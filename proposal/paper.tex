@@ -20,7 +20,7 @@
 %-----------------------------------------------------------------------------
 
 
-\documentclass[10pt]{sigplanconf}
+\documentclass[nocopyrightspace]{sigplanconf}
 
 % The following \documentclass options may be useful:
 %
@@ -29,6 +29,7 @@
 % authoryear    To obtain author/year citation style instead of numeric.
 
 \usepackage[squaren,thinqspace,binary]{SIunits}
+
 \let\fourth\relax               % Undefine a macro
 \let\second\relax               % Undefine a macro
 \let\degree\relax               % Undefine a macro
@@ -189,7 +190,7 @@
 \begin{document}
 
 %\titlebanner{banner above paper title}        % These are ignored unless
-% \preprintfooter{preprint}   % 'preprint' option specified.
+%\preprintfooter{preprint}   % 'preprint' option specified.
 
 \title{Performance Analysis of Parboil Benchmark using RenderScript}
 %\subtitle{}
@@ -198,11 +199,12 @@
            {University of Illinois at Urbana-Champaign}
            {\{dakkak, pham9, psrivas2\}@illinois.edu}
 
-\maketitle
+\conferenceinfo{CONF 'yy}{Month d--d, 20yy, City, ST, Country} 
+\copyrightyear{20yy} 
+\copyrightdata{978-1-nnnn-nnnn-n/yy/mm} 
+\doi{nnnnnnn.nnnnnnn}
 
-\begin{abstract}
-\input{abstract}
-\end{abstract}
+\maketitle
 
 %\category{CR-number}{subcategory}{third-level}
 
@@ -222,8 +224,8 @@
 
 % We recommend abbrvnat bibliography style.
 
-\bibliographystyle{abbrvnat}
-\bibliography{paper}
+% \bibliographystyle{abbrvnat}
+% \bibliography{paper}
 
 % The bibliography should be embedded for final submission.
 
