@@ -19,15 +19,19 @@ core designs of platform models, memory models, and programming models.  Most
 studies~\cite{weber2011comparing, van2011correlating, vassilev2010comparison,
 amorim2009comparing} using applications from various domains show that
 CUDA implementations usually achieve better performance (in NVIDIA GPUs) than
-OpenCL. Another consensus among these studies is that OpenCL provides sufficient
+OpenCL. Another consensus among these studies is that OpenCL provides a sufficient
 interface for developers to express more architectural details to improve the
 performance of their applications. For example,
 studies~\cite{komatsu2010evaluating} and \cite{fang2011comprehensive} show that
 most OpenCL kernels in their studies after being properly optimized can obtain
 comparable performance with CUDA kernels.  Study~\cite{shen2012performance}
 compares OpenCL and OpenMP in the context of application performance in
-multi-core CPUs. Their results show that OpenCL outperforms OpenMP in
-majority of the tests in the Rodinia benchmark suite~\cite{che2009rodinia}.
+multi-core CPUs using the Rodinia benchmark suite~\cite{che2009rodinia}. The
+provided OpenMP implementations generally outperforms the OpenCL ones.
+Based on this result, the authors picked three OpenCL worse-performed
+applications, in compared with OpenMP, and manually tuned them.  Their
+result is appealing, the tuned OpenCL applications outperformed the default
+OpenMP in majority of the test cases.
 
 According to studies \cite{komatsu2010evaluating} and \cite{dolbeau2013one},
 OpenCL achieves fairly stable performance across tested platforms. However, both
