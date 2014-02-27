@@ -10,12 +10,12 @@ INKSCAPE=inkscape
 
 all : $(TARGET).pdf
 
-$(TARGET).pdf : $(TARGET).bib
-	pdflatex $(TARGET).tex
-
-$(TARGET).bib :
+$(TARGET).pdf :
 	pdflatex $(TARGET).tex
 	bibtex $(TARGET)
+	pdflatex $(TARGET).tex
+	pdflatex $(TARGET).tex
+	pdflatex $(TARGET).tex
 
 figures/%.eps : figures/%.svg
 	$(INKSCAPE) --export-eps=$@ --export-area-page $<
