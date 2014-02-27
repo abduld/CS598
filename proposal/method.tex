@@ -19,12 +19,29 @@ Aside from performance, power is an important factor for mobile applications.
 Based on a quick survey, there does seem to be power profiling tools for android~\cite{Google:2014:Power}.
 We will be looking at how the change in language impacts the power usage of the device.
 
+\subsection{Programability}
+
+The final (objective) metric that we will look at is programability.
+Performance programming using CUDA or OpenCL exposes low level details,
+	the memory heirarchy being the most noticable, for hardware.
+This makes programs written in these languages sensitive to these low
+	level optimizations as they are run on different hardware.
+Renderscript hides low level details and while promising to be performance
+	portable.
+In the process of porting the Parboil benchmarks, we will
+	examine these claims.
+
 \subsection{Hardware}
 
 While development will be against the Android emulator, our performance
 	metrics will be measrured on real hardware.
-Currently we have access to a Nexus 7 Android tablet, but we will contact
+Currently we have access to a Nexus 7 Android tablet, but we haved contacted
 	the Android development team to find if there is a way to get
 	access to more devices to run our benchmarks.
 
+Another approach to consider is using existing services,
+	such as Apkudo~\cite{apkudo}, that allow one to test Android
+	applications across devices.
+The Apkudo service allows one to upload an application and then run it on 
+	over 260 android devices.
 
