@@ -1,5 +1,4 @@
-\section{Introduction}
-
+\section{Motivation and Overview}
 Heterogeneous computing promises to address the rising power dissipation problem
 of today's traditional, homogeneous multi-core
 systems. It provides the ability to integrate a variety of processing elements,
@@ -22,23 +21,33 @@ available hardware to maximize perofrmance or energy efficiency or both, the
 programming environment has to provide common abstractions for available
 hardware compute units.
 
-%The industry and the reseach community in this field have been trying to solve
-%this problem. 
-
-%The current programming approaches that are portable such as
-%OpenCL but at a low-level of abstraction as with,
-%e.g., OpenCL. OpenCL requires explicit coding of data transfer, memory
-%management, kernel launch etc., and re-optimization and adaptation to obtain
-%decent performance when migrating to a new configuration. 
-%Programmability of Heterogeenous Systems
-
 The industry and the research community have been trying to solve this problem.
-The recent development of Renderscript~\cite{Renderscript}  
+The recent development of Renderscript~\cite{Renderscript} provides a framework
+for running computationally intensive tasks at a high performance by using a
+specialized runtime for 
+parallelizing work across all processors available on the device, such as
+multi-core CPUs, GPUs, or DSPs. So renderscript is essentially removing the
+burden of load balancing from the programmer to the run-time, unlike other
+solutions such as OpenCL, where the programmer has more control over the
+execution semantics of the application ({\em the programmer decides which part
+of application would run on which device}). In this fashion renderscript is
+making the computationally intensive part of the applcation, that needs to be
+accerated on specialized hardware, portable across the various hardware compute
+units. Also, since the application is not dependent on the existence and
+availablity of a specific accelerator, the application is portable across SoCs
+with different combinations of compue units.
 
-Renderscript
-
-What Renderscript promises
-
-What do we want to study?
-
-
+While such portability is a fine goal, Renderscript achieves it at the cost of
+hiding hardware details from the programmer that are critical to good
+performance on these accelerator. For example, in GPUs, the placement of data at
+various levels of memory hierarchy is critical to good performance on them.
+It is this reason that most programming languages for GPUs, allow the programmer
+limited control over memory management. Renderscript too uses GPUs for acceleration, but
+completely hides the memory management from the programmer. In the Renderscript
+model, application developers only define the part of the application that needs
+to be accelerated, and the granularity at which data needs to be partitioned,
+while the rest of the responsibilities of memory management and work distribution
+among different compute units is handled by Renderscript compiler and run-time.
+This raises an important
+question of ``how effective is the Renderscript compiler and run-time?'', which
+we plan to answer by doing a comprehensive performance analysis of Renderscript.
