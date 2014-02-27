@@ -8,26 +8,21 @@ FIGURES=
 TARGET=paper
 INKSCAPE=inkscape
 
-all : $(TARGET).ps $(TARGET).pdf
+all : $(TARGET).pdf
 
-$(TARGET).ps : $(TARGET).dvi
-	dvips -t letter $<
+$(TARGET).pdf : $(TARGET).bib
+	pdflatex $(TARGET).tex
 
-$(TARGET).pdf : $(TARGET).dvi
-	dvipdf -sPAPERSIZE=letter $<
-
-$(TARGET).bbl : $(TARGET).bib
-	latex $(TARGET).tex
+$(TARGET).bib :
+	pdflatex $(TARGET).tex
 	bibtex $(TARGET)
-
-$(TARGET).dvi : $(SOURCES) $(FIGURES) $(TARGET).bbl
-	latex $(TARGET).tex
-	bibtex $(TARGET)
-	latex $(TARGET).tex
 
 figures/%.eps : figures/%.svg
 	$(INKSCAPE) --export-eps=$@ --export-area-page $<
 
 figures/%.eps : figures/%.gp figures/%.dat
 	cd figures && gnuplot $(notdir $<)
+
+clean:
+	rm -fr *pdf *bbl *dvi
 
