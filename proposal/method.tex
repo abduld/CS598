@@ -1,11 +1,11 @@
 
-\section{Methodology}
+\section*{Methodology}
 
 This project study will analyze RenderScript based on three criteria: performance, power, and programmability.
 The following sections describe each one of the analysis in detail.
 
 
-\subsection{Performance Analysis}
+\subsection*{Performance Analysis}
 
 In general, a Parboil benchmark has 3 parts: it reads the data, runs the kernel, and checks if the 
     computed solution is valid.
@@ -19,14 +19,14 @@ While OpenCL 2.0~\cite{OpenCL} does
 If OpenCL is supported, then we will do performance measurements using it as a base line.
 If not, then we will use a native multithreaded C implementation as our base line.
 
-\subsection{Power Analysis}
+\subsection*{Power Analysis}
 
 Aside from performance, power is an important factor for mobile applications.
 Based on our research, there does seem to be power profiling tools for Android~\cite{Google:2014:Power}.
 Using the power profiling tools, we will be looking at how the change in
     implementation impacts the power usage of the device.
 
-\subsection{Programability}
+\subsection*{Programability}
 
 The final (objective) metric that we will look at is programmability.
 As discussed previously, performance programming using CUDA or OpenCL
@@ -40,7 +40,7 @@ RenderScript makes code more programmable (by hiding low level details) while pr
 In the process of porting the Parboil benchmarks, we will
 	examine the ease of programmability claims.
 
-\subsection{Hardware}
+\subsection*{Hardware}
 
 While development will be against the Android emulator, our performance
 	metrics will be measured on real hardware.
