@@ -1,0 +1,30 @@
+
+\section{Methodology}
+
+
+
+\subsection{Performance Analysis}
+
+Parboil is unique in the it offers optimized benchmark implementations for different targets.
+Benchmarks have been ported for multicore configurations using {\tt C/OpenMP}, 
+	GPU implementations using {\tt CUDA} and {\tt OpenCL} exist as well.
+There is currently no way to run {\tt CUDA} on Android devices, but OpenCL 2.0~\cite{OpenCL} does
+	have support for \textit{Android Installable Client Driver Extension}.
+If OpenCL is supported by Android, then we will do performance measurements using it as a base line.
+If not, then we will use a native client multithreaded C implementation as our base line.
+
+\subsection{Power Analysis}
+
+Aside from performance, power is an important factor for mobile applications.
+Based on a quick survey, there does seem to be power profiling tools for android~\cite{Google:2014:Power}.
+We will be looking at how the change in language impacts the power usage of the device.
+
+\subsection{Hardware}
+
+While development will be against the Android emulator, our performance
+	metrics will be measrured on real hardware.
+Currently we have access to a Nexus 7 Android tablet, but we will contact
+	the Android development team to find if there is a way to get
+	access to more devices to run our benchmarks.
+
+
