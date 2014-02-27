@@ -1,14 +1,17 @@
 
 \section{Parboil Benchmark Framework}
 
-The Parboil benchmark framework~\cite{Parboil} is a collection
-  of 11 compute kernels extracted from parallel applications.
-Initially ristricted to CUDA kernels, it now encompases  
-  OpenCL kernels (both optimized an unoptimized), 
-  C threaded on a shared memory architecture using OpenMP,
-  C distributed on a distributed memory architecture using MPI,
-  and .
-The 11 kernels are sumarized in table~\ref{table:parboil}.
+To measure how effective the RenderScript compiler and runtime
+    are, we will be porting the Parboil benchmark framework~\cite{Parboil} to
+    RenderScript.
+The Parboil benchmark framework is a collection
+  of 11 compute kernels extracted from
+  real world parallel applications.
+Initially restricted to CUDA kernels, Parboil is unique in that it offers
+  heavily optimized benchmark implementations for different language targets.
+The benchmarks have been ported for multicore configurations using C+OpenMP 
+  as well as with OpenCL (both optimized an unoptimized).
+The 11 kernels are summarized in table~\ref{table:parboil}.
 
 \begin{table}[h]\footnotesize
 \centering
@@ -16,18 +19,19 @@ The 11 kernels are sumarized in table~\ref{table:parboil}.
     \hline 
     Benchmark & Description \\ \hline
     Breadth-First Search & Computes the shortest-path of a weighted graph using bread-first search \\
-    CUTCP & Computes the Coulombic potential charge interactions for atoms on a 3D grid \\
+    CUTCP & Computes the Coulomb's potential charge interactions for atoms on a 3D grid \\
     Histogram & Computes a large histogram of a 2D image \\
     Lattice-Boltzmann Method & Simulates a bounded fluid dynamic problem using Lattice-Boltzmann method \\
-    Matrix Multiply & Computes the matrix product of two matricies \\
+    Matrix Multiply & Computes the matrix product of two matrices \\
     MRI-Gridding & Computes a grid used in MRI imaging by interpolation \\
     MRI-Q & Computes a calibration matrix used in MRI imaging \\
     Sum of Absolute Differences & Computes the sum of absolute differences common in video encoding algorithms \\
     Spare-Matrix Vector Multiply & Computes the product of a sparse matrix and a dense vector \\
-    Stencil & Convolves a Jacobi sentencil on a 3D volume \\
+    Stencil & Convolves a Jacobi stencil on a 3D volume \\
     TPACF & Computes the two point angular correlation function for spatial distribution of astronomical bodies \\   
     \hline
 \end{tabular}
 \caption{Parboil Benchmark Summary}
 \label{table:parboil}
 \end{table}
+

@@ -1,47 +1,58 @@
 
 \section{Methodology}
 
+This project study will analyze RenderScript based on three criteria: performance, power, and programmability.
+The following sections describe each one of the analysis in detail.
 
 
 \subsection{Performance Analysis}
 
-Parboil is unique in the it offers optimized benchmark implementations for different targets.
-Benchmarks have been ported for multicore configurations using {\tt C/OpenMP}, 
-	GPU implementations using {\tt CUDA} and {\tt OpenCL} exist as well.
-There is currently no way to run {\tt CUDA} on Android devices, but OpenCL 2.0~\cite{OpenCL} does
-	have support for \textit{Android Installable Client Driver Extension}.
-If OpenCL is supported by Android, then we will do performance measurements using it as a base line.
-If not, then we will use a native client multithreaded C implementation as our base line.
+In general, a Parboil benchmark has 3 parts: it reads the data, runs the kernel, and checks if the 
+    computed solution is valid.
+We will be concentrating on the latter 2 parts of each benchmark and comparing them against other
+    targets supported by Parboil.
+Since there is currently no way to run {\tt CUDA} on Android devices, we will be concentrating
+    on comparing RenderScript's performance against the OpenCL implementation.
+While OpenCL 2.0~\cite{OpenCL} does
+	have support for \textit{Android Installable Client Driver Extension}, it is still not clear whether 
+    it is an advertised feature and/or it would run on the Android device we have.
+If OpenCL is supported, then we will do performance measurements using it as a base line.
+If not, then we will use a native multithreaded C implementation as our base line.
 
 \subsection{Power Analysis}
 
 Aside from performance, power is an important factor for mobile applications.
-Based on a quick survey, there does seem to be power profiling tools for android~\cite{Google:2014:Power}.
-We will be looking at how the change in language impacts the power usage of the device.
+Based on our research, there does seem to be power profiling tools for Android~\cite{Google:2014:Power}.
+Using the power profiling tools, we will be looking at how the change in
+    implementation impacts the power usage of the device.
 
 \subsection{Programability}
 
-The final (objective) metric that we will look at is programability.
-Performance programming using CUDA or OpenCL exposes low level details,
-	the memory heirarchy being the most noticable, for hardware.
-This makes programs written in these languages sensitive to these low
-	level optimizations as they are run on different hardware.
-Renderscript hides low level details and while promising to be performance
+The final (objective) metric that we will look at is programmability.
+As discussed previously, performance programming using CUDA or OpenCL
+    exposes low level details of the hardware --- the memory hierarchy being the most noticeable.
+The performance of programs written in these languages is very sensitive to low
+	level optimizations.
+This results in codes that performs well on one architecture (or one generation of an architecture)
+    but poorly on another architecture.
+RenderScript makes code more programmable (by hiding low level details) while promising to be performance
 	portable.
 In the process of porting the Parboil benchmarks, we will
-	examine these claims.
+	examine the ease of programmability claims.
 
 \subsection{Hardware}
 
 While development will be against the Android emulator, our performance
-	metrics will be measrured on real hardware.
-Currently we have access to a Nexus 7 Android tablet, but we haved contacted
+	metrics will be measured on real hardware.
+Currently we have access to a Nexus 7 Android tablet, but we have contacted
 	the Android development team to find if there is a way to get
 	access to more devices to run our benchmarks.
 
-Another approach to consider is using existing services,
+One approach we will consider is using existing services,
 	such as Apkudo~\cite{apkudo}, that allow one to test Android
 	applications across devices.
 The Apkudo service allows one to upload an application and then run it on 
 	over 260 android devices.
+One concern we have is whether we can get accurate timing information from
+    such public services.
 
