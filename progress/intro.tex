@@ -1,0 +1,55 @@
+\section*{Motivation and Overview}
+Heterogeneous computing promises to address the rising power dissipation problem
+of today's traditional homogeneous multi-core
+systems. It provides the ability to integrate a variety of processing elements,
+such as large and small general purpose cores, GPUs, DSPs, and custom or
+semi-custom hardware into a single system. Applications that can efficiently use
+the full range of available hardware reap significant energy
+savings over conventional processors by executing portions of the code on the
+device which optimized for it. This promise of performance along with power efficiency
+has led mobile devices such as smartphones
+and tablets, which deal with a variety of applications with limited battery
+life, to move towards heterogeneous designs.
+
+However, heterogeneity of hardware resources also has led to a diverse landscape
+of different programming models, run-time systems, profiling and debugging tools
+for application development. The differences are so deep that programmers are
+often experts on only one class of device, e.g., an expert GPU programmer will
+not have much DSP expertise and vice-versa. This is highly inefficient and
+unproductive: we cannot expect applications to use a separate language for each
+class of compute unit. If we want applications to use the full range of
+available hardware to maximize performance or energy efficiency or both, the
+programming environment has to provide common abstractions for available
+hardware compute units.
+
+The industry and the research community have been trying to solve this problem.
+The recent development of RenderScript~\cite{wiki:RenderScript, RenderScript} provides a framework
+for running computationally intensive tasks at a high performance by using a
+specialized runtime for 
+parallelizing work across all processors available on the device, such as
+multi-core CPUs, GPUs, or DSPs. RenderScript is therefore removing the
+burden of load balancing and memory management from the programmer to the run-time, unlike other
+solutions such as OpenCL, where the programmer has more control over the
+execution semantics of the application ({\em the programmer decides which part
+of application would run on which device and using which part of the memory heirarchy}).
+In this fashion RenderScript is
+making the computationally intensive part of the application, that needs to be
+accelerated on specialized hardware, performance portable across the various hardware compute
+units. Also, since the application is not dependent on the existence and
+availability of a specific accelerator, the application is portable across SoCs
+with varying combinations of compute units.
+
+While such portability is a noble goal, RenderScript achieves it at the cost of
+hiding hardware details from the programmer that are critical to good
+performance on these accelerator. For example, in GPUs, the placement of data at
+various levels of memory hierarchy is critical to good performance.
+It is this reason that most programming languages for GPUs, allow the programmer
+unlimited control over memory management. RenderScript too can use GPUs for acceleration, but
+completely hides the memory management from the programmer. In the RenderScript
+model, application developers only define the part of the application that needs
+to be accelerated, and the granularity at which data needs to be partitioned,
+while the rest of the responsibilities of memory management and work distribution
+among different compute units is handled by RenderScript compiler and run-time.
+This raises an important
+question of ``how effective is the RenderScript compiler and run-time?'', which
+we plan to answer by doing a comprehensive performance analysis of RenderScript.
