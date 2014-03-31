@@ -6,12 +6,45 @@ In our proposal we stated that if we were able to run OpenCL on the Android devi
 Sadly, we were not able to find a way to run OpenCL on the devices.
 Instead, we opted to implement a serial version of the code in Java along with a multithreaded version
   and compare both against RenderScript.
-This is added work, since we now impleemnt 3 versions of the same benchmark, but since we usually
+This is added work, since we now implement 3 versions of the same benchmark, but since we usually
   start with the serial Java version, make it multithreaded, and then port the multithreaded code
   into RenderScript.
 
 All the implementations share a common interface, which means our framework takes the code,
   runs it, and the information is stored in a database on the device which we use for analysis.
+
+\subsection*{RenderScript}
+Currently, the benchmarks we have ported have naive RenderScript kernel
+implementations. Our aim has been to write the RenderScript kernels allowing maximum
+parallelization and let the RenderScript runtime  perform locality
+optimizations (such as, deciding how to group parallel threads when running on a
+GPU), if any. We believe that this is the right approach as
+the purpose of RenderScript was to keep the programmer oblivious to the low
+level hardware details.
+
+We would be working on finding techiques of improving performance of
+RenderScript kernels. However, we have realized that it has several challenges.
+
+Firstly, the RenderScript programming environment prevents the standard locality
+optimizations by the programmer, such as, tiling. This is primarily because
+these optimizations require knowledge of memory sizes, e.g., cache sizes,
+scratchpad sizes on GPUs, details which we cannot use as we are not aware of the
+processing unit RenderScript kernel is running on.
+
+Secondly, since RenderScript is relatively new, we could not find many examples
+of improving performance of RenderScript kernels. Also, not having detailed
+documentation on RenderScript makes it difficult to write high performance
+RenderScript kernels. For example, there are multiple ways to pass read-only
+data to RenderScript runtime. However, we are not sure of the overheads involved
+with each approach. With more experience and
+experiments, we believe we would have better understanding of such optimizations
+and could improve RenderScript performance.
+
+Lastly, RenderScript programming environment has certain idiosyncratic
+restrictions which make it difficult to use. For instance, the input and output
+{\em Allocation} to a RenderScript kernel have to be of same dimensions. Such
+restrictions are counter-intuitive and add to the complexity of using
+RenderScript.
 
 \subsection*{Performance Analysis}
 
@@ -26,7 +59,7 @@ We implemented a class that allows us to time sections of code and store dump th
 
 Unlike Parboil's timers however, our interface does not aggregate the data.
 This is left for the analysis pass.
-The reason is that we feal like Parboil looses some information about which sections are hot in the
+The reason is that we feel like Parboil loses some information about which sections are hot in the
   code by aggregating all the data for you.
 
 \subsection*{Power Analysis}
