@@ -21,11 +21,11 @@ The second is a Samsung Galaxy Nexus with the following specs:
 \end{verbatim}
 
 
-\subsection*{Perliminary Results}
+\subsection*{Preliminary Results}
 
 While we do have implementations for 3 out of the 4 benchmarks we promised in the proposal schedule,
   our results only show part of those.
-The data has not been fully analyzed, but we can give some perliminary insights into the expected
+The data has not been fully analyzed, but we can give some preliminary insights into the expected
   results.
 
 The IO times are around 1000 times more than the compute times on Android devices.
@@ -39,8 +39,8 @@ Vector addition, shown in figure~\ref{vecadd}, is a simple kernel and we see tha
   and the threaded Java version.
 For the RenderScript, we suspect this is overhead from translating between the Java data arrays and
   the RenderScript arrays.
-For the threaded version, we use a thread for each element calculation (in the same style as you'd do in CUDA), and therefore you encure huge runtime penalty because of launching many threads.
-Performing thread coarsing would decrease this implact, but that has not been done. 
+For the threaded version, we use a thread for each element calculation (in the same style as you'd do in CUDA), and therefore you result in huge runtime penalty because of launching many threads.
+Performing thread coarsening would decrease this impact, but that has not been done. 
 
 \begin{figure}[t!]
 \includegraphics[scale=0.125]{VectorAdd_nolog.png}
