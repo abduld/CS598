@@ -1,5 +1,66 @@
-\section*{Overview}
+
+\section*{Progress Summary}
+
+This section summarizes our progress to date. Further information on each task
+is presented in the subsequent sections.
+
+We have successfully setup our development infrastructures, which allow us to
+efficiently collaborate and conveniently develop on both emulator and physical
+phones.  Due to the diversity of the Android versions (4.2, 4.3, and 4.4), the
+SDKs (API-17, API-18, and API-19), and the hardware configurations of different
+devices, we had a chance to evaluate the portability of our framework. For
+example, we did learn that the datasets generated for traditional computers are
+often too large for mobile devices, thus we needed to generate a different set
+of datasets for our mobile benchmarks. Also, due the wide range of hardware
+resources, a dataset that is suitable for a tablet may be too big for a phone.
+Therefore, we need to have a systematic way to select suitable datasets and
+make fair comparison between devices.
 
 
+In term of porting the Parboil benchmark, we have completed the overall
+framework and three benchmarks, namely VectorAdd, Stencil, and Segmm, and close
+to finish three more benchmarks, namely, CUTCP, TPACF, MRIQ. The status of the
+benchmarks porting are summarized in Table \ref{table:parboi}. We spent a significant amount of
+effort to make the benchmark framework robust and convenient to work on. For
+example, the framework contains a Timer utility that allows us to record time
+of different segment of each benchmark. We also implemented a database back-end
+to store the benchmark results for later analysis.
 
-XXX Describe what we did
+
+\begin{table}[h]\small
+\centering
+\begin{tabular}{ | l | p{2cm} |}
+    \hline 
+    Benchmark & Porting status \\ \hline
+    Matrix Multiply & \\
+    \hspace{0.5cm}-- Java & Completed \\
+    \hspace{0.5cm}-- RenderScript & Completed \\ \hline
+    Stencil & \\
+    \hspace{0.5cm}-- Java & Completed \\
+    \hspace{0.5cm}-- RenderScript & Completed \\ \hline
+    VectorAdd & \\
+    \hspace{0.5cm}-- Java & Completed \\
+    \hspace{0.5cm}-- Threaded Java & Completed \\
+    \hspace{0.5cm}-- RenderScript & Completed \\ \hline
+    CUTCP & \\
+    \hspace{0.5cm}-- Java & Completed \\
+    \hspace{0.5cm}-- Threaded Java & Partial \\
+    \hspace{0.5cm}-- RenderScript & Partial \\ \hline
+    MRI-Q & \\
+    \hspace{0.5cm}-- Java & Partial \\
+    \hspace{0.5cm}-- Threaded Java & Partial \\
+    \hspace{0.5cm}-- RenderScript & Partial \\ \hline
+    TPACF & \\
+    \hspace{0.5cm}-- Java & Completed \\
+    \hspace{0.5cm}-- RenderScript & Partial \\ \hline  
+    Histogram & Next phase \\ \hline
+    Breadth-First Search & Next phase\\ \hline
+    MRI-Gridding & Next phase \\ \hline
+    Sum of Absolute Differences & Next phase \\ \hline
+    Spare-Matrix Vector Multiply & Next phase \\ \hline
+    Lattice-Boltzmann Method & TBD \\ \hline
+    \hline
+\end{tabular}
+\caption{Parboil Benchmark Porting Status}
+\label{table:parboil}
+\end{table}
