@@ -25,13 +25,14 @@ The second is a Samsung Galaxy Nexus with the following specs:
 
 While we do have implementations for 3 out of the 4 benchmarks we promised in the proposal schedule,
   our results only show part of those.
-This is primarily due to a lack of time configuring the devices to run the benchmarks.
+The data has not been fully analyzed, but we can give some perliminary insights into the expected
+  results.
 
 
 \begin{figure}[t!]
 \includegraphics[scale=0.125]{VectorAdd.png}
 \caption{VectorAdd Benchmark.}
-\label{fig:schedule}
+\label{fig:vecadd}
 \centering
 \end{figure}
 
@@ -40,20 +41,28 @@ This is primarily due to a lack of time configuring the devices to run the bench
 \begin{figure}[t!]
 \includegraphics[scale=0.125]{Sgemm.png}
 \caption{Matrix Matrix Multiplication Benchmark.}
-\label{fig:schedule}
+\label{fig:sgemm}
 \centering
 \end{figure}
 
 
 
+In figure~\ref{fig:stencil}, we should the results from running the stencil code across the different
+  implementations.
+
+The serial versions have an added {\tt RSSetup} time, this is either due to bad parsing of the 
+  output data or an incorrect labeling of a timer in the source code.
+
 \begin{figure}[t!]
 \includegraphics[scale=0.125]{Stencil.png}
 \caption{Stencil Benchmark.}
-\label{fig:schedule}
+\label{fig:stencil}
 \centering
 \end{figure}
 
 
 While these graphs have the infromation, they are not presented in the clearest way.
-Future work would merge the datasets not just by devices, but also by different benchmark implementations.
+Future work would remove the IO times from the plots, this would avoid us having to use Log scalling
+  and would make some of the differences more visable.
+  
 
