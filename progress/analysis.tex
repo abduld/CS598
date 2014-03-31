@@ -35,7 +35,7 @@ Therefore, in the plots we chose not to include the IO times, since that heavily
 The plots record the time it took to allocate the data (which should be similar across implementations),
   the compute time, and for RenderScript the setup time --- this is the time it takes to load the RenderScript code as you prepare for computation (it may include jitting the code for example).
 
-Vector addition, shown in figure~\ref{vecadd}, is a simple kernel and we see that the serial version outperforms both RenderScript
+Vector addition, shown in figure~\ref{fig:vecadd}, is a simple kernel and we see that the serial version outperforms both RenderScript
   and the threaded Java version.
 For the RenderScript, we suspect this is overhead from translating between the Java data arrays and
   the RenderScript arrays.
@@ -49,9 +49,15 @@ Performing thread coarsening would decrease this impact, but that has not been d
 \centering
 \end{figure}
 
+The large RenderScript setup time might either be because this benchmark does not take too much time
+  to run and therefore the difference is apparent, or because it is the first benchmark we run and
+  the RenderScript initial load time is added.
+Further investigation is required, but in general we plan on extending our benchmark framework so 
+  it performs multiple runs, discarded the time for the first run, and computes the mean time.
 
 
-Matrix multiplication, shown in figure~\ref{vecadd}, performs matrix multiplication.
+
+Matrix multiplication, shown in figure~\ref{fig:sgemm}, performs matrix multiplication.
 The data is stored in column major order and we perform the computation in column major order.
 One possible optimization is to transpose the data beforehand to get better locality when performing computation.
 Regardless, we see a 4x performance improvement in SGEMM.
