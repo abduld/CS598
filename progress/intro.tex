@@ -2,7 +2,7 @@
 \section*{Progress Summary}
 
 This section summarizes our progress to date. Further information on each task
-is presented in the subsequent sections.
+is described in the subsequent sections.
 
 We have successfully setup our development infrastructures, which allow us to
 efficiently collaborate and conveniently develop on both emulator and physical
@@ -10,21 +10,22 @@ phones.  Due to the diversity of the Android versions (4.2, 4.3, and 4.4), the
 SDKs (API-17, API-18, and API-19), and the hardware configurations of different
 devices, we had a chance to evaluate the portability of our framework. For
 example, we did learn that the datasets generated for traditional computers are
-often too large for mobile devices, thus we needed to generate a different set
-of datasets for our mobile benchmarks. Also, due the wide range of hardware
+often too large for mobile devices, thus we needed to generate different
+datasets for our mobile benchmarks. Also, due the wide range of hardware
 resources, a dataset that is suitable for a tablet may be too big for a phone.
-Therefore, we need to have a systematic way to select suitable datasets and
+Therefore, we will need to have a clever way to select suitable datasets and
 make fair comparison between devices.
 
 
-In term of porting the Parboil benchmark, we have completed the overall
+In term of porting the Parboil benchmarks, we have completed the overall
 framework and three benchmarks, namely VectorAdd, Stencil, and Segmm, and close
 to finish three more benchmarks, namely, CUTCP, TPACF, MRIQ. The status of the
-benchmarks porting are summarized in Table \ref{table:parboi}. We spent a significant amount of
-effort to make the benchmark framework robust and convenient to work on. For
-example, the framework contains a Timer utility that allows us to record time
-of different segment of each benchmark. We also implemented a database back-end
-to store the benchmark results for later analysis.
+benchmarks porting are summarized in Table \ref{table:parboil}. We spent a
+significant amount of effort to make the benchmark framework robust and
+convenient to work on. For example, the framework contains a Timer utility that
+allows us to record time of different segments of each benchmark. We also
+implemented a database back-end to store the benchmark results for later
+analysis.
 
 
 \begin{table}[h]\small
@@ -64,3 +65,9 @@ to store the benchmark results for later analysis.
 \caption{Parboil Benchmark Porting Status}
 \label{table:parboil}
 \end{table}
+
+In term of measurement and analysis, for each implemented benchmark, we compare
+three versions, Java, threaded Java, and RenderScript implementations, across
+two physical devices: a Samsung Galaxy Nexus phone and a Google Nexus 7 tablet.
+The results are detailed in section \ref{sec:analysis} Analysis.
+
