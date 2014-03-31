@@ -4,8 +4,8 @@
 This section summarizes our progress to date. Further information on each task
 is described in the subsequent sections.
 
-We have successfully setup our development infrastructures, which allow us to
-efficiently collaborate and conveniently develop on both emulator and physical
+We have successfully setup our development infrastructure, which allows us to
+efficiently collaborate and develop on both the emulator and hardware devices.
 phones.  Due to the diversity of the Android versions (4.2, 4.3, and 4.4), the
 SDKs (API-17, API-18, and API-19), and the hardware configurations of different
 devices, we had a chance to evaluate the portability of our framework. For
@@ -16,11 +16,10 @@ resources, a dataset that is suitable for a tablet may be too big for a phone.
 Therefore, we will need to have a clever way to select suitable datasets and
 make fair comparison between devices.
 
-
 In term of porting the Parboil benchmarks, we have completed the overall
 framework and three benchmarks, namely VectorAdd, Stencil, and Segmm, and close
 to finish three more benchmarks, namely, CUTCP, TPACF, MRIQ. The status of the
-benchmarks porting are summarized in Table \ref{table:parboil}. We spent a
+benchmarks porting are summarized in Table~\ref{table:parboil}. We spent a
 significant amount of effort to make the benchmark framework robust and
 convenient to work on. For example, the framework contains a Timer utility that
 allows us to record time of different segments of each benchmark. We also
@@ -48,7 +47,7 @@ analysis.
     \hspace{0.5cm}-- Threaded Java & Partial \\
     \hspace{0.5cm}-- RenderScript & Partial \\ \hline
     MRI-Q & \\
-    \hspace{0.5cm}-- Java & Partial \\
+    \hspace{0.5cm}-- Java & Completed \\
     \hspace{0.5cm}-- Threaded Java & Partial \\
     \hspace{0.5cm}-- RenderScript & Partial \\ \hline
     TPACF & \\
@@ -69,5 +68,5 @@ analysis.
 In term of measurement and analysis, for each implemented benchmark, we compare
 three versions, Java, threaded Java, and RenderScript implementations, across
 two physical devices: a Samsung Galaxy Nexus phone and a Google Nexus 7 tablet.
-The results are detailed in section \ref{sec:analysis} Analysis.
+The results are detailed in section {\em Analysis}.
 
