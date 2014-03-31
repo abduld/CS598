@@ -8,3 +8,15 @@ We approached it as if we were developing Java applications, but quickly realize
 Furthermore, because the Android software and hardware is fragmented, references we found
   on how to solve certain problems either did not pertain to the hardware we were using
   or the Android version we are targeting.
+This is the main reason why we were not able to capture power information from the device,
+  since each device has a different file system path that stores those counters.
+
+Finally, the datasets used by Parboil each have a different format.
+This means that for each benchmark we have to write a file reader and writer to read in the proper benchmarks.
+The datasets are also quite large --- a few GB.
+At first, we were bundling the data with the application which resulted in the Android application
+  to balloon into a 1GB application.
+We have now moved the data to be read from the SD card.
+One possible alternative is to generate random data (according to some distribution).
+While this is simple for benchmarks such as matrix multiplication, it is not clear how one would
+  generate meaningful data for the MRI benchmark.
