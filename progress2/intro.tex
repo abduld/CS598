@@ -6,68 +6,26 @@ is described in the subsequent sections.
 
 \begin{table}[h]\small
 \centering
-\begin{tabular}{ | l | p{2cm} |}
+\begin{tabular}{ | l | c | c | c | c |}
     \hline 
-    Benchmark & Porting status \\ \hline
-    Matrix Multiply & \\
-    \hspace{0.5cm}-- Java & Completed \\
-    \hspace{0.5cm}-- Threaded Java & Incomplete \\
-    \hspace{0.5cm}-- OpenCL & Completed \\
-    \hspace{0.5cm}-- RenderScript & Completed \\ \hline
-    Stencil & \\
-    \hspace{0.5cm}-- Java & Completed \\
-    \hspace{0.5cm}-- Threaded Java & Incomplete \\
-    \hspace{0.5cm}-- OpenCL & Incomplete \\
-    \hspace{0.5cm}-- RenderScript & Completed \\ \hline
-    VectorAdd & \\
-    \hspace{0.5cm}-- Java & Completed \\
-    \hspace{0.5cm}-- Threaded Java & Completed \\
-    \hspace{0.5cm}-- OpenCL & Incomplete \\
-    \hspace{0.5cm}-- RenderScript & Completed \\ \hline
-    CUTCP & \\
-    \hspace{0.5cm}-- Java & Completed \\
-    \hspace{0.5cm}-- Threaded Java & Partial \\
-    \hspace{0.5cm}-- OpenCL & Incomplete \\
-    \hspace{0.5cm}-- RenderScript & Partial \\ \hline
-    MRI-Q & \\
-    \hspace{0.5cm}-- Java & Completed \\
-    \hspace{0.5cm}-- Threaded Java & Incomplete \\
-    \hspace{0.5cm}-- OpenCL & Incomplete \\
-    \hspace{0.5cm}-- RenderScript & Complete \\ \hline
-    TPACF & \\
-    \hspace{0.5cm}-- Java & Completed \\
-    \hspace{0.5cm}-- Threaded Java & Incomplete \\
-    \hspace{0.5cm}-- OpenCL & Incomplete \\
-    \hspace{0.5cm}-- RenderScript & Incomplete \\ \hline
-    Histogram & \\
-    \hspace{0.5cm}-- Java & Completed \\
-    \hspace{0.5cm}-- Threaded Java & Completed \\
-    \hspace{0.5cm}-- OpenCL & Incomplete \\
-    \hspace{0.5cm}-- RenderScript & Incomplete \\ \hline
-    Breadth-First Search & \\
-    \hspace{0.5cm}-- Java & Completed \\
-    \hspace{0.5cm}-- Threaded Java & Incomplete \\
-    \hspace{0.5cm}-- OpenCL & Incomplete \\
-    \hspace{0.5cm}-- RenderScript & Incomplete \\ \hline
-    MRI-Gridding & \\
-    \hspace{0.5cm}-- Java & Incomplete \\
-    \hspace{0.5cm}-- Threaded Java & Incomplete \\
-    \hspace{0.5cm}-- OpenCL & Incomplete \\
-    \hspace{0.5cm}-- RenderScript & Incomplete \\ \hline
-    Sum of Absolute Differences & \\
-    \hspace{0.5cm}-- Java & Completed \\
-    \hspace{0.5cm}-- Threaded Java & Incomplete \\
-    \hspace{0.5cm}-- OpenCL & Incomplete \\
-    \hspace{0.5cm}-- RenderScript & Incomplete \\ \hline
-    Spare-Matrix Vector Multiply & \\
-    \hspace{0.5cm}-- Java & Completed \\
-    \hspace{0.5cm}-- Threaded Java & Incomplete \\
-    \hspace{0.5cm}-- OpenCL & Incomplete \\
-    \hspace{0.5cm}-- RenderScript & Incomplete \\ \hline
-    Lattice-Boltzmann Method & TBD \\ \hline
+    Benchmark & \multicolumn{4}{|c|}{Porting status} \\ \cline{2-5}
+              & Java & T-Java & OpenCL & RS \\ \hline
+    Matrix Multiply & C & I & C & C \\ \hline
+    Stencil & C & I & I & C \\ \hline
+    VectorAdd & C & C & I & C \\ \hline
+    CUTCP & C & P  & I  & P \\ \hline
+    MRI-Q & C & I & I & C \\ \hline
+    TPACF & C & I & I & I \\ \hline
+    Histogram & C & C & I & I \\ \hline
+    Breadth-First Search & C & I & I & I \\ \hline
+    MRI-Gridding & I & I & I & I \\ \hline
+    Sum of Absolute Differences & C & I & I & I \\ \hline
+    Spare-Matrix Vector Multiply & C & I & I & I \\ \hline
+    Lattice-Boltzmann Method & \multicolumn{4}{|c|}{TBD} \\ \hline
     \hline
 \end{tabular}
-\caption{Parboil Benchmark Porting Status}
+\caption{Parboil Benchmark Porting Status. T-Java: Threaded Java; RS:
+RenderScript; C: Completed; I: Incompleted; P: Partial}
 \label{table:parboil}
 \end{table}
 
