@@ -32,6 +32,11 @@
 \usepackage{url}
 \usepackage[squaren,thinqspace,binary]{SIunits}
 
+\usepackage{hyperref}
+\newcommand\fnurl[2]{%
+  \href{#2}{#1}\footnote{\url{#2}}%
+}
+
 \let\fourth\relax               % Undefine a macro
 \let\second\relax               % Undefine a macro
 \let\degree\relax               % Undefine a macro
@@ -218,6 +223,7 @@
 %keyword1, keyword2
 
 \input{intro}
+\input{implementation}
 \input{method}
 \input{analysis}
 \input{complications}
