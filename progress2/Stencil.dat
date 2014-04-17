@@ -1,4 +1,10 @@
 Hardware	Implementation	Allocate	Compute	OpenCLSetup	RSSetup
+GalaxyNexus	Java(ART)	0	0	0	0
+GalaxyNexus	Java(Dalvik)	100	0	0	0
+GalaxyNexus	RenderScript(ART)	0	0	0	0
+GalaxyNexus	RenderScript(Dalvik)	48	0	0	803
+GalaxyNexus	ThreadedJava(ART)	0	0	0	0
+GalaxyNexus	ThreadedJava(Dalvik)	81	6409	0	0
 Nexus5	Java(ART)	99	0	0	0
 Nexus5	Java(Dalvik)	100	0	0	0
 Nexus5	RenderScript(ART)	98	0	0	5370
