@@ -20,7 +20,7 @@ display the progress of running the benchmarks, and the final scores of the
 device. But we do not think that should be the focus of our development at this
 moment.
 
-The \fix{parboil} package is the core of the project. In this package, we also
+The \fix{parboil} Java package is the core of the project. In this package, we also
 identified the common functions, such as timing- and logging-related functions,
 that are used across all the benchmarks. Those functions are further grouped in
 classes, e.g., \fix{Timer} and \fix{Logger}, and implemented in the \fix{utils}
@@ -37,6 +37,7 @@ implemented in a separate class, e.g., \fix{VectorAddJava},
 respectively. These class inherits from the parent class of the benchmark, which
 is the \fix{VectorAddBenchmark} in this case. This hierarchical design maximize
 the code reuse between benchmarks, and between computation kernel.
+It also allows for a consistent interface to run the benchmarks.
 
 \subsection*{Writing RenderScript kernels}
 This section describes the general steps to write a computation kernel in
@@ -91,20 +92,22 @@ nanosecond resolution. Each \fix{Timer} object consists of a flexible amount of
 \fix{TimerElement} objects. Each \fix{TimerElement} object is a measure of a
 particular execution segment, e.g., allocation time, setup time, and compute
 time. In order to create a new \fix{TimerElement}, we
-just need to invoke the \fix{Timer.start()} method at the beginning of the execution
-segment we wish to measure. At the end of the execution segment, we need to
+just need to invoke the \fix{Timer.start(category, message)} method at the beginning of the execution
+segment we wish to measure (here category is a user defined category such as "Compute" or "Setup", while message is a message that further refines the category such as "Allocating temporary datastructures"). At the end of the execution segment, we need to
 invoke the \fix{Time.stop()} method. The time-stamp and elapsed time will be
 automatically computed and recorded. The \fix{Timer} class also has a function that
-dumps all the recorded \fix{TimerElement} to the JSON format for conveniently storing
-into the database.
+dumps all the recorded \fix{TimerElement} to a SQLite database or serialize it to JSON format for conveniently storing the results in an easily parsable format.
 
+If a benchmark is run multiple times, for example, we run the compute part of the implementation 5 times in our currently analysis, then the timer has code 
+to aggregate the results -- giving you the average time across runs.
+Currently, we do not exercise that code and we leave the statistical analysis to the parser and visualizer.
 
 \subsection*{Output to Database}
 
 
 \begin{figure}[t!]
 \begin{verbatim}
-struct {
+{
 	string Type,
 	string Hardware,
 	string Benchmark,
@@ -124,8 +127,8 @@ struct {
 \end{figure}
 
 Unlike Parboil, which outputs the times to {\tt stdout}, we output our data into
-a SQLite database.  This affords us a few things.  First, since data is outputed
+a SQLite database (the schema is shown in table~\ref{fig:database}).  This affords us a few things.  First, since data is outputted
 in the specified columns, we do not have to re-parse the output data.  Second,
 timing information can be shared easily by copying the database.  Finally, we
-can store more than just timing information.
+can store more than just timing information -- for example we also store which machine the time has been taken on as well as which runtime is being used.
 
