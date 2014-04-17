@@ -1,6 +1,12 @@
 \section*{Progress Summary}
 
-This section summarizes our progress to date\footnote{Code is hosted on \fnurl{github.com/cmpham/RSBench}{https://github.com/cmpham/RSBench}}.
+This section summarizes our progress to date~\footnote{Code is hosted on
+\url{https://github.com/cmpham/RSBench}}. Table~\ref{table:parboil} shows the
+porting status of each version of the benchmarks in the Parboil Benchmark Suite.
+In this phase, we also worked on improving the framework, making it easy to collect
+data and plot graphs. In parallel, we worked on getting OpenCL to work on our
+devices (this was required as Android does not have official support for OpenCL
+on Nexus tablets), and started porting the OpenCL version of the benchmarks. 
 Further information on each task
 is described in the subsequent sections.
 
@@ -15,7 +21,7 @@ is described in the subsequent sections.
     Stencil & C & C & I & C \\ \hline
     VectorAdd & C & C & I & C \\ \hline
     CUTCP & C & P  & I  & P \\ \hline
-    MRI-Q & C & C & I & C \\ \hline
+    MRI-Q & C & C & P & C \\ \hline
     TPACF & C & C & I & I \\ \hline
     Histogram & C & C & I & I \\ \hline
     Breadth-First Search & C & I & I & I \\ \hline
