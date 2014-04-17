@@ -1,2 +1,14 @@
-
 \section*{Methodology}
+There is one major change in our strategy to evaluate RenderScript from our last
+progress report. In our last report we mentioned that because of the ongoing competetion between
+Google's RenderScript and Khronos Group's OpenCL, Google has decided not to ship
+GPU-CPU RenderScript drivers in their Nexus phones/tablets firmware. They never
+officialy supported the drivers for use by developers, but the Android 4.2 was
+found to have unofficial OpenCL drivers. It was predicted that these drivers
+would be removed from future versions and as expected Google removed these drivers from
+Android 4.3 onwards. As a result we decided to focus on evaluating RenderScript
+implementation against Single threaded and multi-threaded Java implementations. 
+
+However, we have been able to manually install OpenCL drivers in Android 4.4.2
+running on our Nexus 7 device and we would now be able to evaluate
+RenderScript against OpenCL.
