@@ -1,13 +1,13 @@
-Implementation	Hardware	Allocate	Compute	OpenCLSetup	RSSetup
-Java(ART)	Nexus5	337188	36780001	-	-	-
-Java(ART)	Nexus7	518799	49163817	-	-	-
-Java(ART)	SM-T900	-	-	-	-	-
-Java(Dalvik)	Nexus5	225239948	45130625	-	-	-
-Java(Dalvik)	Nexus7	-	-	-	-	-
-Java(Dalvik)	SM-T900	2092333	29334083	-	-	-
-ThreadedJava(ART)	Nexus5	338489	151399844	-	-	-
-ThreadedJava(ART)	Nexus7	488282	202087401	-	-	-
-ThreadedJava(ART)	SM-T900	-	-	-	-	-
-ThreadedJava(Dalvik)	Nexus5	229410521	1004206353	-	-	-
-ThreadedJava(Dalvik)	Nexus7	-	-	-	-	-
-ThreadedJava(Dalvik)	SM-T900	1890959	266561042	-	-	-
+ImplementationHardware	Allocate	Compute	OpenCLSetup	RSSetup
+Nexus5_Java(ART)	1	14	0	0
+Nexus5_Java(Dalvik)	84	17	0	0
+Nexus5_ThreadedJava(ART)	1	56	0	0
+Nexus5_ThreadedJava(Dalvik)	85	372	0	0
+Nexus7_Java(ART)	2	99	0	0
+Nexus7_Java(Dalvik)	0	0	0	0
+Nexus7_ThreadedJava(ART)	1	407	0	0
+Nexus7_ThreadedJava(Dalvik)	0	0	0	0
+SM-T900_Java(ART)	0	0	0	0
+SM-T900_Java(Dalvik)	7	94	0	0
+SM-T900_ThreadedJava(ART)	0	0	0	0
+SM-T900_ThreadedJava(Dalvik)	7	849	0	0

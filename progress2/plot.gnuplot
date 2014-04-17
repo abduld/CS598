@@ -17,4 +17,4 @@ set xtics   ()
 set yrange [ 0.00000 : * ] noreverse nowriteback
 i = 1
 
-plot 'ExtData1' using 3:xtic(2), '' using 4 t col with histogram lt 1 fs solid 0, '' using 5 t col with histogram lt 1 fs pattern 6, '' using 6 t col with histogram lt 1 fs pattern 1, '' using 7 t col with histogram lt 1 fs pattern 2, '' using 8 t col with histogram lt 1 fs pattern 3, '' using 9 t col with histogram lt 1 fs solid 0.25
+plot 'ExtData1' using 2:xtic(1), '' using 3 with histogram lt 1 fs pattern 6, '' using 4 with histogram lt 1 fs pattern 1, '' using 5 with histogram lt 1 fs pattern 2, '' using 6 with histogram lt 1 fs solid 0
