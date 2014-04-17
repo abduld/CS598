@@ -2,24 +2,24 @@
 \label{sec:analysis}
 
 We run the benchmarks on 4 different hardware.
-Two of the devices (Nex5 and GNex) are phones, while the other two are tablets.
+Two of the devices (Nexus5 and GalaxyNexus) are phones, while the other two are tablets.
 The hardware specification is shown in Table~\ref{table:hardware}.
-The devices also have different software capabilities: the Nexus 7 (Nex7)
+The devices also have different software capabilities: the Nexus 7
   is the only one capable of running OpenCL currently --- since it is the only
   one that's hacked to do so.
 
 \begin{table}[h]\small
 \centering
-\begin{tabular}{ | l | c | c | c |}
+\begin{tabular}{ | l | p{2cm} | p{2cm} | c |}
     \hline 
     Name & CPU & GPU & Memory \\ \hline
-    GNex & ARMv7 2Core 1200Mhz & PowerVR-SGX 540 & 694Mb \\ \hline
-    Nex5 & Snapdragon S4 Pro 1.5GHz & Adreno320 400MHz & 2Gb} \\ \hline
-    Nex7 & Snapdragon 800 2.26GHz & Adreno330 450MHz & 2Gb} \\ \hline
-    T900 & QuadCore 1.9GHz CortexA15 & Mali-T628 MP6 & 3Gb} \\ \hline
+    GalaxyNexus & ARMv7, 2 cores, 1200 Mhz, SIMD NEON & PowerVR-SGX 540 & 694Mb \\ \hline
+    Nexus5 & Qualcomm Snapdragon S4 Pro 1.5GHz & Adreno 320 400MHz & 2Gb} \\ \hline
+    Nexus7 & Qualcomm Snapdragon 800 2.26GHz & Adreno 330 450MHz & 2Gb} \\ \hline
+    SM-T900 & QuadCore 1.9GHz Cortex-A15 & Mali T628 MP6 & 3Gb} \\ \hline
     \hline
 \end{tabular}
-\caption{The hardware specifications of the devices we ran the benchmarks on.}
+\caption{The hardware specifications of the devices we ran the benchmarks on. Two of the devices (Nexus 7 and GalaxyNexus) are mobile phones while the other two are tablets.}
 \label{table:hardware}
 \end{table}
 
@@ -27,7 +27,7 @@ Figure~\ref{fig:benchmarks} shows the output of the benchmarks run~\footnote{We 
 Each benchmark is run across the implementd implementations (Java, ThreadedJava, RenderScript, and OpenCL) as well as (when available) across runtimes provided by Android (ART and Dalvik).
 All runtimes are normalized to the Java(Dalvik) runtime.
 
-We ommit the IO time, since it scews the graph --- in general IO takes 
+We omit the IO time, since it skews the graph --- in general IO takes 
   order of magnitude more time than the compute part.
 We expect the allocate time to be equal across benchmarks, since
   that code is shared across implementations.
@@ -37,8 +37,8 @@ In some cases timer information is not available, for example the compute times 
 
 The ART, introduced but disabled in 4.4.2, runtime performs ahead of
   time JIT-ing, while Dalvik uses a traditional hotspot runtime JIT architecture.
-It is not clear if ART gives a performance increase, there is massive degregation
-  in speed for the Stencil and CUTCP benchmark, for example, which, time permiting, we could
+It is not clear if ART gives a performance increase, there is massive degradation
+  in speed for the Stencil and CUTCP benchmark, for example, which, time permitting, we could
   analyze.
 
 \begin{figure}%
@@ -50,15 +50,19 @@ It is not clear if ART gives a performance increase, there is massive degregatio
     \subfloat[Stencil]{{\includegraphics[width=0.5\linewidth]{stencil} }}~
     \subfloat[Histogram]{{\includegraphics[width=0.5\linewidth]{histogram} }}\\
     \subfloat[CUTCP]{{\includegraphics[width=0.5\linewidth]{cutcp} }}%
-    \caption{Benchmark results: yellow corresponds to runs being performed on GNex, Red on the Nex5, Green on the Nex7, and Blue on the T900.}%
+    \caption{Benchmark results: yellow corresponds to runs being performed on GalaxyNexus, Red on the Nexus 5, Green on the Nexus 7, and Blue on the SM-T900.}%
     \label{fig:benchmarks}%
 \end{figure}
 
-While a more indepth analysis is planned, we can recognize a few pattens:
+While a more in depth analysis is planned, we can recognize a few pattens:
 
 \begin{enumerate}
 \item The OpenCL setup time results in SGEMM's OpenCL implementation to be slower than the serial version. OpenCL performs runtime compilation which is the main contributer to this setup time.
 \item Since RenderScript performs the compilation to bytecode offline, it does not suffer from the same setup cost as OpenCL.
 \item For SGEMM, RenderScript performs better than OpenCL, this could be due
-  to the SGEMM kernel being optimized for desktop GPUs which have more resources than the Nexus 7. 
+  to the SGEMM kernel being optimized for desktop GPUs which have more resources than the Nexus 7.
+\item Some of the benchmarks skew the graph.
 \end{enumerate}
+
+If data is missing this could be either because we have not implemented the benchmark yet, a bug which we fixed, or we did not run the benchmark on that
+device.
