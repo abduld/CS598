@@ -99,7 +99,7 @@ dumps all the recorded $TimerElement$ to the JSON format for conveniently storin
 into the database.
 
 
-\subsection*{Output}
+\subsection*{Output to Database}
 
 
 \begin{figure}[t!]
@@ -123,9 +123,9 @@ struct {
 \centering
 \end{figure}
 
-Unlike Parboil, which outputs the times to {\tt stdout}, we output our data into a SQLite database.
-This affords us a few things.
-First, since data is outputed in the specified columns, we do not have to reparse the output data.
-Second, timing information can be shared easily by copying the database.
-Finally, we can store more than just timing information.
+Unlike Parboil, which outputs the times to {\tt stdout}, we output our data into
+a SQLite database.  This affords us a few things.  First, since data is outputed
+in the specified columns, we do not have to re-parse the output data.  Second,
+timing information can be shared easily by copying the database.  Finally, we
+can store more than just timing information.
 
