@@ -91,16 +91,22 @@ class utilizes Android's \fix{SystemClock}, which provides real-time clock at
 nanosecond resolution. Each \fix{Timer} object consists of a flexible amount of
 \fix{TimerElement} objects. Each \fix{TimerElement} object is a measure of a
 particular execution segment, e.g., allocation time, setup time, and compute
-time. In order to create a new \fix{TimerElement}, we
-just need to invoke the \fix{Timer.start(category, message)} method at the beginning of the execution
-segment we wish to measure (here category is a user defined category such as "Compute" or "Setup", while message is a message that further refines the category such as "Allocating temporary datastructures"). At the end of the execution segment, we need to
-invoke the \fix{Time.stop()} method. The time-stamp and elapsed time will be
-automatically computed and recorded. The \fix{Timer} class also has a function that
-dumps all the recorded \fix{TimerElement} to a SQLite database or serialize it to JSON format for conveniently storing the results in an easily parsable format.
+time. In order to create a new \fix{TimerElement}, we just need to invoke the
+\fix{Timer.start(category, message)} method at the beginning of the execution
+segment we wish to measure (here category is a user defined category such as
+``Compute'' or ``Setup'', while message is a message that further refines the
+category such as ``Allocating temporary datastructures''). At the end of the
+execution segment, we need to invoke the \fix{Time.stop()} method. The
+time-stamp and elapsed time will be automatically computed and recorded. The
+\fix{Timer} class also has a function that dumps all the recorded
+\fix{TimerElement} to a SQLite database or serialize it to JSON format for
+conveniently storing the results in an easily parsable format.
 
-If a benchmark is run multiple times, for example, we run the compute part of the implementation 5 times in our currently analysis, then the timer has code 
-to aggregate the results -- giving you the average time across runs.
-Currently, we do not exercise that code and we leave the statistical analysis to the parser and visualizer.
+If a benchmark is run multiple times, for example, we run the compute part of
+the implementation 5 times in our currently analysis, then the timer has code to
+aggregate the results -- giving you the average time across runs.  Currently, we
+do not exercise that code and we leave the statistical analysis to the parser
+and visualizer.
 
 \subsection*{Output to Database}
 
