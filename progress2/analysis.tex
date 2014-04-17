@@ -1,10 +1,12 @@
 \section*{Analysis}
 \label{sec:analysis}
 
-Figure~\ref{fig:benchmarks} shows the output of the benchmarks run~\footnote{We would like to know how we can present these results better}.
-The results show the benchmarks being run on 4 different hardware.
+We run the benchmarks on 4 different hardware.
+Two of the devices (Nex5 and GNex) are phones, while the other two are tablets.
 The hardware specification is shown in Table~\ref{table:hardware}.
-
+The devices also have different software capabilities: the Nexus 7 (Nex7)
+  is the only one capable of running OpenCL currently --- since it is the only
+  one that's hacked to do so.
 
 \begin{table}[h]\small
 \centering
@@ -21,6 +23,24 @@ The hardware specification is shown in Table~\ref{table:hardware}.
 \label{table:hardware}
 \end{table}
 
+Figure~\ref{fig:benchmarks} shows the output of the benchmarks run~\footnote{We would like to know how we can present these results better}.
+Each benchmark is run across the implementd implementations (Java, ThreadedJava, RenderScript, and OpenCL) as well as (when available) across runtimes provided by Android (ART and Dalvik).
+All runtimes are normalized to the Java(Dalvik) runtime.
+
+We ommit the IO time, since it scews the graph --- in general IO takes 
+  order of magnitude more time than the compute part.
+We expect the allocate time to be equal across benchmarks, since
+  that code is shared across implementations.
+Each compute part of the implementation is run 5 times, and we 
+  take the minimum value across the runs.
+In some cases timer information is not available, for example the compute times for some of the Stencil implementations, this is due to a bug in our code (we omitted inserting the compute timer code) and has been fixed, but we were not able to rerun the benchmarks (primarily due to the IO runtime).
+
+The ART, introduced but disabled in 4.4.2, runtime performs ahead of
+  time JIT-ing, while Dalvik uses a traditional hotspot runtime JIT architecture.
+It is not clear if ART gives a performance increase, there is massive degregation
+  in speed for the Stencil and CUTCP benchmark, for example, which, time permiting, we could
+  analyze.
+
 \begin{figure}%
     \centering
     \subfloat[VectorAdd]{{\includegraphics[width=0.5\linewidth]{vecadd} }}~
@@ -28,9 +48,15 @@ The hardware specification is shown in Table~\ref{table:hardware}.
     \subfloat[MRI-Q]{{\includegraphics[width=0.5\linewidth]{mriq} }}~
     \subfloat[TPACF]{{\includegraphics[width=0.5\linewidth]{tpacf} }}\\
     \subfloat[Stencil]{{\includegraphics[width=0.5\linewidth]{stencil} }}~
-    \subfloat[Histogram]{{\includegraphics[width=0.5\linewidth]{histogram} }}%
+    \subfloat[Histogram]{{\includegraphics[width=0.5\linewidth]{histogram} }}\\
+    \subfloat[CUTCP]{{\includegraphics[width=0.5\linewidth]{cutcp} }}%
     \caption{Benchmark results: yellow corresponds to runs being performed on GNex, Red on the Nex5, Green on the Nex7, and Blue on the T900.}%
     \label{fig:benchmarks}%
 \end{figure}
 
+While a more indepth analysis is planned, we can recognize a few pattens:
 
+\begin{enumerate}
+\item The OpenCL setup time results in SGEMM's OpenCL implementation to be slower than the serial version. OpenCL performs runtime compilation which is the main contributer to this setup time.
+\item Since RenderScript performs the compilation to bytecode offline, it does not suffer from the same setup cost as OpenCL.
+\end{enumerate}
