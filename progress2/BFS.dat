@@ -1,4 +1,7 @@
-Hardware	Allocate_Java(Dalvik)	Compute_Java(Dalvik)	OpenCLSetup_Java(Dalvik)	RSSetup_Java(Dalvik)	Allocate_Java(ART)	Compute_Java(ART)	OpenCLSetup_Java(ART)	RSSetup_Java(ART)
-Nexus5	-	-	-	-	-	-	-	-	-	-
-Nexus7	-	-	-	-	-	-	-	-	-	-
-SM-T900	-	-	-	-	-	-	-	-	-	-
+Implementation	Hardware	Allocate	Compute	OpenCLSetup	RSSetup
+Java(ART)	Nexus5	-	-	-	-	-
+Java(ART)	Nexus7	-	-	-	-	-
+Java(ART)	SM-T900	-	-	-	-	-
+Java(Dalvik)	Nexus5	-	-	-	-	-
+Java(Dalvik)	Nexus7	-	-	-	-	-
+Java(Dalvik)	SM-T900	-	-	-	-	-

@@ -1,4 +1,22 @@
-Hardware	Allocate_Java(Dalvik)	Compute_Java(Dalvik)	OpenCLSetup_Java(Dalvik)	RSSetup_Java(Dalvik)	Allocate_ThreadedJava(Dalvik)	Compute_ThreadedJava(Dalvik)	OpenCLSetup_ThreadedJava(Dalvik)	RSSetup_ThreadedJava(Dalvik)	Allocate_RenderScript(Dalvik)	Compute_RenderScript(Dalvik)	OpenCLSetup_RenderScript(Dalvik)	RSSetup_RenderScript(Dalvik)	Allocate_Java(ART)	Compute_Java(ART)	OpenCLSetup_Java(ART)	RSSetup_Java(ART)	Allocate_ThreadedJava(ART)	Compute_ThreadedJava(ART)	OpenCLSetup_ThreadedJava(ART)	RSSetup_ThreadedJava(ART)	Allocate_RenderScript(ART)	Compute_RenderScript(ART)	OpenCLSetup_RenderScript(ART)	RSSetup_RenderScript(ART)	Allocate_OpenCL(ART)	Compute_OpenCL(ART)	OpenCLSetup_OpenCL(ART)	RSSetup_OpenCL(ART)
-Nexus5	178021	62974323	-	-	-	173021	28262552	-	-	-	229584	12926406	-	-	16440364	458438	68833177	-	-	-	417866	32166459	-	-	-	439740	10569688	-	-	15171510	-	-	-	-	-
-Nexus7	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	549316	71502687	-	-	-	549317	33203126	-	-	-	457763	9735107	-	-	40985106	488282	64605712	-	66040038	-
-SM-T900	154041	43942042	-	-	-	173042	14289208	-	-	-	173833	11169334	-	-	14377583	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-
+Implementation	Hardware	Allocate	Compute	OpenCLSetup	RSSetup
+Java(ART)	Nexus5	458438	68833177	-	-	-
+Java(ART)	Nexus7	549316	71502687	-	-	-
+Java(ART)	SM-T900	-	-	-	-	-
+Java(Dalvik)	Nexus5	178021	62974323	-	-	-
+Java(Dalvik)	Nexus7	-	-	-	-	-
+Java(Dalvik)	SM-T900	154041	43942042	-	-	-
+OpenCL(ART)	Nexus5	-	-	-	-	-
+OpenCL(ART)	Nexus7	488282	64605712	-	66040038	-
+OpenCL(ART)	SM-T900	-	-	-	-	-
+RenderScript(ART)	Nexus5	439740	10569688	-	-	15171510
+RenderScript(ART)	Nexus7	457763	9735107	-	-	40985106
+RenderScript(ART)	SM-T900	-	-	-	-	-
+RenderScript(Dalvik)	Nexus5	229584	12926406	-	-	16440364
+RenderScript(Dalvik)	Nexus7	-	-	-	-	-
+RenderScript(Dalvik)	SM-T900	173833	11169334	-	-	14377583
+ThreadedJava(ART)	Nexus5	417866	32166459	-	-	-
+ThreadedJava(ART)	Nexus7	549317	33203126	-	-	-
+ThreadedJava(ART)	SM-T900	-	-	-	-	-
+ThreadedJava(Dalvik)	Nexus5	173021	28262552	-	-	-
+ThreadedJava(Dalvik)	Nexus7	-	-	-	-	-
+ThreadedJava(Dalvik)	SM-T900	173042	14289208	-	-	-

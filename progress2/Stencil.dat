@@ -1,4 +1,19 @@
-Hardware	Allocate_Java(Dalvik)	Compute_Java(Dalvik)	OpenCLSetup_Java(Dalvik)	RSSetup_Java(Dalvik)	Allocate_ThreadedJava(Dalvik)	Compute_ThreadedJava(Dalvik)	OpenCLSetup_ThreadedJava(Dalvik)	RSSetup_ThreadedJava(Dalvik)	Allocate_RenderScript(Dalvik)	Compute_RenderScript(Dalvik)	OpenCLSetup_RenderScript(Dalvik)	RSSetup_RenderScript(Dalvik)	Allocate_Java(ART)	Compute_Java(ART)	OpenCLSetup_Java(ART)	RSSetup_Java(ART)	Allocate_ThreadedJava(ART)	Compute_ThreadedJava(ART)	OpenCLSetup_ThreadedJava(ART)	RSSetup_ThreadedJava(ART)	Allocate_RenderScript(ART)	Compute_RenderScript(ART)	OpenCLSetup_RenderScript(ART)	RSSetup_RenderScript(ART)
-Nexus5	408177	-	-	-	-	2551354	92175156	-	-	-	1772395	-	-	-	33495676	402396	-	-	-	-	486354	64590365	-	-	-	396563	-	-	-	21917604
-Nexus7	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	427246	-	-	-	-	549317	80261229	-	-	-	549316	-	-	-	35034177
-SM-T900	3412792	-	-	-	-	5675459	93244041	-	-	-	4588916	-	-	-	10956958	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-
+Implementation	Hardware	Allocate	Compute	OpenCLSetup	RSSetup
+Java(ART)	Nexus5	402396	-	-	-	-
+Java(ART)	Nexus7	427246	-	-	-	-
+Java(ART)	SM-T900	-	-	-	-	-
+Java(Dalvik)	Nexus5	408177	-	-	-	-
+Java(Dalvik)	Nexus7	-	-	-	-	-
+Java(Dalvik)	SM-T900	3412792	-	-	-	-
+RenderScript(ART)	Nexus5	396563	-	-	-	21917604
+RenderScript(ART)	Nexus7	549316	-	-	-	35034177
+RenderScript(ART)	SM-T900	-	-	-	-	-
+RenderScript(Dalvik)	Nexus5	1772395	-	-	-	33495676
+RenderScript(Dalvik)	Nexus7	-	-	-	-	-
+RenderScript(Dalvik)	SM-T900	4588916	-	-	-	10956958
+ThreadedJava(ART)	Nexus5	486354	64590365	-	-	-
+ThreadedJava(ART)	Nexus7	549317	80261229	-	-	-
+ThreadedJava(ART)	SM-T900	-	-	-	-	-
+ThreadedJava(Dalvik)	Nexus5	2551354	92175156	-	-	-
+ThreadedJava(Dalvik)	Nexus7	-	-	-	-	-
+ThreadedJava(Dalvik)	SM-T900	5675459	93244041	-	-	-

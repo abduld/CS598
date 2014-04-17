@@ -1,4 +1,7 @@
-Hardware	Allocate_Java(Dalvik)	Compute_Java(Dalvik)	OpenCLSetup_Java(Dalvik)	RSSetup_Java(Dalvik)	Allocate_Java(ART)	Compute_Java(ART)	OpenCLSetup_Java(ART)	RSSetup_Java(ART)
-Nexus5	39089896	34048631081	-	-	-	6241251	36707032851	-	-	-
-Nexus7	-	-	-	-	-	8911132	-	-	-	-
-SM-T900	21961666	25705534679	-	-	-	-	-	-	-	-
+Implementation	Hardware	Allocate	Compute	OpenCLSetup	RSSetup
+Java(ART)	Nexus5	6241251	36707032851	-	-	-
+Java(ART)	Nexus7	8911132	-	-	-	-
+Java(ART)	SM-T900	-	-	-	-	-
+Java(Dalvik)	Nexus5	39089896	34048631081	-	-	-
+Java(Dalvik)	Nexus7	-	-	-	-	-
+Java(Dalvik)	SM-T900	21961666	25705534679	-	-	-
