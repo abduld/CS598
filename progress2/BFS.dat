@@ -1,0 +1,4 @@
+Hardware	Allocate_Java(Dalvik)	Compute_Java(Dalvik)	OpenCLSetup_Java(Dalvik)	RSSetup_Java(Dalvik)	Allocate_Java(ART)	Compute_Java(ART)	OpenCLSetup_Java(ART)	RSSetup_Java(ART)
+Nexus5	-	-	-	-	-	-	-	-	-	-
+Nexus7	-	-	-	-	-	-	-	-	-	-
+SM-T900	-	-	-	-	-	-	-	-	-	-

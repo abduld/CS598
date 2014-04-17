@@ -1,0 +1,4 @@
+Hardware	Allocate_Java(Dalvik)	Compute_Java(Dalvik)	OpenCLSetup_Java(Dalvik)	RSSetup_Java(Dalvik)	Allocate_ThreadedJava(Dalvik)	Compute_ThreadedJava(Dalvik)	OpenCLSetup_ThreadedJava(Dalvik)	RSSetup_ThreadedJava(Dalvik)	Allocate_Java(ART)	Compute_Java(ART)	OpenCLSetup_Java(ART)	RSSetup_Java(ART)	Allocate_ThreadedJava(ART)	Compute_ThreadedJava(ART)	OpenCLSetup_ThreadedJava(ART)	RSSetup_ThreadedJava(ART)
+Nexus5	225239948	45130625	-	-	-	229410521	1004206353	-	-	-	337188	36780001	-	-	-	338489	151399844	-	-	-
+Nexus7	-	-	-	-	-	-	-	-	-	-	518799	49163817	-	-	-	488282	202087401	-	-	-
+SM-T900	2092333	29334083	-	-	-	1890959	266561042	-	-	-	-	-	-	-	-	-	-	-	-	-
