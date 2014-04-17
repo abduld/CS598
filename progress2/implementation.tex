@@ -1,4 +1,3 @@
-
 \section*{Implementation}
 
 \subsection*{Project Structure}
@@ -52,24 +51,22 @@ finest granularity of the output element, e.g., one array element in this case,
 to implement our RenderScript kernel.
 
 
-In order to support this model, the RenderScript framework provides APIs to
-(i) define the type of \fix{Element} for both input and output of RenderScript
-kernels, and (ii) pack \fix{Element}s into \fix{Allocation}, which is the data structure
-that is used to pass data back and forth between regular Java code and
+In order to support this model, the RenderScript framework provides APIs to (i)
+define the type of \fix{Element} for both input and output of RenderScript
+kernels, and (ii) pack \fix{Element}s into \fix{Allocation}, which is the data
+structure that is used to pass data back and forth between regular Java code and
 RenderScript code.
 
 A significant effort of our work is to determine efficient ways to convert input
 data from original structure to the \fix{Allocation} structure with appropriate
 \fix{Element} type. This conversion is also reflected at runtime through the
-setup time category of RenderScript execution.
+\textit{setup} time category of RenderScript execution.
 
 After data has been packed into \fix{Allocation} objects, we move to write
 RenderScript code in C99 format. The code need to be placed in a specific file
 with .rs extension and a proper header, so that the Android Development Tools
 (ADT) can automatically generate a Java class for it. The auto-generated Java
 class provides interfaces to invoke the RenderScript code from Java code.
-
-
 
 \begin{figure}[t!]
 \includegraphics[scale=0.65]{figs/package_diagram.pdf}
@@ -87,7 +84,19 @@ class provides interfaces to invoke the RenderScript code from Java code.
 \end{figure}
 
 \subsection*{Timer}
-
+The \fix{Timer} class is the most important utility in our benchmark. It
+determines the accuracy and flexibility of our measurement. The \fix{Timer}
+class utilizes Android's \fix{SystemClock}, which provides real-time clock at
+nanosecond resolution. Each \fix{Timer} object consists of a flexible amount of
+\fix{TimerElement} objects. Each \fix{TimerElement} object is a measure of a
+particular execution segment, e.g., allocation time, setup time, and compute
+time. In order to create a new \fix{TimerElement}, we
+just need to invoke the \fix{Timer.start()} method at the beginning of the execution
+segment we wish to measure. At the end of the execution segment, we need to
+invoke the \fix{Time.stop()} method. The time-stamp and elapsed time will be
+automatically computed and recorded. The $Timer$ class also has a function that
+dumps all the recorded $TimerElement$ to the JSON format for conveniently storing
+into the database.
 
 
 \subsection*{Output}
