@@ -1,16 +1,19 @@
-Hardware	Implementation	Allocate	Compute	OpenCLSetup	RSSetup
-GalaxyNexus	Java(Dalvik)	17	84	0	0
-GalaxyNexus	RenderScript(Dalvik)	14	100	0	265
-GalaxyNexus	ThreadedJava(Dalvik)	14	157	0	0
-Nexus5	Java(ART)	43	71	0	0
-Nexus5	Java(Dalvik)	41	60	0	0
-Nexus5	RenderScript(ART)	28	160	0	573
-Nexus5	RenderScript(Dalvik)	17	91	0	318
-Nexus5	ThreadedJava(ART)	29	411	0	0
-Nexus5	ThreadedJava(Dalvik)	27	259	0	0
-Nexus7	Java(ART)	32	69	0	0
-Nexus7	RenderScript(ART)	25	121	0	456
-Nexus7	ThreadedJava(ART)	28	263	0	0
-SM-T900	Java(Dalvik)	33	68	0	0
-SM-T900	RenderScript(Dalvik)	16	171	0	539
-SM-T900	ThreadedJava(Dalvik)	16	219	0	0
+Hardware	Implementation	Allocate	Compute	Setup
+GalaxyNexus	Java(Dalvik)	16	85	0
+GalaxyNexus	RenderScript(Dalvik)	15	102	269
+GalaxyNexus	ThreadedJava(Dalvik)	15	149	0
+Nexus5	Java(ART)	43	71	0
+Nexus5	Java(Dalvik)	41	60	0
+Nexus5	RenderScript(ART)	28	160	573
+Nexus5	RenderScript(Dalvik)	17	91	318
+Nexus5	ThreadedJava(ART)	29	411	0
+Nexus5	ThreadedJava(Dalvik)	27	259	0
+Nexus7	Java(ART)	38	71	0
+Nexus7	Java(Dalvik)	26	75	0
+Nexus7	RenderScript(ART)	30	123	478
+Nexus7	RenderScript(Dalvik)	34	160	508
+Nexus7	ThreadedJava(ART)	30	234	0
+Nexus7	ThreadedJava(Dalvik)	26	275	0
+SM-T900	Java(Dalvik)	33	68	0
+SM-T900	RenderScript(Dalvik)	16	171	539
+SM-T900	ThreadedJava(Dalvik)	16	219	0

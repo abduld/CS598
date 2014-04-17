@@ -1,5 +1,6 @@
-Hardware	Implementation	Allocate	Compute	OpenCLSetup	RSSetup
-Nexus5	Java(ART)	1	108	0	0
-Nexus5	Java(Dalvik)	1	100	0	0
-Nexus7	Java(ART)	100	0	0	0
-SM-T900	Java(Dalvik)	1	100	0	0
+Hardware	Implementation	Allocate	Compute	Setup
+Nexus5	Java(ART)	1	108	0
+Nexus5	Java(Dalvik)	1	100	0
+Nexus7	Java(ART)	144	586078	0
+Nexus7	Java(Dalvik)	100	0	0
+SM-T900	Java(Dalvik)	1	100	0
