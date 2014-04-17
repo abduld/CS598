@@ -59,4 +59,6 @@ While a more indepth analysis is planned, we can recognize a few pattens:
 \begin{enumerate}
 \item The OpenCL setup time results in SGEMM's OpenCL implementation to be slower than the serial version. OpenCL performs runtime compilation which is the main contributer to this setup time.
 \item Since RenderScript performs the compilation to bytecode offline, it does not suffer from the same setup cost as OpenCL.
+\item For SGEMM, RenderScript performs better than OpenCL, this could be due
+  to the SGEMM kernel being optimized for desktop GPUs which have more resources than the Nexus 7. 
 \end{enumerate}
