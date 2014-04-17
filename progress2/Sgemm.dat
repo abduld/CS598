@@ -1,22 +1,22 @@
-ImplementationHardware	Allocate	Compute	OpenCLSetup	RSSetup
-Nexus5_Java(ART)	1	109	0	0
-Nexus5_Java(Dalvik)	1	100	0	0
-Nexus5_OpenCL(ART)	0	0	0	0
-Nexus5_RenderScript(ART)	1	17	0	25
-Nexus5_RenderScript(Dalvik)	1	21	0	27
-Nexus5_ThreadedJava(ART)	1	51	0	0
-Nexus5_ThreadedJava(Dalvik)	1	45	0	0
-Nexus7_Java(ART)	1	100	0	0
-Nexus7_Java(Dalvik)	0	0	0	0
-Nexus7_OpenCL(ART)	1	90	92	0
-Nexus7_RenderScript(ART)	1	14	0	57
-Nexus7_RenderScript(Dalvik)	0	0	0	0
-Nexus7_ThreadedJava(ART)	1	47	0	0
-Nexus7_ThreadedJava(Dalvik)	0	0	0	0
-SM-T900_Java(ART)	0	0	0	0
-SM-T900_Java(Dalvik)	1	100	0	0
-SM-T900_OpenCL(ART)	0	0	0	0
-SM-T900_RenderScript(ART)	0	0	0	0
-SM-T900_RenderScript(Dalvik)	1	26	0	33
-SM-T900_ThreadedJava(ART)	0	0	0	0
-SM-T900_ThreadedJava(Dalvik)	1	33	0	0
+Hardware	Implementation	Allocate	Compute	OpenCLSetup	RSSetup
+Nexus5	Java(ART)	1	109	0	0
+Nexus5	Java(Dalvik)	1	100	0	0
+Nexus5	OpenCL(ART)	0	0	0	0
+Nexus5	RenderScript(ART)	1	17	0	25
+Nexus5	RenderScript(Dalvik)	1	21	0	27
+Nexus5	ThreadedJava(ART)	1	51	0	0
+Nexus5	ThreadedJava(Dalvik)	1	45	0	0
+Nexus7	Java(ART)	1	100	0	0
+Nexus7	Java(Dalvik)	0	0	0	0
+Nexus7	OpenCL(ART)	1	90	92	0
+Nexus7	RenderScript(ART)	1	14	0	57
+Nexus7	RenderScript(Dalvik)	0	0	0	0
+Nexus7	ThreadedJava(ART)	1	47	0	0
+Nexus7	ThreadedJava(Dalvik)	0	0	0	0
+SM-T900	Java(ART)	0	0	0	0
+SM-T900	Java(Dalvik)	1	100	0	0
+SM-T900	OpenCL(ART)	0	0	0	0
+SM-T900	RenderScript(ART)	0	0	0	0
+SM-T900	RenderScript(Dalvik)	1	26	0	33
+SM-T900	ThreadedJava(ART)	0	0	0	0
+SM-T900	ThreadedJava(Dalvik)	1	33	0	0
