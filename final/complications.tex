@@ -1,0 +1,37 @@
+\section*{Complications}
+\subsection*{Running OpenCL Benchmarks}
+
+%This was a major challenge for us, but we have been
+%able to successfully insall these drivers manually on our Nexus 7 tablets.
+
+While we have been successful in getting OpenCL to run on Nexus 7 tablets
+running Android 4.4.2 (Kit-Kat), the OpenCL drivers we installed for Adreno
+GPU were from
+Android 4.2 and that too were not part of the official release. Thus, they might
+be unstable. The parboil benchmark suite is written using the OpenCL C API while
+we have been able to run the SGEMM benchmark and an example application only by using
+the OpenCL C++ Wrapper API. All our attempts to run the parboil benchmark suite as
+is, using the OpenCL C API have failed so far. Any call to native JNI code
+ends up corrupting the C++ heap and thus, crashing the application. So far, we
+have only been successful in running SGEMM by porting the parboil OpenCL C
+API version to OpenCL C++ Wrapper API version manually.
+
+Another challenge is to tune these parboil OpenCL benchmarks for the Adreno GPU.
+The current versions of these benchmarks are tuned for discrete Nvidia GPUs on desktop and might
+suffer poor performance while running on the Adreno GPU of Nexus 7, which is much
+smaller.
+
+Both these challenges significantly
+increase our work as any OpenCL parboil benchmark needs to be ported to OpenCL
+C++ Wrapper API version to run on the Nexus 7 tablets, and has to be tuned for
+the Adreno GPU. We did not foresee the former
+challenge initially and thus we are now contemplating on implementing only a
+subset of benchmarks for OpenCL.
+
+\subsection*{Visualization}
+
+We have yet to figure out an easy to read way to represent our results.
+Our current visualizations are easier to read than before, but they
+  still encode a lot of information that is hard to read.
+We plan on reviewing how people present their graphs for similar sorts
+  of problems for the final report.

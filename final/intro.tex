@@ -1,0 +1,37 @@
+\section*{Progress Summary}
+
+This section summarizes our progress to date. Table~\ref{table:parboil} shows the
+porting status of each version of the benchmarks in the Parboil Benchmark Suite.
+In this phase, we also worked on improving the framework, making it easy to collect
+data and plot graphs. In parallel, we worked on getting OpenCL to work on our
+devices (this was required as Android does not have official support for OpenCL
+on Nexus tablets), and started porting the OpenCL version of the benchmarks. 
+Further information on each task is described in the subsequent sections.
+
+Our code is publicly available at \url{https://github.com/cmpham/RSBench}.
+
+\begin{table}[h]\small
+\centering
+\begin{tabular}{ | l | c | c | c | c |}
+    \hline 
+    Benchmark & \multicolumn{4}{|c|}{Porting status} \\ \cline{2-5}
+              & Java & T-Java & OpenCL & RS \\ \hline
+    Matrix Multiply & C & C & C & C \\ \hline
+    Stencil & C & C & I & C \\ \hline
+    VectorAdd & C & C & I & C \\ \hline
+    CUTCP & C & P  & I  & P \\ \hline
+    MRI-Q & C & C & P & C \\ \hline
+    TPACF & C & C & I & I \\ \hline
+    Histogram & C & C & I & I \\ \hline
+    Breadth-First Search & C & I & I & I \\ \hline
+    MRI-Gridding & I & I & I & I \\ \hline
+    Sum of Absolute Differences & P & I & I & I \\ \hline
+    Spare-Matrix Vector Multiply & I & I & I & I \\ \hline
+    Lattice-Boltzmann Method & \multicolumn{4}{|c|}{TBD} \\ \hline
+    \hline
+\end{tabular}
+\caption{Parboil Benchmark Porting Status. T-Java: Threaded Java; RS:
+RenderScript; C: Completed; I: Incomplete; P: Partial}
+\label{table:parboil}
+\end{table}
+
