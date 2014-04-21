@@ -6,7 +6,6 @@
 *.fls
 *.out
 *.toc
-*.pdf
 
 ## Intermediate documents:
 *.dvi
@@ -14,6 +13,7 @@
 # *.ps
 # *.eps
 # *.pdf
+paper.pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
