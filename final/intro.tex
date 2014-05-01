@@ -12,17 +12,17 @@ Our code is publicly available at \url{https://github.com/cmpham/RSBench}.
 
 \begin{table}[h]\small
 \centering
-\begin{tabular}{ | l | c | c | c | c |}
+\begin{tabular}{ | l | c | c | c | c | c | c |}
     \hline 
     Benchmark & \multicolumn{4}{|c|}{Porting status} \\ \cline{2-5}
-              & Java & T-Java & OpenCL & RS \\ \hline
-    Matrix Multiply & C & C & C & C \\ \hline
-    Stencil & C & C & C & C \\ \hline
-    VectorAdd & C & C & C & C \\ \hline
-    CUTCP & C & P  & P  & P \\ \hline
-    MRI-Q & C & C & C & C \\ \hline
-    TPACF & C & C & I & I \\ \hline
-    Histogram & C & C & C & I \\ \hline
+             C & OMP & Java & T-Java & OpenCL & RS \\ \hline
+    Matrix Multiply & C & C & C & C & C & C \\ \hline
+    Stencil & C & C & C & C & C & C \\ \hline
+    VectorAdd & C & C & C & C & C & C \\ \hline
+    CUTCP & I & I & C & P  & P  & P \\ \hline
+    MRI-Q & I & I & C & C & C & C \\ \hline
+    TPACF & I & I & C & C & I & I \\ \hline
+    Histogram & C & C & C & C & C & I \\ \hline
     Breadth-First Search & \multicolumn{4}{|c|}{N/A} \\ \hline
     MRI-Gridding & \multicolumn{4}{|c|}{N/A} \\ \hline
     Sum of Absolute Differences & \multicolumn{4}{|c|}{N/A} \\ \hline
@@ -30,7 +30,7 @@ Our code is publicly available at \url{https://github.com/cmpham/RSBench}.
     Lattice-Boltzmann Method & \multicolumn{4}{|c|}{N/A} \\ \hline
     \hline
 \end{tabular}
-\caption{Parboil Benchmark Porting Status. T-Java: Threaded Java; RS:
+\caption{Parboil Benchmark Porting Status. C : Native C; OMP : Native C with OpenMP; T-Java: Threaded Java; RS:
 RenderScript; C: Completed; I: Incomplete; P: Partial}
 \label{table:parboil}
 \end{table}
