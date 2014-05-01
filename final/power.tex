@@ -1,0 +1,36 @@
+\subsection{Power}
+
+Mobile devices employ dynamic voltage frequency scaling (DVFS),
+  this results in power draw of the device being goverened by
+  the operating frequency of the processor.
+A typical model\tt{TODO:CITE Power tutor} of the power draw at time $t$ is
+
+\[
+P(t) = GPUVoltage(GPUFreq(t)) + \sum_{i=1}^{N} CPUVoltage_n(CPUFreq_n(t))
+\]
+
+with $N$ begin the number of CPU cores, $GPUFreq(t)$ and $CPUFreq(t)$ are the operating frequencies at time $t$, and $GPUVoltage(f)$ and $CPUVoltage(f)$ are the power draws for the processors at the specified voltage.
+Other terms, such as GPS, wireless, and other sensors, can be measured or modeled, but for this analysis we turn them off.
+
+The of the issues with using a model are knowing the the power draw at the 
+  frequency (which is not specified by the processor's manifacturer) and the method of reading
+  the CPU and GPU counters is varies from device to device.
+As a result, we use Qualcomm's Trepn tool \tt{TODO: CITE} to read the hardware
+  counters.
+Trepn, which is limited to Qualcomm based chipsets, reads internal processor
+  counters as well as power rail information, both of which are not otherwise
+  available programatically.
+We set Trepn to read the counters every $100ms$ and measure the load and power
+  usage seperatly to decrease the overhead of the profiler.
+
+\subsubsection{Vector Add}
+
+\subsubsection{SGEMM}
+
+\subsubsection{Stencil}
+
+\subsubsection{Histogram}
+
+\subsubsection{CUTCP}
+
+
