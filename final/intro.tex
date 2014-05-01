@@ -14,20 +14,20 @@ Our code is publicly available at \url{https://github.com/cmpham/RSBench}.
 \centering
 \begin{tabular}{ | l | c | c | c | c | c | c |}
     \hline 
-    Benchmark & \multicolumn{6}{|c|}{Porting status} \\ \cline{2-5}
-             C & OMP & Java & T-Java & OpenCL & RS \\ \hline
-    Matrix Multiply & C & C & C & C & C & C \\ \hline
-    Stencil & C & C & C & C & C & C \\ \hline
+    Benchmark & \multicolumn{6}{|c|}{Porting status} \\ \cline{2-7}
+            & C & OMP & Java & T-Java & OpenCL & RS \\ \hline
     VectorAdd & C & C & C & C & C & C \\ \hline
+    SGEMM & C & C & C & C & C & C \\ \hline
+    Stencil & C & C & C & C & C & C \\ \hline
     CUTCP & I & I & C & P  & P  & P \\ \hline
     MRI-Q & I & I & C & C & C & C \\ \hline
     TPACF & I & I & C & C & I & I \\ \hline
     Histogram & C & C & C & C & C & I \\ \hline
-    Breadth-First Search & \multicolumn{6}{|c|}{N/A} \\ \hline
-    MRI-Gridding & \multicolumn{6}{|c|}{N/A} \\ \hline
-    Sum of Absolute Differences & \multicolumn{6}{|c|}{N/A} \\ \hline
-    Spare-Matrix Vector Multiply & \multicolumn{6}{|c|}{N/A} \\ \hline
-    Lattice-Boltzmann Method & \multicolumn{6}{|c|}{N/A} \\ \hline
+    BFS & \multicolumn{6}{|c|}{N/A} \\ \hline
+    MRI-G & \multicolumn{6}{|c|}{N/A} \\ \hline
+    SAM & \multicolumn{6}{|c|}{N/A} \\ \hline
+    SPMV & \multicolumn{6}{|c|}{N/A} \\ \hline
+    LBM & \multicolumn{6}{|c|}{N/A} \\ \hline
     \hline
 \end{tabular}
 \caption{Parboil Benchmark Porting Status. C : Native C; OMP : Native C with OpenMP; T-Java: Threaded Java; RS:
