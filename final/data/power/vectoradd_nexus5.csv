@@ -1,0 +1,221 @@
+App,Package,Start Time,Duration,Filename
+"System",,"May 3, 2014 @ 02:32:13 PM","17 sec",""
+
+Time  [ms],"Battery Status",Time  [ms],"Battery Power [uW]",Time  [ms],"Application State",Description,
+0,0,32,3584188,1,0,,
+91,0,149,3812119,102,0,,
+102,0,223,3227644,203,0,,
+202,0,324,3857819,304,0,,
+303,0,424,3469828,404,0,,
+404,0,525,3133669,505,0,,
+504,0,625,3045413,605,0,,
+605,0,726,4102937,705,0,,
+705,0,827,4556151,806,0,,
+806,0,929,4932811,907,0,,
+906,0,1027,2414744,1007,0,,
+1007,0,1127,2994829,1107,0,,
+1107,0,1256,2869464,1208,0,,
+1208,0,1340,2281014,1308,0,,
+1308,0,1429,1295830,1408,0,,
+1408,0,1529,1320912,1509,0,,
+1508,0,1629,2235211,1609,0,,
+1609,0,1730,1345894,1709,0,,
+1709,0,1830,2873302,1809,0,,
+1809,0,1933,3623010,1912,0,,
+1910,0,2038,3285931,2012,0,,
+2010,0,2130,2437389,2110,0,,
+2110,0,2233,1951983,2211,0,,
+2211,0,2362,2789394,2312,0,,
+2311,0,2456,1920201,2414,0,,
+2414,0,2535,2431968,2514,0,,
+2513,0,2636,1756184,2616,0,,
+2615,0,2737,3298844,2716,0,,
+2716,0,2837,2975238,2816,0,,
+2816,0,2940,3520123,2918,0,,
+2917,0,3038,3354573,3018,0,,
+3017,0,3138,2831473,3118,0,,
+3118,0,3240,4194465,3218,0,,
+3218,0,3340,3638387,3305,116,VectorAdd::NativeC::IO::Start,
+3318,0,3440,3469258,3319,116,VectorAdd::NativeC::IO::Start,
+3418,0,3562,3787813,3419,116,VectorAdd::NativeC::IO::Start,
+3519,0,3640,4179687,3519,116,VectorAdd::NativeC::IO::Start,
+3619,0,3741,4400110,3586,117,VectorAdd::NativeC::IO::Stop,
+3720,0,3841,3437222,3610,422,VectorAdd::NativeC::Allocate::Stop,
+3820,0,3942,3795965,3611,178,VectorAdd::NativeC::Init::Start,
+3921,0,4043,4286997,3615,179,VectorAdd::NativeC::Init::Stop,
+4021,0,4143,3499177,3616,431,VectorAdd::NativeC::Setup::Start,
+4122,0,4242,2904991,3617,432,VectorAdd::NativeC::Setup::Stop,
+4222,0,4346,5349578,3618,421,VectorAdd::NativeC::Allocate::Start,
+4324,0,4444,4070463,3620,421,VectorAdd::NativeC::Allocate::Start,
+4424,0,4545,4203076,3623,422,VectorAdd::NativeC::Allocate::Stop,
+4525,0,4668,3482440,3657,177,VectorAdd::NativeC::Compute::Start,
+4625,0,4752,3607622,3721,177,VectorAdd::NativeC::Compute::Start,
+4725,0,4846,3662902,3775,178,VectorAdd::NativeC::Compute::Stop,
+4825,0,4947,4117656,3776,846,VectorAdd::NativeC::Free::Start,
+4926,0,5047,4311721,3777,847,VectorAdd::NativeC::Free::Stop,
+5026,0,5148,4047289,3821,847,VectorAdd::NativeC::Free::Stop,
+5126,0,5248,3681883,3908,0,:: :: :: ::,
+5227,0,5348,2755524,3921,0,:: :: :: ::,
+5327,0,5450,3799057,3955,429,VectorAdd::NativeCThreaded::IO::Start,
+5427,0,5548,4774514,4021,429,VectorAdd::NativeCThreaded::IO::Start,
+5528,0,5648,3271346,4122,429,VectorAdd::NativeCThreaded::IO::Start,
+5628,0,5754,4334461,4222,429,VectorAdd::NativeCThreaded::IO::Start,
+5728,0,5859,5410158,4241,430,VectorAdd::NativeCThreaded::IO::Stop,
+5829,0,5956,4742405,4242,164,VectorAdd::NativeCThreaded::Allocate::Start,
+5929,0,6052,3660740,4257,165,VectorAdd::NativeCThreaded::Allocate::Stop,
+6030,0,6151,4206060,4258,33,VectorAdd::NativeCThreaded::Init::Start,
+6130,0,6253,3969970,4260,34,VectorAdd::NativeCThreaded::Init::Stop,
+6230,0,6351,4646183,4262,370,VectorAdd::NativeCThreaded::Setup::Start,
+6331,0,6455,4452005,4263,371,VectorAdd::NativeCThreaded::Setup::Stop,
+6432,0,6558,4098256,4269,164,VectorAdd::NativeCThreaded::Allocate::Start,
+6534,0,6654,2837020,4270,165,VectorAdd::NativeCThreaded::Allocate::Stop,
+6634,0,6755,2796753,4299,216,VectorAdd::NativeCThreaded::Compute::Start,
+6735,0,6860,3388588,4324,216,VectorAdd::NativeCThreaded::Compute::Start,
+6835,0,6967,4388764,4409,217,VectorAdd::NativeCThreaded::Compute::Stop,
+6936,0,7057,5146793,4410,701,VectorAdd::NativeCThreaded::Free::Start,
+7036,0,7156,2432604,4411,702,VectorAdd::NativeCThreaded::Free::Stop,
+7136,0,7257,2939829,4425,702,VectorAdd::NativeCThreaded::Free::Stop,
+7236,0,7358,2691188,4525,702,VectorAdd::NativeCThreaded::Free::Stop,
+7337,0,7457,2745234,4561,0,:: :: :: ::,
+7437,0,7557,2762015,4594,54,VectorAdd::Java::IO::Start,
+7537,0,7658,3167609,4625,54,VectorAdd::Java::IO::Start,
+7638,0,7758,2369470,4726,54,VectorAdd::Java::IO::Start,
+7738,0,7861,2066599,4826,54,VectorAdd::Java::IO::Start,
+7838,0,7976,1967199,4873,55,VectorAdd::Java::IO::Stop,
+7943,0,8071,3715837,4875,725,VectorAdd::Java::Allocate::Start,
+8043,0,8163,2011969,4877,726,VectorAdd::Java::Allocate::Stop,
+8143,0,8263,1438220,4918,345,VectorAdd::Java::Compute::Start,
+8243,0,8364,1373819,4926,345,VectorAdd::Java::Compute::Start,
+8343,0,8473,920145,5026,345,VectorAdd::Java::Compute::Start,
+8444,0,8587,1034571,5127,345,VectorAdd::Java::Compute::Start,
+8548,0,8673,1048570,5227,345,VectorAdd::Java::Compute::Start,
+8646,0,8790,1199031,5315,346,VectorAdd::Java::Compute::Stop,
+8747,0,8897,963555,5327,346,VectorAdd::Java::Compute::Stop,
+8858,0,8970,2043722,5417,0,:: :: :: ::,
+8948,0,9080,1305885,5428,0,:: :: :: ::,
+9048,0,9177,1335757,5438,201,VectorAdd::JavaThreaded::IO::Start,
+9149,0,9280,904729,5528,201,VectorAdd::JavaThreaded::IO::Start,
+9249,0,9375,1210697,5628,201,VectorAdd::JavaThreaded::IO::Start,
+9351,0,9475,1043905,5716,202,VectorAdd::JavaThreaded::IO::Stop,
+9451,0,9597,1042793,5717,342,VectorAdd::JavaThreaded::Allocate::Start,
+9555,0,9676,2062677,5727,343,VectorAdd::JavaThreaded::Allocate::Stop,
+9653,0,9773,1905382,5728,343,VectorAdd::JavaThreaded::Allocate::Stop,
+9753,0,9873,2534935,5758,330,VectorAdd::JavaThreaded::Compute::Start,
+9853,0,9973,2380577,5829,330,VectorAdd::JavaThreaded::Compute::Start,
+9953,0,10080,2157529,5929,330,VectorAdd::JavaThreaded::Compute::Start,
+10054,0,10177,2391120,6030,330,VectorAdd::JavaThreaded::Compute::Start,
+10154,0,10283,2293759,6131,330,VectorAdd::JavaThreaded::Compute::Start,
+10254,0,10374,2284511,6231,330,VectorAdd::JavaThreaded::Compute::Start,
+10354,0,10478,2481818,6331,330,VectorAdd::JavaThreaded::Compute::Start,
+10455,0,10579,2354016,6432,330,VectorAdd::JavaThreaded::Compute::Start,
+10555,0,10677,3359194,6454,331,VectorAdd::JavaThreaded::Compute::Stop,
+10655,0,10778,3504058,6531,0,:: :: :: ::,
+10756,0,10876,4124991,6534,0,:: :: :: ::,
+10856,0,10977,3987647,6558,459,VectorAdd::RenderScript::IO::Start,
+10957,0,11081,4750782,6634,459,VectorAdd::RenderScript::IO::Start,
+11057,0,11179,3289501,6735,459,VectorAdd::RenderScript::IO::Start,
+11158,0,11283,3416402,6812,460,VectorAdd::RenderScript::IO::Stop,
+11258,0,11387,2358096,6814,172,VectorAdd::RenderScript::Allocate::Start,
+11358,0,11479,2384928,6815,173,VectorAdd::RenderScript::Allocate::Stop,
+11459,0,11592,2724687,6816,23,VectorAdd::RenderScript::Init::Start,
+11572,0,11693,1758295,6832,24,VectorAdd::RenderScript::Init::Stop,
+11672,0,11793,1830059,6833,626,VectorAdd::RenderScript::Setup::Start,
+11772,0,11895,1699425,6835,627,VectorAdd::RenderScript::Setup::Stop,
+11872,0,11994,1512472,6838,172,VectorAdd::RenderScript::Allocate::Start,
+11973,0,12095,1355233,6876,173,VectorAdd::RenderScript::Allocate::Stop,
+12073,0,12194,1307166,6879,249,VectorAdd::RenderScript::CopyTo::Start,
+12173,0,12294,1252484,6882,250,VectorAdd::RenderScript::CopyTo::Stop,
+12273,0,12399,1811988,6883,277,VectorAdd::RenderScript::SetupArgs::Start,
+12374,0,12495,1268352,6885,278,VectorAdd::RenderScript::SetupArgs::Stop,
+12474,0,12597,2010069,6930,232,VectorAdd::RenderScript::Compute::Start,
+12574,0,12696,1775664,6936,232,VectorAdd::RenderScript::Compute::Start,
+12674,0,12798,2318362,7037,232,VectorAdd::RenderScript::Compute::Start,
+12775,0,12897,2157141,7074,233,VectorAdd::RenderScript::Compute::Stop,
+12875,0,13001,3687164,7075,642,VectorAdd::RenderScript::CopyFrom::Start,
+12976,0,13102,3444881,7077,643,VectorAdd::RenderScript::CopyFrom::Stop,
+13076,0,13197,1801822,7136,643,VectorAdd::RenderScript::CopyFrom::Stop,
+13176,0,13297,1789225,7237,643,VectorAdd::RenderScript::CopyFrom::Stop,
+13276,0,13399,3385120,7291,0,:: :: :: ::,
+13377,0,13507,1345211,7323,862,VectorAdd::OpenCL(GPU)::IO::Start,
+13478,0,13605,1709447,7338,862,VectorAdd::OpenCL(GPU)::IO::Start,
+13579,0,13705,1866540,7437,862,VectorAdd::OpenCL(GPU)::IO::Start,
+13680,0,13801,2818969,7538,862,VectorAdd::OpenCL(GPU)::IO::Start,
+13780,0,13903,3331720,7597,863,VectorAdd::OpenCL(GPU)::IO::Stop,
+13881,0,14002,1996315,7598,639,VectorAdd::OpenCL(GPU)::Allocate::Start,
+13981,0,14107,2828759,7602,640,VectorAdd::OpenCL(GPU)::Allocate::Stop,
+14081,0,14202,2061047,7603,140,VectorAdd::OpenCL(GPU)::Init::Start,
+14181,0,14303,1720088,7604,141,VectorAdd::OpenCL(GPU)::Init::Stop,
+14282,0,14403,2706541,7605,377,VectorAdd::OpenCL(GPU)::Compile::Start,
+14382,0,14505,2453723,7638,377,VectorAdd::OpenCL(GPU)::Compile::Start,
+14482,0,14612,1360032,7643,378,VectorAdd::OpenCL(GPU)::Compile::Stop,
+14583,0,14703,1885017,7645,17,VectorAdd::OpenCL(GPU)::Setup::Start,
+14683,0,14803,2087003,7646,18,VectorAdd::OpenCL(GPU)::Setup::Stop,
+14783,0,14904,2441812,7652,640,VectorAdd::OpenCL(GPU)::Allocate::Stop,
+14883,0,15004,1929742,7655,308,VectorAdd::OpenCL(GPU)::CopyTo::Start,
+14983,0,15112,1931033,7664,309,VectorAdd::OpenCL(GPU)::CopyTo::Stop,
+15084,0,15205,2502060,7701,597,VectorAdd::OpenCL(GPU)::Compute::Start,
+15184,0,15308,2536410,7738,597,VectorAdd::OpenCL(GPU)::Compute::Start,
+15284,0,15408,2138756,7839,597,VectorAdd::OpenCL(GPU)::Compute::Start,
+15385,0,15509,2538734,7944,597,VectorAdd::OpenCL(GPU)::Compute::Start,
+15485,0,15610,1693760,8007,598,VectorAdd::OpenCL(GPU)::Compute::Stop,
+15585,0,15706,4312341,8010,843,VectorAdd::OpenCL(GPU)::CopyFrom::Start,
+15685,0,15807,2386216,8014,844,VectorAdd::OpenCL(GPU)::CopyFrom::Stop,
+15785,0,15906,1322733,8017,808,VectorAdd::OpenCL(GPU)::Free::Start,
+15886,0,16007,2850649,8019,809,VectorAdd::OpenCL(GPU)::Free::Stop,
+15986,0,16110,3334386,8044,809,VectorAdd::OpenCL(GPU)::Free::Stop,
+16087,0,16208,1262305,8143,809,VectorAdd::OpenCL(GPU)::Free::Stop,
+16187,0,16311,1300922,8203,0,:: :: :: ::,
+16287,0,16409,1343963,8243,0,:: :: :: ::,
+16388,0,16512,1394373,8343,0,:: :: :: ::,
+16488,0,16610,1339975,8445,0,:: :: :: ::,
+16588,0,16718,4051914,8554,0,:: :: :: ::,
+16688,0,16811,1809899,8647,0,:: :: :: ::,
+16789,0,16910,2810756,8747,0,:: :: :: ::,
+16889,0,,,8860,0,:: :: :: ::,
+,,,,8949,0,:: :: :: ::,
+
+System Statistics:
+Sensor Id,Name,Type,Average
+206,"Battery Status",Battery Status,0.0
+332,"Battery Power",Power Measurements [uW],2747852.2130177515
+
+Application State Statistics:
+App State 141,"VectorAdd::OpenCL(GPU)::Init::Stop",Start Time: 7.60 s,End Time: 7.60 s
+Sensor Id,Name,Type,Average
+App State 377,"VectorAdd::OpenCL(GPU)::Compile::Start",Start Time: 7.60 s,End Time: 7.64 s
+Sensor Id,Name,Type,Average
+206,"Battery Status",Battery Status,0.0
+332,"Battery Power",Power Measurements [uW],2762015.0
+App State 378,"VectorAdd::OpenCL(GPU)::Compile::Stop",Start Time: 7.64 s,End Time: 7.64 s
+Sensor Id,Name,Type,Average
+App State 17,"VectorAdd::OpenCL(GPU)::Setup::Start",Start Time: 7.64 s,End Time: 7.65 s
+Sensor Id,Name,Type,Average
+App State 18,"VectorAdd::OpenCL(GPU)::Setup::Stop",Start Time: 7.65 s,End Time: 7.65 s
+Sensor Id,Name,Type,Average
+App State 640,"VectorAdd::OpenCL(GPU)::Allocate::Stop",Start Time: 7.65 s,End Time: 7.66 s
+Sensor Id,Name,Type,Average
+App State 308,"VectorAdd::OpenCL(GPU)::CopyTo::Start",Start Time: 7.66 s,End Time: 7.66 s
+Sensor Id,Name,Type,Average
+App State 309,"VectorAdd::OpenCL(GPU)::CopyTo::Stop",Start Time: 7.66 s,End Time: 7.70 s
+Sensor Id,Name,Type,Average
+App State 597,"VectorAdd::OpenCL(GPU)::Compute::Start",Start Time: 7.70 s,End Time: 8.01 s
+Sensor Id,Name,Type,Average
+206,"Battery Status",Battery Status,0.0
+332,"Battery Power",Power Measurements [uW],2534559.3333333335
+App State 598,"VectorAdd::OpenCL(GPU)::Compute::Stop",Start Time: 8.01 s,End Time: 8.01 s
+Sensor Id,Name,Type,Average
+App State 843,"VectorAdd::OpenCL(GPU)::CopyFrom::Start",Start Time: 8.01 s,End Time: 8.01 s
+Sensor Id,Name,Type,Average
+App State 844,"VectorAdd::OpenCL(GPU)::CopyFrom::Stop",Start Time: 8.01 s,End Time: 8.02 s
+Sensor Id,Name,Type,Average
+App State 808,"VectorAdd::OpenCL(GPU)::Free::Start",Start Time: 8.02 s,End Time: 8.02 s
+Sensor Id,Name,Type,Average
+App State 809,"VectorAdd::OpenCL(GPU)::Free::Stop",Start Time: 8.02 s,End Time: 8.20 s
+Sensor Id,Name,Type,Average
+206,"Battery Status",Battery Status,0.0
+332,"Battery Power",Power Measurements [uW],2841518.0
+App State 0,":: :: :: ::",Start Time: 8.20 s,End Time: 16.99 s
+Sensor Id,Name,Type,Average
+206,"Battery Status",Battery Status,0.0
+332,"Battery Power",Power Measurements [uW],2149909.6704545454
+
