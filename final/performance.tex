@@ -1,5 +1,46 @@
 \subsection{Performance}
 
+\begin{figure*}[ht]
+
+  \begin{subfigure}[b]{0.5\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{data/VectorAdd_time.pdf}
+      \caption{VectorAdd}\label{fig:vectoradd}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.5\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{data/Tpacf_time.pdf}
+      \caption{TPACF}
+      \label{fig:TPACF}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{0.5\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{data/Histogram_time.pdf}
+      \caption{Histo}\label{fig:histo}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.5\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{data/Mriq_time.pdf}
+      \caption{MRIQ}
+      \label{fig:MRIQ}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{0.5\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{data/Sgemm_time.pdf}
+      \caption{Sgemm}\label{fig:Sgemm}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.5\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{data/Stencil_time.pdf}
+      \caption{Stencil}
+      \label{fig:Stencil}
+  \end{subfigure}
+
+  \caption{Runtime}
+\end{figure*}
+
 We evaluate each benchmark and its implementations on the devices listed
   in Table~\ref{table:hardware}.
 The performance measurments are collected by measuring the time
