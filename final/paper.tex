@@ -20,7 +20,7 @@
 %-----------------------------------------------------------------------------
 
 
-\documentclass[nocopyrightspace]{sigplanconf}
+\documentclass[nocopyrightspace, 10pt]{sigplanconf}
 
 % The following \documentclass options may be useful:
 %
@@ -53,13 +53,14 @@
 
 \usepackage{graphicx}
 \usepackage{subcaption}
+\usepackage{setspace}
 %\usepackage[tight,footnotesize]{subfigure}
 % \usepackage{subfigure}
 
 \newcommand{\fix}[1]{\texttt{\small #1}}
 
 %------------------------------------------------------------------------------
-
+%\doublespacing
 \begin{document}
 
 %\titlebanner{banner above paper title}        % These are ignored unless
@@ -87,7 +88,7 @@
 
 %\keywords
 %keyword1, keyword2
-
+\input{abstract}
 \input{intro}
 \input{implementation}
 \input{method}
