@@ -93,6 +93,47 @@ Each compute part of an implementation is run $5$ % TODO: what do we decide
 The performance times are also measured with the system connected to a
   power source, which avoids the device going to sleep.
 
+\begin{figure*}[ht]
+  \centering
+  \begin{subfigure}[b]{0.95\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{data/load_vectoradd_nexus5.pdf}
+      \caption{VectorAdd}\label{fig:vectoradd}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.95\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{data/load_tpacf_nexus5.pdf}
+      \caption{TPACF}
+      \label{fig:TPACF}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{0.95\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{data/load_histogram_nexus5.pdf}
+      \caption{Histo}\label{fig:histo}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.95\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{data/load_mriq_nexus5.pdf}
+      \caption{MRIQ}
+      \label{fig:MRIQ}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{0.95\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{data/load_sgemm_nexus5.pdf}
+      \caption{Sgemm}\label{fig:Sgemm}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.95\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{data/load_stencil_nexus5.pdf}
+      \caption{Stencil}
+      \label{fig:Stencil}
+  \end{subfigure}
+
+  \caption{Load Nexus 5}
+\end{figure*}
+
 
 \begin{figure*}[ht]
   \centering
@@ -132,8 +173,10 @@ The performance times are also measured with the system connected to a
 %      \label{fig:Stencil}
 %  \end{subfigure}
 
-  \caption{Load}
+  \caption{Load Nexus 7}
 \end{figure*}
+
+
 
 \subsubsection{Vector Add}
 
