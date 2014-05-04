@@ -151,6 +151,12 @@ We set Trepn to read the counters every $100ms$ and measure the load and power
   \caption{Battery Nexus 5}
 \end{figure*}
 
+Note: Battery information consists of all power-consuming components, e.g., screen,
+cpu, gpu, memory. If the computation takes longer, more battery power has to
+be spent on other components, such as screen, which typically consumes more
+power than the cpus or gpus. That why we think the results that we got
+reflects the actual power consumption in real usage of mobile devices.
+
 \subsubsection{Vector Add}
 
 \subsubsection{SGEMM}
@@ -160,5 +166,3 @@ We set Trepn to read the counters every $100ms$ and measure the load and power
 \subsubsection{Histogram}
 
 \subsubsection{CUTCP}
-
-
