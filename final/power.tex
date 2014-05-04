@@ -118,6 +118,7 @@ We set Trepn to read the counters every $100ms$ and measure the load and power
   \end{subfigure}
 
   \begin{subfigure}[b]{0.3\textwidth}
+<<<<<<< HEAD
       \includegraphics[width=\textwidth]{data/bbattery_vectoradd_nexus5.pdf}
       \caption{VectorAdd}\label{fig:b_vectoradd}
   \end{subfigure}
@@ -190,6 +191,42 @@ We set Trepn to read the counters every $100ms$ and measure the load and power
 
   \caption{Battery Nexus 5}
 \end{figure*}
+=======
+      \includegraphics[width=0.9\textwidth]{data/bbattery_vectoradd.pdf}
+      \caption{VectorAdd}\label{fig:vectoradd}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{0.3\textwidth}
+      \includegraphics[width=0.9\textwidth]{data/bbattery_tpacf.pdf}
+      \caption{TPACF} \label{fig:TPACF}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{0.3\textwidth}
+      \includegraphics[width=0.9\textwidth]{data/bbattery_histogram.pdf}
+      \caption{Histo}\label{fig:histo}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{0.3\textwidth}
+      \includegraphics[width=0.9\textwidth]{data/bbattery_mriq.pdf}
+      \caption{MRIQ} \label{fig:MRIQ}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{0.3\textwidth}
+      \includegraphics[width=0.9\textwidth]{data/bbattery_sgemm.pdf}
+      \caption{Sgemm}\label{fig:Sgemm}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{0.3\textwidth}
+      \includegraphics[width=0.9\textwidth]{data/bbattery_stencil.pdf}
+      \caption{Stencil} \label{fig:Stencil}
+  \end{subfigure}
+
+  \caption{Battery Usage}
+\end{figure}
+
+
+
+>>>>>>> cf565578a548f9368f61df9412a509dac1d24c0b
 Note: Battery information consists of all power-consuming components, e.g., screen,
 cpu, gpu, memory. If the computation takes longer, more battery power has to
 be spent on other components, such as screen, which typically consumes more
