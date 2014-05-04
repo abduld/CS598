@@ -6,6 +6,22 @@ One of the tasks that we have completed in this phase is to complete the design
 of an structural framework that allows easy and incremental development of the
 benchmarks. This section briefly describes the design.
 
+
+\begin{table}[h]\small
+\centering
+\begin{tabular}{ | l | c |}
+    \hline 
+    Language &  Line Count \\ \hline
+    Java & 7549 \\ \hline
+    RenderScript & 1000 \\ \hline
+    JNI/C++ & 2048 \\ \hline
+    OpenCL & 480
+    \hline
+\end{tabular}
+\caption{RSBench project line count breakdown.}
+\label{table:breakdown}
+\end{table}
+
 Figure \ref{fig:package_structure} depicts the overview of the framework by mean
 of the Java package structure. Figure \ref{fig:class_diagram} provides a closer
 view at the organization of the classes related to the VectorAdd benchmark.
