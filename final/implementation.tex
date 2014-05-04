@@ -1,6 +1,6 @@
-\section*{Implementation}
+\section{Implementation}
 
-\subsection*{Project Structure}
+\subsection{Project Structure}
 
 One of the tasks that we have completed in this phase is to complete the design
 of an structural framework that allows easy and incremental development of the
@@ -54,7 +54,7 @@ is the \fix{VectorAddBenchmark} in this case. This hierarchical design maximize
 the code reuse between benchmarks, and between computation kernel.
 It also allows for a consistent interface to run the benchmarks.
 
-\subsection*{Writing RenderScript kernels}
+\subsection{Writing RenderScript kernels}
 This section describes the general steps to write a computation kernel in
 RenderScript for our benchmark.
 
@@ -101,7 +101,7 @@ class provides interfaces to invoke the RenderScript code from Java code.
 \centering
 \end{figure}
 
-\subsection*{Timer}
+\subsection{Timer}
 The \fix{Timer} class is the most important utility in our benchmark. It
 determines the accuracy and flexibility of our measurement. The \fix{Timer}
 class utilizes Android's \fix{SystemClock}, which provides real-time clock at
@@ -125,7 +125,7 @@ aggregate the results -- giving you the average time across runs.  Currently, we
 do not exercise that code and we leave the statistical analysis to the parser
 and visualizer.
 
-\subsection*{Output to Database}
+\subsection{Output to Database}
 
 
 \begin{figure}[t!]
