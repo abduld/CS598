@@ -108,6 +108,55 @@ We set Trepn to read the counters every $100ms$ and measure the load and power
 \caption{Power Nexus 7}
 \end{figure*}
 
+
+
+\begin{figure*}[ht]
+  \begin{subfigure}[b]{0.5\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{data/bbattery_vectoradd_nexus5.pdf}
+      \caption{VectorAdd}\label{fig:vectoradd}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.5\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{data/bbattery_tpacf_nexus5.pdf}
+      \caption{TPACF}
+      \label{fig:TPACF}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{0.5\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{data/bbattery_histogram_nexus5.pdf}
+      \caption{Histo}\label{fig:histo}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{0.5\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{data/bbattery_mriq_nexus5.pdf}
+      \caption{MRIQ}
+      \label{fig:MRIQ}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{0.5\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{data/bbattery_sgemm_nexus5.pdf}
+      \caption{Sgemm}\label{fig:Sgemm}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.5\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{data/bbattery_stencil_nexus5.pdf}
+      \caption{Stencil}
+      \label{fig:Stencil}
+  \end{subfigure}
+
+  \caption{Battery Nexus 5}
+\end{figure*}
+
+Note: Battery information consists of all power-consuming components, e.g., screen,
+cpu, gpu, memory. If the computation takes longer, more battery power has to
+be spent on other components, such as screen, which typically consumes more
+power than the cpus or gpus. That why we think the results that we got
+reflects the actual power consumption in real usage of mobile devices.
+
 \subsubsection{Vector Add}
 
 \subsubsection{SGEMM}
@@ -117,5 +166,3 @@ We set Trepn to read the counters every $100ms$ and measure the load and power
 \subsubsection{Histogram}
 
 \subsubsection{CUTCP}
-
-
