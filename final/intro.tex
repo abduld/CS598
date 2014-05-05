@@ -69,14 +69,14 @@ Our code is publicly available at \url{https://github.com/cmpham/RSBench}.
 \begin{tabular}{ | l | c | c | c | c | c | c |}
     \hline 
     Benchmark & \multicolumn{6}{|c|}{Porting status} \\ \cline{2-7}
-                      & C & OMP & Java & T-Java & OpenCL & RS \\ \hline
+                      & C & OMP & J & JT & OCL & RS \\ \hline
     VectorAdd         & C & C   & C    & C      & C      & C \\ \hline
     SGEMM             & C & C   & C    & C      & C      & C \\ \hline
     Stencil           & C & C   & C    & C      & C      & C \\ \hline
-    CUTCP             & I & I   & C    & P      & P      & C \\ \hline
+    CUTCP             & I & I   & C    & C      & C      & C \\ \hline
     MRI-Q             & I & I   & C    & C      & C      & C \\ \hline
-    TPACF             & I & I   & C    & C      & I      & I \\ \hline
-    Histogram         & C & C   & C    & C      & C      & I \\ \hline
+    TPACF             & B & B   & C    & C      & C      & C \\ \hline
+    Histogram         & C & B   & C    & C      & C      & C \\ \hline
     BFS               & \multicolumn{6}{|c|}{N/A} \\ \hline
     MRI-G             & \multicolumn{6}{|c|}{N/A} \\ \hline
     SAM               & \multicolumn{6}{|c|}{N/A} \\ \hline
@@ -85,8 +85,8 @@ Our code is publicly available at \url{https://github.com/cmpham/RSBench}.
     \hline
 \end{tabular}
 \caption{Parboil Benchmark Porting Status. C : Native C; OMP : Native C with
-OpenMP; T-Java: Threaded Java; RS: RenderScript; C: Completed; I: Incomplete; P:
-Partial}
+OpenMP; JT: Threaded Java; OCL : OpenCL;  RS: RenderScript; C: Completed; I: Incomplete; P:
+Partial; B : a bug causes the benchmark to crash.}
 \label{table:parboil}
 \end{table}
 
