@@ -20,16 +20,23 @@ Therefore, the OpenMP code for SGEMM is equivalent to the serial C code.
 
 \subsection{TPACF}
 
-TPACF 
+TPACF analyzes the angular distribution of astronomical objects.
+It performs histogramming, collecting the restults in 3 histograms which are then
+	correlated with the different datasets.
+We use $x$ number of datasets, each containing $y$ corrdinates.
 
 \subsection{MRIQ}
 
-
+MRIQ computes a non-uniform 3D inverse fourier transform to create a 3D image.
+The input image is of size $x$.
 
 \subsection{Stencil}
 
 Stencil computes a 7 point stencil of an input volume. 
 The volume has dimension $128 \times 128 \times 32$.
+Each kernel accesses the $6$ adjacent voxels, adding the results
+	to its current voxel.
+The result is then placed in the output buffer.
 
 \subsection{Histogram}
 
