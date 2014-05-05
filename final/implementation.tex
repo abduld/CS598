@@ -68,17 +68,20 @@ time. In order to create a new \fix{TimerElement}, we just need to invoke the
 \fix{Timer.start(category, message)} method at the beginning of the execution
 segment we wish to measure (here category is a user defined category such as
 ``Compute'' or ``Setup'', while message is a message that further refines the
-category such as ``Allocating temporary datastructures''). At the end of the
+category such as ``Allocating temporary data structures''). At the end of the
 execution segment, we need to invoke the \fix{Time.stop()} method. The
 time-stamp and elapsed time will be automatically computed and recorded.
+The \fix{Timer} class also can dump all the recorded \fix{TimerElement} to a
+SQLite database or serialize it to the JSON format for conveniently storing and
+parsing the results.
 
-If a benchmark is run multiple times, for example, we run the compute part of
-the implementation 5 times in our currently analysis, then we take the minimum
-amount of time for each block. While this does hide some overhead (the JIT
-compilation in Java, for example) it does reflect the maximum performance one
-can achieve for each implementation.
+If a benchmark is run multiple times, for example, we run the compute part 100
+times for each small benchmark, and five times for each big benchmark in our
+currently analysis, then the \fix{Timer} has a function to aggregate the results
+to output the average time across runs.  Currently, we do not exercise that code
+and we leave the statistical analysis to the parser and visualizer.
 
-\subsubsection{Time Database}
+\subsubsection{Output to Database}
 
 Unlike Parboil, which outputs the times to {\tt stdout}, we output our data into
 a SQLite database.  This affords us a few things.  First, since data is
@@ -171,9 +174,9 @@ from Java code.
 
 The Android operating system requires that C, OpenMP, and OpenCL kernels have to
 be invoked through Java Native Interface (JNI).  The C and OpenMP versions of
-the code have been taken from Parboil with minimal modifications.  
-Aside from wrapping the code via JNI so it is callable from within Java,
-	little modification was done to the C and OpenMP code.
+the code have been taken from Parboil with minimal modifications.  Aside from
+wrapping the code via JNI so it is callable from within Java, little
+modification was done to the C and OpenMP code.
 
 The OpenCL kernels are lifted from the parboil benchmark suite with no
 modifications.  We use the \fix{base} implementation of OpenCL --- this a
