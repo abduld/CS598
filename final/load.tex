@@ -166,3 +166,15 @@ We again see that memory copy (\fix{SetupArgs} for RenderScript and
   \label{fig:loadHistogramStencil}
 \end{figure*}
 \FloatBarrier
+
+Throughout the benchmarks we see that RenderScript
+	does not utalize the GPU.
+This is due to RenderScript requiring full
+	IEEE 754-2008 compliance, which the GPU is not able to provide.
+Inserting the \fix{\#pragma rs\_fp\_imprecise} pragma into the
+	RenderScript kernel allows for relaxed IEEE compliance and 
+	should allow for GPU acceleration.
+Similar options are available in OpenCL and C, but since
+	this option is not available in Java we chose to disable it. 
+Further investigations would require us to analyze the results with relatex precision.
+
