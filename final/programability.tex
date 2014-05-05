@@ -52,11 +52,19 @@ in C.
 %\textit{Active community}. stackoverflow response time was good and the answers
 %were useful.
 
-\paragraph{The Bads.} We also found that RenderScript is still unpleasant to work
-with in various aspects. We also note that many of these limitations due to the
+\paragraph{The Bads.} We also found that RenderScript was still unpleasant to work
+with in various aspects. We also noteed that many of these limitations due to the
 infancy of the framework.
 
-\textit{No intrinsic synchronization within kernels.}
+\textit{No intrinsic synchronization within kernels.} Currently, RenderScript
+only allows global synchronization by calling the \fix{syncAll()} function in
+Java host code. This means that there is no CUDA-like \fix{\_\_syncthread()} or
+OpenCL-like \fix{barrier()} functions that can be called inside RenderScript
+kernels. Therefore, RenderScript kernels do not allow threads to share
+intermediate data. We found that this model is too restrictive in several
+scenarios. For example in the \fix{CUTCP} benchmark, we had to substaintially
+modify the RenderScript implementation in order to overcome the lack of the
+synchronization support.
 
 \textit{Only support two coordinates.}
 
