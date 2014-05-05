@@ -68,25 +68,24 @@ Our code is publicly available at \url{https://github.com/cmpham/RSBench}.
 \centering
 \begin{tabular}{ | l | c | c | c | c | c | c |}
     \hline 
-    Benchmark & \multicolumn{6}{|c|}{Porting status} \\ \cline{2-7}
+    Benchmark & \multicolumn{6}{c|}{Implementations} \\ \cline{2-7}
                       & C & OMP & J & JT & OCL & RS \\ \hline
     VectorAdd         & C & C   & C    & C      & C      & C \\ \hline
     SGEMM             & C & C   & C    & C      & C      & C \\ \hline
     Stencil           & C & C   & C    & C      & C      & C \\ \hline
-    CUTCP             & I & I   & C    & C      & C      & C \\ \hline
-    MRI-Q             & I & I   & C    & C      & C      & C \\ \hline
+    CUTCP             & N & N   & C    & C      & C      & C \\ \hline
+    MRI-Q             & N & N   & C    & C      & C      & C \\ \hline
     TPACF             & B & B   & C    & C      & C      & C \\ \hline
     Histogram         & C & B   & C    & C      & C      & C \\ \hline
-    BFS               & \multicolumn{6}{|c|}{N/A} \\ \hline
-    MRI-G             & \multicolumn{6}{|c|}{N/A} \\ \hline
-    SAM               & \multicolumn{6}{|c|}{N/A} \\ \hline
-    SPMV              & \multicolumn{6}{|c|}{N/A} \\ \hline
-    LBM               & \multicolumn{6}{|c|}{N/A} \\ \hline
+    BFS               & \multicolumn{6}{c|}{N} \\ \hline
+    MRI-G             & \multicolumn{6}{c|}{N} \\ \hline
+    SAM               & \multicolumn{6}{c|}{N} \\ \hline
+    SPMV              & \multicolumn{6}{c|}{N} \\ \hline
+    LBM               & \multicolumn{6}{c|}{N} \\ \hline
     \hline
 \end{tabular}
 \caption{Parboil Benchmark Porting Status. C : Native C; OMP : Native C with
-OpenMP; JT: Threaded Java; OCL : OpenCL;  RS: RenderScript; C: Completed; I: Incomplete; P:
-Partial; B : a bug causes the benchmark to crash.}
+OpenMP; JT: Threaded Java; OCL : OpenCL;  RS: RenderScript; C: Completed; N : No Implementation; B : a bug causes the benchmark to crash.}
 \label{table:parboil}
 \end{table}
 

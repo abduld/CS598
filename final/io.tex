@@ -1,0 +1,6 @@
+\subsection{Input/Output}
+
+Throught the analysis, we have ignored IO times which is infact the biggest performance bottleneck in these benchmarks.
+Unlike desktops which have a harddrive read speed of 80-100MB/s, Android devices use flash which have a 7-25MB/s read speed.
+In reality, however, computational data for mobile devices are not stored on disk and are usually either streamed from the cloud or captured from onboard sensors and therefore are available in RAM.
+To keep with the typical usage, and to not skew the plots, we therefore explicitly removed the IO performance times from our graphs.
