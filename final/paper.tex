@@ -57,8 +57,9 @@
 %\usepackage[tight,footnotesize]{subfigure}
 % \usepackage{subfigure}
 
-\usepackage[draft]{todonotes}
-%\usepackage[disable]{todonotes}
+% Display notes/comments with todonotes:
+% \usepackage[disable]{todonotes} % notes/comments not showed
+\usepackage[draft]{todonotes} % notes/comments showed
 
 \newcommand{\fix}[1]{\texttt{\small #1}}
 
@@ -83,7 +84,7 @@
 \doi{nnnnnnn.nnnnnnn}
 
 \maketitle
-
+\todo[inline]{To do notes is enabled. Disable it to hide all notes}
 %\category{CR-number}{subcategory}{third-level}
 
 %\terms
