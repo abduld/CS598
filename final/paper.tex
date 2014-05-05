@@ -88,6 +88,8 @@
     stringstyle=\ttfamily\color[rgb]{0.627,0.126,0.941},
 }
 
+
+
 %\makeatletter
 \lstdefinelanguage{llvm}{
   morecomment = [l]{;},
@@ -112,11 +114,11 @@
     module, asm, align, tail, to,
     addrspace, section, alias, sideeffect, c, gc,
     target, datalayout, triple,
-    blockaddress
+    blockaddress, metadata
   },
   classoffset=1, keywordstyle=\color{purple},
   morekeywords={
-    fadd, sub, fsub, mul, fmul,
+    add, fadd, sub, fsub, mul, fmul,
     sdiv, udiv, fdiv, srem, urem, frem,
     and, or, xor,
     icmp, fcmp,
@@ -133,8 +135,8 @@
     extractelement, insertelement, shufflevector,
     extractvalue, insertvalue,
   },
-  alsoletter={\%},
-  keywordsprefix={\%},
+  alsoletter=\%,
+  keywordsprefix=\%,
 }
 
 %------------------------------------------------------------------------------
