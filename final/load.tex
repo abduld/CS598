@@ -1,0 +1,85 @@
+\subsection{Processor Utilization}
+
+
+\begin{figure*}[ht]
+  \centering
+
+  \begin{subfigure}[b]{0.9\textwidth}
+       \centering
+       \includegraphics[width=\textwidth]{data/load_vectoradd_nexus5.pdf}
+       \caption{VectorAdd on Nexus 5}\label{fig:Vecadd5}
+   \end{subfigure}
+  \begin{subfigure}[b]{0.9\textwidth}
+       \centering
+       \includegraphics[width=\textwidth]{data/load_vectoradd_nexus7.pdf}
+       \caption{VectorAdd on Nexus 7}\label{fig:Vecadd7}
+   \end{subfigure}
+
+  \begin{subfigure}[b]{0.9\textwidth}
+       \centering
+       \includegraphics[width=\textwidth]{data/load_sgemm_nexus5.pdf}
+       \caption{Sgemm on Nexus 5}\label{fig:Sgemm5}
+   \end{subfigure}
+  \begin{subfigure}[b]{0.9\textwidth}
+       \centering
+       \includegraphics[width=\textwidth]{data/load_sgemm_nexus7.pdf}
+       \caption{Sgemm on Nexus 7}\label{fig:Sgemm7}
+   \end{subfigure}
+
+
+  \caption{Processor utilization of VectorAdd and SGEMM for both Nexus 5 and Nexus 7. The Y axis is normalized across implementations with $1$ representing the peek utlization ($frequency*load$) for CPUs or GPUs. The X axis encodes timed blocked and is not scaled across implementations.}
+\end{figure*}
+\FloatBarrier
+
+Processor utlization is measured by multiplying the $frequency$ and the $load$ information collected via Trepn.
+The information gives us insight as to what parts of the code are active in each
+	section of the code, how that impacts performance and battery.
+In this section we discuss the results collected.
+
+\subsubsection{VectorAdd}
+
+VectorAdd, unlike other benchmarks, has a very high memory to compute ratio.
+We therefore see very low 
+
+\subsubsection{SGEMM}
+
+\subsubsection{TPACF}
+
+\subsubsection{MRIQ}
+
+\subsubsection{Stencil}
+
+\subsubsection{Histogram}
+
+\begin{figure*}[ht]
+  \centering
+
+  \begin{subfigure}[b]{0.9\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{data/load_mriq_nexus5.pdf}
+      \caption{MRIQ on Nexus 5}
+      \label{fig:MRIQ5}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.9\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{data/load_mriq_nexus7.pdf}
+      \caption{MRIQ on Nexus 7}
+      \label{fig:MRIQ7}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{0.9\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{data/load_tpacf_nexus5.pdf}
+      \caption{TPACF on Nexus 5}
+      \label{fig:TPACF5}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.9\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{data/load_tpacf_nexus7.pdf}
+      \caption{TPACF on Nexus 7}
+      \label{fig:TPACF7}
+  \end{subfigure}
+
+  \caption{Processor utilization of MRIQ and TPACF for both Nexus 5 and Nexus 7. The Y axis is normalized across implementations with $1$ representing the peek utlization ($frequency*load$) for CPUs or GPUs. The X axis encodes timed blocked and is not scaled across implementations.}
+\end{figure*}
+\FloatBarrier
