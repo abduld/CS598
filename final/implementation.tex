@@ -116,6 +116,7 @@ $10\%$ overhead.
 
 
 \subsection{Implementing Computational Kernels}
+\label{sec:imple_RS}
 
 \begin{table}[tp]\small
 \centering
@@ -170,8 +171,9 @@ from Java code.
 
 The Android operating system requires that C, OpenMP, and OpenCL kernels have to
 be invoked through Java Native Interface (JNI).  The C and OpenMP versions of
-the code have been taken from Parboil with minimal modifications.  The code is
-wrapped via JNI so it is callable from within Java.
+the code have been taken from Parboil with minimal modifications.  
+Aside from wrapping the code via JNI so it is callable from within Java,
+	little modification was done to the C and OpenMP code.
 
 The OpenCL kernels are lifted from the parboil benchmark suite with no
 modifications.  We use the \fix{base} implementation of OpenCL --- this a
@@ -182,3 +184,4 @@ some of the code and affords us more code reuse oportunities.
 To allow devices with no OpenCL support to make use of the C and OpenMP
 implementations, we generate 3 libraries (one for C, OpenMP, and OpenCL).  Each
 library is then loaded and called from with its class implementation.
+
