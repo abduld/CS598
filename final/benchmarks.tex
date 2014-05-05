@@ -1,0 +1,46 @@
+\section{Benchmarks}
+
+In this section we give an overview of the benchmarks implemented along with 
+	the dataset sizes we used when profiling the results.
+
+\subsection{VectorAdd}
+
+VectorAdd, unlike other benchmarks, has a very high memory to compute ratio.
+We use two $8K$ input vectors and simple element by element addition.
+
+\subsection{SGEMM}
+
+
+SGEMM multiplies two matricies $A$ and $B$ together.
+Matrix $A$ is of dimension $128 \times 96$ and $B$ is of dimension $96 \times 160$.
+Matrix $A$ is stored in row major format while $B$ is stored in column major format --- we therfore do not need to transpose $B$ to make effective use of the cache.
+
+The OpenMP code use the \fix{\#pragma omp parallel for shared(A, B, C) collapse(2)} pragma, which, based on the processor utilization, the Android GCC compiler is not able to understand as valid OpenMP code.
+Therefore, the OpenMP code for SGEMM is equivalent to the serial C code.
+
+\subsection{TPACF}
+
+TPACF 
+
+\subsection{MRIQ}
+
+
+
+\subsection{Stencil}
+
+Stencil computes a 7 point stencil of an input volume. 
+The volume has dimension $128 \times 128 \times 32$.
+
+\subsection{Histogram}
+
+Histogram computes the histogram of an input image.
+The input image used is of size $996 \times 1040$ and compute a 
+	histogram of size $256$.
+Each bin in the histogram saturate at $255$.
+
+Unlike the other parallel implementations, which use atomcs, both the
+	threaded Java and OpenMP implementations use privitizations.
+Private histogram copies are allocated and operated on, each thread 
+	operates on its own private copy, and once the threads finish the
+	master thread aggregates the results.
+

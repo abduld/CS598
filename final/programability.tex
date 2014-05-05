@@ -1,17 +1,48 @@
 \subsection{RenderScript Programmability}
-Pros:
+This section presents our analysis of RenderScript's programmability --- how
+comfortable we, as programmers, feel when working with RenderScript. Since this
+analysis is primarily based on our experience working with RenderScript
+throughout this semester, it is subjective. Furthermore, we are fully aware of
+that some of the limitations presented in this section are due to the fact that
+RenderScript is a new framework being rapidly developed and deployed.
+Therefore, we expect that RenderScript will keep evolving to close most of the
+identified limitations.
 
-* Allocation is intuitive: Express data and computation simultaneously.
+\paragraph{The Goods.}
+We start by describing the features that we like about the RenderScript
+programming model.
 
-* Flexibility and performability of C?
+\textit{RenderScript delivers its promises about the code portability}.
+The runtime behavior of our RenderScript implementations is consistent across
+five different tested devices and seven different benchmarks. For example, we
+always got the same runtime errors, e.g., segmentation fault or out-of-memory
+error, regardless of the devices that the code is running on. Furthermore, we
+did not have to express any device specific parameters in our code. The code
+portability gives us a confidence that if a kernel works on our testing device,
+it will work seamlessly on other devices. Unlike OpenCL, we needed to tune some
+parameters, such as the thread block sizes, in order to avoid crashes in some
+devices.
 
-* Portable; compare to OpenCL
+\textit{Debugging in RenderScript is convenient}. Since RenderScript is natively
+supported in Android, it offers a set of convenient built-in debugging
+facilities, such as the \fix{rsDebug()} functions, detailed runtime exceptions,
+and IDE-navigable compilation errors. The \fix{rsDebug()} functions in
+RenderScript's runtime API provide a familiar debugging interface for displaying
+runtime information inside RenderSript kernels. Since most programmers accustom
+to the \fix{printf()} debugging style in C/C++, this interface provides exactly
+what we need for debugging. Note that it is not convenient to use the
+\fix{printf()} debugging style in other host/device programming models, such as
+OpenCL and CUDA, since it is available only in emulation mode.
 
-* Debugging: much better with rsDebug. IDE supports showing compile errors.
+\textit{The Allocation interface to express data and execution parallelism is
+intuitive}. As described in section~\ref{sec:imple_RS}...
 
-* Active community: stackoverflow response time is good and the answers were useful.
+\textit{Flexibility and performability of C}.
 
-Cons:
+\textit{Active community}. stackoverflow response time was good and the answers
+were useful.
+
+\paragraph{The Bads}
 
 * No intrinsic synchronization within kernels
 

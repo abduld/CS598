@@ -57,6 +57,9 @@
 %\usepackage[tight,footnotesize]{subfigure}
 % \usepackage{subfigure}
 
+\usepackage[draft]{todonotes}
+%\usepackage[disable]{todonotes}
+
 \newcommand{\fix}[1]{\texttt{\small #1}}
 
 %------------------------------------------------------------------------------
@@ -66,7 +69,7 @@
 %\titlebanner{banner above paper title}        % These are ignored unless
 %\preprintfooter{preprint}   % 'preprint' option specified.
 
-\title{Final Report: Performance Analysis of RenderScript}
+\title{Performance Analysis of RenderScript}
 %\subtitle{}
 
 \authorinfo{Abdul Dakkak \and Cuong Manh Pham \and Prakalp Srivastava}
@@ -90,24 +93,20 @@
 %keyword1, keyword2
 \input{abstract}
 \input{intro}
-\input{implementation}
+\input{motivation}
 \input{method}
+\input{implementation}
+\input{benchmarks}
 \input{analysis}
+\input{related}
 \input{conclusion}
+\input{future}
 
 % We recommend abbrvnat bibliography style.
 
-% \bibliographystyle{abbrvnat}
-% \bibliography{paper}
+\bibliographystyle{abbrvnat}
+\bibliography{paper}
 
-% The bibliography should be embedded for final submission.
 
-%\begin{thebibliography}{}
-%\softraggedright
-%
-%\bibitem[Smith et~al.(2009)Smith, Jones]{smith02}
-%P. Q. Smith, and X. Y. Jones. ...reference text...
-%
-%\end{thebibliography}
-
+\listoftodos
 \end{document}
