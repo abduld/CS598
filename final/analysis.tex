@@ -10,8 +10,11 @@ In fact, one of the main selling points for hetrogenous
 Increasingly, hardware vendors, such as Apple or Samsung, sell new
   mobile hardware by advertising long battery life.
 
-In this section we analyze hetrogenous programming on Android battery
-  considering not only the performance, but also the power usage.
+
+In this section evaluate each benchmark and its implementations on the devices listed
+  in Table~\ref{table:hardware}.
+Each implementation is analyzed to determine processor utlization, performance
+  results, and power usage.
 We conclude the section by discussing the programability of RenderScript
   and compare it against established programming models such as using
   native C, OpenMP, or OpenCL for kernel code.
@@ -26,7 +29,7 @@ We conclude the section by discussing the programability of RenderScript
     Nexus5 & Qualcomm Snapdragon S4 Pro 1.5GHz & Adreno 320 400MHz & 2Gb \\ \hline
     Nexus7 & Qualcomm Snapdragon 800 2.26GHz & Adreno 330 450MHz & 2Gb \\ \hline
     Nexus10 & DualCore 1.7GHz Cortex-A15 & Mali T604 & 2Gb \\ \hline
-    SM-T900 & QuadCore 1.9GHz Cortex-A15 & Mali T628 MP6 & 3Gb \\ \hline
+    SM-T900 & QuadCore 1.9GHz Cortex-A15 & Mali T628 & 3Gb \\ \hline
     \hline
 \end{tabular}
 \caption{The hardware specifications of the devices we ran the benchmarks on. Two of the devices (Nexus 7 and GalaxyNexus) are mobile phones while the other three are tablets. Only the Nexus 5 and Nexus 7 devices are OpenCL capable.}

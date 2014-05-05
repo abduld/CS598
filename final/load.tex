@@ -37,15 +37,19 @@
 \end{figure*}
 \FloatBarrier
 
-Mobile devices use DVFS to match performance to power utlization.
+Mobile devices use dynamic voltage frequency scaling (DVFS)
+  to match performance to power utlization.
 The frequency is increased for the processors when the load goes over a certain
   threashold.
 Both CPUs and GPUs make use of frequency scaling, but unlike CPUs (which typically
   have vary fine frequencies --- operating at around 10 different frequencies), GPUs
   have coarse grained frequencies (operating at only 4 different frequencies).  
 
-Processor utlization is measured by multiplying the $frequency$ and the $load$ information collected via Trepn.
-The measurements are performed with the device plugged into the development machine.
+Processor utlization is measured by multiplying the $frequency$ and the $load$ information collected via Qualcomm's Trepn~\cite{profilerqualcomm} tool.
+The performance times are measured with the system connected to a
+  power source, which avoids the device going to sleep (it does add the
+  overhead of the device comunicating debug information with the development
+  machine).
 Since Trepn has a $100ms$ measure granularity, the kernel code is run $100$ times
   ($5$ times for MRIQ and TPACF), this allows us to visualize the trend in resource
   utlization.
@@ -136,9 +140,6 @@ This is because the stencil kernel is memory access bound, performing around 10 
 We again see that memory copy (\fix{SetupArgs} for RenderScript and
   \fix{CopyTo} for OpenCL) result in the a substantial amound of resources being
   wasted.
-
-
-
 
 \begin{figure*}[ht]
   \centering

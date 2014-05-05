@@ -1,7 +1,7 @@
-\subsection{Power}
+\subsection{Energy Utlization}
 
-Mobile devices employ dynamic voltage frequency scaling (DVFS),
-  this results in power draw of the device being goverened by
+Since, mobile devices employ DVFS
+  the energy utlization of the device at a specific time is goverened by
   the operating frequency of the processor.
 One can model the battery usage of the power draw at time $t$~\cite{zhang2010accurate, dong2011self} is
 
@@ -12,10 +12,10 @@ $$
 with $N$ begin the number of CPU cores, $Brightness$ is the brightness of the LCD screen at time $t$, $BatV(br)$ is the power used for the specified brightness level, $GPUF(t)$ and $CPUF(t)$ are the operating frequencies at time $t$, and $GPUV(f)$ and $CPUV(f)$ are the power draws for the processors at the specified voltage, $GPUU(t)$ and $GPUU_n(t)$ are the processor utlization at time $t$.
 Other terms, such as GPS, wireless, and other sensors, can be measured or modeled, but for this analysis we turn them off.
 
-The issues with using a model are knowing the the power draw at the 
+The issues with using a model is knowing the the power draw at the specified
   frequency (which is not specified by the processor's manifacturer) and the method of reading
   the CPU and GPU counters is varies from device to device.
-As a result, we use Qualcomm's Trepn tool~\cite{profilerqualcomm} to read the hardware
+As a result, we again use Trepn to read the hardware
   counters.
 Battery information consists of all power-consuming components, e.g., screen,
 cpu, gpu, memory.
@@ -79,9 +79,9 @@ Therfore, power is not only a measure of the load, but also the time it takes to
 
 \subsubsection{Stencil}
 
-\subsubsection{TPACF}
-
 \subsubsection{MriQ}
+
+\subsubsection{TPACF}
 
 \subsubsection{Histogram}
 

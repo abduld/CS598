@@ -1,7 +1,5 @@
 \subsection{Performance}
 
-
-
 \begin{figure*}[t]
 
   \begin{subfigure}[b]{\textwidth}
@@ -45,19 +43,13 @@
       \label{fig:Stencil}
   \end{subfigure}
 
-  \caption{Runtime across devices where kernel is exceuted once. J : Java, JT : JavaThreaded, C : C with JNI, OMP: OpenMP, OCL : OpenCL, and RS : Renderscript.}
+  \caption{Runtime across devices where kernel is exceuted once normalized to the Java execution time (lower is better). J : Java, JT : JavaThreaded, C : C with JNI, OMP: OpenMP, OCL : OpenCL, and RS : Renderscript.}
 \end{figure*}
 \FloatBarrier
 
-We evaluate each benchmark and its implementations on the devices listed
-  in Table~\ref{table:hardware}.
 The performance measurments are collected by measuring the time
-  spent within each section of the code (as discussed in~\ref{design}).
-The performance times are measured with the system connected to a
-  power source, which avoids the device going to sleep (it does add the
-  overhead of the device comunicating debug information with the development
-  machine).
-
+  spent within each section of the code (as discussed in~\ref{design})
+  while the device is pluged into the development machine.
 Each compute part of an implementation is run $5$ times with the minimum
   presented.
 We consider two cases --- one where the kernel code is run once and therefore
@@ -65,16 +57,20 @@ We consider two cases --- one where the kernel code is run once and therefore
   and one where the kernel is run $100$ times (or $5$ for both TPACF and MRIQ)
   and the overhead has little impact.
 
-\todo[inline]{Discuss Performance.}
 
+For each device, the plot show the time to execute sections of the code normalized
+  to the Java execution time.
+These times correspond the the $x$-axis of the processor utlization times discussed
+  in the previous section (e.g. figure~\ref{fig:loadVecAddSgemm}) --- Trepn is not
+  running while collecting these timing results.
 
-\subsubsection{Vector Add}
+\subsubsection{VectorAdd}
 
 \subsubsection{SGEMM}
 
-\subsubsection{TPACF}
-
 \subsubsection{MRIQ}
+
+\subsubsection{TPACF}
 
 \subsubsection{Stencil}
 
@@ -123,6 +119,6 @@ We consider two cases --- one where the kernel code is run once and therefore
       \label{fig:Stencil}
   \end{subfigure}
 
-  \caption{Runtime across devices where kernel is exceuted many times. J : Java, JT : JavaThreaded, C : C with JNI, OMP: OpenMP, OCL : OpenCL, and RS : Renderscript.}
+  \caption{Runtime across devices where kernel is exceuted multiple times normalized to the Java execution time (lower is better). J : Java, JT : JavaThreaded, C : C with JNI, OMP: OpenMP, OCL : OpenCL, and RS : Renderscript.}
 \end{figure*}
 \FloatBarrier
