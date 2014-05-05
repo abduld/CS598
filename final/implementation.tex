@@ -54,7 +54,7 @@ is the \fix{VectorAddBenchmark} in this case. This hierarchical design maximize
 the code reuse between benchmarks, and between computation kernel.
 It also allows for a consistent interface to run the benchmarks.
 
-\subsection{RenderScript Kernels}
+\subsection{Writing RenderScript kernels}
 This section describes the general steps to write a computation kernel in
 RenderScript for our benchmark.
 
@@ -101,27 +101,11 @@ class provides interfaces to invoke the RenderScript code from Java code.
 \centering
 \end{figure}
 
-
-\subsection{Native Kernels}
-
-C, OpenMP, and OpenCL require one to write native JNI code.
-The C and OpenMP versions of the code have been taken from Parboil with minimal modifications.
-The code is wrapped via JNI so it is callable from within Java.
-
-The OpenCL kernels are lifted from the parboil benchmark suite with no modifications.
-We use the \fix{base} implementation of OpenCL --- this a platform agnostic unoptimized implementation.
-Unlike the Parboil benchmark suite, we write the OpenCL host code using the C++ OpenCL API, this
-simplifies some of the code and affords us more code reuse oportunities.
-
-To allow devices with no OpenCL support to make use of the C and OpenMP implementations, 
-we generate 3 libraries (one for C, OpenMP, and OpenCL).
-Each library is then loaded and called from with its class implementation.
-
 \subsection{Timer}
-The \fix{Timer} class is an important utility in our benchmark. It
+The \fix{Timer} class is the most important utility in our benchmark. It
 determines the accuracy and flexibility of our measurement. The \fix{Timer}
 class utilizes Android's \fix{SystemClock}, which provides real-time clock at
-nanosecond resolution. Each \fix{Timer} object consists of a dynamic list of
+nanosecond resolution. Each \fix{Timer} object consists of a flexible amount of
 \fix{TimerElement} objects. Each \fix{TimerElement} object is a measure of a
 particular execution segment, e.g., allocation time, setup time, and compute
 time. In order to create a new \fix{TimerElement}, we just need to invoke the
@@ -130,48 +114,44 @@ segment we wish to measure (here category is a user defined category such as
 ``Compute'' or ``Setup'', while message is a message that further refines the
 category such as ``Allocating temporary datastructures''). At the end of the
 execution segment, we need to invoke the \fix{Time.stop()} method. The
-time-stamp and elapsed time will be automatically computed and recorded.
+time-stamp and elapsed time will be automatically computed and recorded. The
+\fix{Timer} class also has a function that dumps all the recorded
+\fix{TimerElement} to a SQLite database or serialize it to JSON format for
+conveniently storing the results in an easily parsable format.
 
 If a benchmark is run multiple times, for example, we run the compute part of
-the implementation 5 times in our currently analysis, then we take the minimum amount of time
-for each block. While this does hide some overhead (the JIT compilation in Java, for example) 
-it does reflect the maximum performance one can achieve for each implementation.
+the implementation 5 times in our currently analysis, then the timer has code to
+aggregate the results -- giving you the average time across runs.  Currently, we
+do not exercise that code and we leave the statistical analysis to the parser
+and visualizer.
 
-\subsection{Time Database}
+\subsection{Output to Database}
+
+
+\begin{figure}[t!]
+\begin{verbatim}
+{
+	string Type,
+	string Hardware,
+	string Benchmark,
+	string Implementation,
+	string Category,
+	string Message,
+	long StartTime,
+	long EndTime,
+	long ElapsedTime,
+	string Data,
+	string Date,
+}
+\end{verbatim}
+\caption{Database Columns.}
+\label{fig:database}
+\centering
+\end{figure}
 
 Unlike Parboil, which outputs the times to {\tt stdout}, we output our data into
-a SQLite database.  This affords us a few things.  First, since data is outputted
+a SQLite database (the schema is shown in table~\ref{fig:database}).  This affords us a few things.  First, since data is outputted
 in the specified columns, we do not have to re-parse the output data.  Second,
 timing information can be shared easily by copying the database.  Finally, we
 can store more than just timing information -- for example we also store which machine the time has been taken on as well as which runtime is being used.
-Since writing to flash is extensive, all timing data is stored in memory and after the benchmark has run it is inserted into the database. 
-
-\subsection{Load/Power Profiler}
-
-
-Since Android does not offer a way to capture processor usage information
-  programatically, we use the Trepn tool by Qualqomm to capture the
-  data for us and save it into a {\tt csv} file.   
-Trepn, which is limited to Qualcomm based chipsets, reads internal processor
-  counters as well as power rail information, both of which are not otherwise
-  available programatically.
-We set Trepn to read the counters every $100ms$ and measure the load and power
-  usage seperatly to decrease the overhead of the profiler.
-To reduce overhead, Trepn measure the processor usage information every $100ms$, both
-  the frequency and the load are measured sequentially, we therefore need to 
-  correct that when parsing the {\tt csv} file.
-
-  
-First, we parse each processor reading along with the time stamp for reading
-  the file.
-Next, we interpolate the measured data (we use linear interpolant) and
-  evaluate the interpolant at the application state times (these are the
-  times Trepn recieved a signal from our application and correspond to
-  timed blocks of code).
-We then multiply the load by the frequency, and rescale all the CPU and GPU data (we perform the rescaling on the CPU and GPU seperatly).
-Trepn can have measurment errors, resulting in infinite numbers.
-To make sure that these do not skew the plots, we clip the range of possible processor reading to be between 1 and the the $0.99$th quantile of the data.
-While efforts have been taken to reduce the profiler's overhead, it still 
-  ocupies around a $10\%$ overhead.
-
 
