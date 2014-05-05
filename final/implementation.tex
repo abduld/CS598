@@ -56,8 +56,8 @@ maximize the code reuse between benchmarks, and between computation kernel.  It
 also allows for a consistent interface to run the benchmarks.
 
 
-\subsection{Utility Classes}
-\subsection{Timer}
+\subsection{Utility Functions}
+\subsubsection{Timer}
 The \fix{Timer} class is an important utility in our benchmark. It
 determines the accuracy and flexibility of our measurement. The \fix{Timer}
 class utilizes Android's \fix{SystemClock}, which provides real-time clock at
@@ -78,7 +78,7 @@ amount of time for each block. While this does hide some overhead (the JIT
 compilation in Java, for example) it does reflect the maximum performance one
 can achieve for each implementation.
 
-\subsection{Time Database}
+\subsubsection{Time Database}
 
 Unlike Parboil, which outputs the times to {\tt stdout}, we output our data into
 a SQLite database.  This affords us a few things.  First, since data is
@@ -89,7 +89,7 @@ store which machine the time has been taken on as well as which runtime is being
 used.  Since writing to flash is extensive, all timing data is stored in memory
 and after the benchmark has run it is inserted into the database. 
 
-\subsection{Load/Power Profiler}
+\subsubsection{Load/Power Profiler}
 
 Since Android does not offer a way to capture processor usage information
 programatically, we use the Trepn tool by Qualqomm to capture the data for us
@@ -115,9 +115,9 @@ been taken to reduce the profiler's overhead, it still ocupies around a
 $10\%$ overhead.
 
 
-\subsection{Computational Kernels}
+\subsection{Implementing Computational Kernels}
 
-\begin{table}[h]\small
+\begin{table}[tp]\small
 \centering
 \begin{tabular}{ | l | c |}
     \hline 
@@ -136,7 +136,7 @@ into different types of programming languages in the RSBench project. The next
 sub-sections describe the process of implementing different types of computational
 kernels for each benchmark.
 
-\subsection{RenderScript Kernels}
+\subsubsection{RenderScript Kernels}
 %This section describes the general steps to write a computation kernel in
 %RenderScript for our benchmark.
 
@@ -166,7 +166,7 @@ Tools (ADT) can automatically generate a wrapper Java class for it. The
 auto-generated Java class provides interfaces to invoke the RenderScript code
 from Java code.
 
-\subsection{Native Kernels}
+\subsubsection{Native Kernels}
 
 The Android operating system requires that C, OpenMP, and OpenCL kernels have to
 be invoked through Java Native Interface (JNI).  The C and OpenMP versions of
