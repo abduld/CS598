@@ -3,205 +3,84 @@
 Mobile devices employ dynamic voltage frequency scaling (DVFS),
   this results in power draw of the device being goverened by
   the operating frequency of the processor.
-A typical model{\tt TODO:CITE Power tutor} of the power draw at time $t$ is
+One can model the battery usage of the power draw at time $t$~\cite{zhang2010accurate, dong2011self} is
 
 $$
-P(t) = GPUV(GPUF(t)) + sum_{i=1}^{N} CPUV_n(CPUF_n(t))
+P(t) = BatV(Brightness(t)) + GPUU(t) * GPUV(GPUF(t)) + sum_{i=1}^{N} CPUU_n(t) * CPUV_n(CPUF_n(t))
 $$
 
-with $N$ begin the number of CPU cores, $GPUF(t)$ and $CPUF(t)$ are the operating frequencies at time $t$, and $GPUV(f)$ and $CPUV(f)$ are the power draws for the processors at the specified voltage.
+with $N$ begin the number of CPU cores, $Brightness$ is the brightness of the LCD screen at time $t$, $BatV(br)$ is the power used for the specified brightness level, $GPUF(t)$ and $CPUF(t)$ are the operating frequencies at time $t$, and $GPUV(f)$ and $CPUV(f)$ are the power draws for the processors at the specified voltage, $GPUU(t)$ and $GPUU_n(t)$ are the processor utlization at time $t$.
 Other terms, such as GPS, wireless, and other sensors, can be measured or modeled, but for this analysis we turn them off.
 
-The of the issues with using a model are knowing the the power draw at the 
+The issues with using a model are knowing the the power draw at the 
   frequency (which is not specified by the processor's manifacturer) and the method of reading
   the CPU and GPU counters is varies from device to device.
-As a result, we use Qualcomm's Trepn tool {\tt TODO: CITE} to read the hardware
+As a result, we use Qualcomm's Trepn tool~\cite{profilerqualcomm} to read the hardware
   counters.
-Trepn, which is limited to Qualcomm based chipsets, reads internal processor
-  counters as well as power rail information, both of which are not otherwise
-  available programatically.
-We set Trepn to read the counters every $100ms$ and measure the load and power
-  usage seperatly to decrease the overhead of the profiler.
+Battery information consists of all power-consuming components, e.g., screen,
+cpu, gpu, memory.
+If the computation takes longer, more power is consumed by other components, such as the LCD screen.
+Therfore, power is not only a measure of the load, but also the time it takes to perform a computation.
 
+\begin{figure}[tp]
+  \centering
 
-
-% \begin{figure*}[ht]
-%   \centering
-%   \begin{subfigure}[b]{0.95\textwidth}
-%       \centering
-%       \includegraphics[width=\textwidth]{data/power_vectoradd.pdf}
-%       \caption{VectorAdd}\label{fig:vectoradd}
-%   \end{subfigure}
-%   \begin{subfigure}[b]{0.95\textwidth}
-%       \centering
-%       \includegraphics[width=\textwidth]{data/power_tpacf.pdf}
-%       \caption{TPACF}
-%       \label{fig:TPACF}
-%   \end{subfigure}
-% 
-%   \begin{subfigure}[b]{0.95\textwidth}
-%       \centering
-%       \includegraphics[width=\textwidth]{data/power_histogram.pdf}
-%       \caption{Histo}\label{fig:histo}
-%   \end{subfigure}
-%   \begin{subfigure}[b]{0.95\textwidth}
-%       \centering
-%       \includegraphics[width=\textwidth]{data/power_mriq.pdf}
-%       \caption{MRIQ}
-%       \label{fig:MRIQ}
-%   \end{subfigure}
-% 
-%   \begin{subfigure}[b]{0.95\textwidth}
-%       \centering
-%       \includegraphics[width=\textwidth]{data/power_sgemm.pdf}
-%       \caption{Sgemm}\label{fig:Sgemm}
-%   \end{subfigure}
-%   \begin{subfigure}[b]{0.95\textwidth}
-%       \centering
-%       \includegraphics[width=\textwidth]{data/power_stencil.pdf}
-%       \caption{Stencil}
-%       \label{fig:Stencil}
-%   \end{subfigure}
-% 
-%   \caption{Power Nexus 5}
-% \end{figure*}
-% 
-% 
-% \begin{figure*}[ht]
-%   \centering
-%   \begin{subfigure}[b]{0.95\textwidth}
-%       \centering
-%       \includegraphics[width=\textwidth]{data/power_vectoradd_nexus7.pdf}
-%       \caption{VectorAdd}\label{fig:vectoradd}
-%   \end{subfigure}
-%   \begin{subfigure}[b]{0.95\textwidth}
-%       \centering
-%       \includegraphics[width=\textwidth]{data/power_tpacf_nexus7.pdf}
-%       \caption{TPACF}
-%       \label{fig:TPACF}
-%   \end{subfigure}
-% 
-%   \begin{subfigure}[b]{0.95\textwidth}
-%       \centering
-%       \includegraphics[width=\textwidth]{data/power_histogram_nexus7.pdf}
-%       \caption{Histo}\label{fig:histo}
-%   \end{subfigure}
-%   \begin{subfigure}[b]{0.95\textwidth}
-%       \centering
-%       \includegraphics[width=\textwidth]{data/power_mriq_nexus7.pdf}
-%       \caption{MRIQ}
-%       \label{fig:MRIQ}
-%   \end{subfigure}
-% 
-%   \begin{subfigure}[b]{0.95\textwidth}
-%       \centering
-%       \includegraphics[width=\textwidth]{data/power_sgemm_nexus7.pdf}
-%       \caption{Sgemm}\label{fig:Sgemm}
-%   \end{subfigure}
-%   \begin{subfigure}[b]{0.95\textwidth}
-%       \centering
-%       \includegraphics[width=\textwidth]{data/power_stencil_nexus7.pdf}
-%       \caption{Stencil}
-%       \label{fig:Stencil}
-%   \end{subfigure}
-% 
-% \caption{Power Nexus 7}
-% \end{figure*}
-% 
-
-
-\begin{figure*}[ht]
-
-  \begin{subfigure}[b]{\textwidth}
+  \begin{subfigure}[b]{0.5\textwidth}
           \centering
-          \includegraphics[width=0.4\textwidth]{data/legend.pdf}
+          \includegraphics[width=0.6\textwidth]{data/legend.pdf}
   \end{subfigure}
 
-  \begin{subfigure}[b]{0.3\textwidth}
+  \begin{subfigure}[b]{0.24\textwidth}
+      \centering
       \includegraphics[width=\textwidth]{data/bbattery_vectoradd.pdf}
       \caption{VectorAdd}\label{fig:b_vectoradd}
-  \end{subfigure}
+  \end{subfigure}%
 
-  \begin{subfigure}[b]{0.3\textwidth}
+  \begin{subfigure}[b]{0.24\textwidth}
+      \centering
       \includegraphics[width=\textwidth]{data/bbattery_tpacf.pdf}
       \caption{TPACF} \label{fig:b_TPACF}
-  \end{subfigure}
+  \end{subfigure}%
 
-  \begin{subfigure}[b]{0.3\textwidth}
+  \begin{subfigure}[b]{0.24\textwidth}
+      \centering
       \includegraphics[width=\textwidth]{data/bbattery_histogram.pdf}
-      \caption{Histo}\label{fig:b_histo}
-  \end{subfigure}
+      \caption{Histogram}\label{fig:b_histo}
+  \end{subfigure}%
 
-  \begin{subfigure}[b]{0.3\textwidth}
+  \begin{subfigure}[b]{0.24\textwidth}
+      \centering
       \includegraphics[width=\textwidth]{data/bbattery_mriq.pdf}
       \caption{MRIQ} \label{fig:b_MRIQ}
   \end{subfigure}
 
-  \begin{subfigure}[b]{0.3\textwidth}
+  \begin{subfigure}[b]{0.24\textwidth}
+      \centering
       \includegraphics[width=\textwidth]{data/bbattery_sgemm.pdf}
       \caption{Sgemm}\label{fig:b_Sgemm}
   \end{subfigure}
 
-  \begin{subfigure}[b]{0.3\textwidth}
+  \begin{subfigure}[b]{0.24\textwidth}
+      \centering
       \includegraphics[width=\textwidth]{data/bbattery_stencil.pdf}
       \caption{Stencil} \label{fig:b_Stencil}
   \end{subfigure}
 
-  \caption{Battery Nexus 5}
-\end{figure*}
+  \caption{Battery Information}
+\end{figure}
+\FloatBarrier
 
 
-% \begin{figure*}[ht]
-% 
-%   \begin{subfigure}[b]{\textwidth}
-%           \centering
-%           \includegraphics[width=0.4\textwidth]{data/legend.pdf}
-%   \end{subfigure}
-% 
-%   \begin{subfigure}[b]{0.3\textwidth}
-%       \includegraphics[width=0.8\textwidth]{data/bbattery_vectoradd_nexus7.pdf}
-%       \caption{VectorAdd}
-%   \end{subfigure}
-% 
-%   \begin{subfigure}[b]{0.3\textwidth}
-%       \includegraphics[width=0.8\textwidth]{data/bbattery_tpacf_nexus7.pdf}
-%       \caption{TPACF}
-%   \end{subfigure}
-% 
-%   \begin{subfigure}[b]{0.3\textwidth}
-%       \includegraphics[width=0.8\textwidth]{data/bbattery_histogram_nexus7.pdf}
-%       \caption{Histo}
-%   \end{subfigure}
-% 
-%   \begin{subfigure}[b]{0.3\textwidth}
-%       \includegraphics[width=0.8\textwidth]{data/bbattery_mriq_nexus7.pdf}
-%       \caption{MRIQ}
-%   \end{subfigure}
-% 
-%   \begin{subfigure}[b]{0.3\textwidth}
-%       \includegraphics[width=0.8\textwidth]{data/bbattery_sgemm_nexus7.pdf}
-%       \caption{Sgemm}
-%   \end{subfigure}
-% 
-%   \begin{subfigure}[b]{0.3\textwidth}
-%       \includegraphics[width=0.8\textwidth]{data/bbattery_stencil_nexus7.pdf}
-%       \caption{Stencil}
-%   \end{subfigure}
-% 
-%   \caption{Battery Nexus 5}
-% \end{figure*}
-
-Note: Battery information consists of all power-consuming components, e.g., screen,
-cpu, gpu, memory. If the computation takes longer, more battery power has to
-be spent on other components, such as screen, which typically consumes more
-power than the cpus or gpus. That why we think the results that we got
-reflects the actual power consumption in real usage of mobile devices.
 
 \subsubsection{Vector Add}
 
 \subsubsection{SGEMM}
 
 \subsubsection{Stencil}
+
+\subsubsection{TPACF}
+
+\subsubsection{MriQ}
 
 \subsubsection{Histogram}
 
