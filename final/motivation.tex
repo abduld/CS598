@@ -33,6 +33,7 @@ among different compute units is handled by RenderScript compiler and run-time.
 This raises an important
 question of ``how effective is the RenderScript compiler and run-time?'', which
 we plan to answer by doing a comprehensive performance analysis of RenderScript.
+
 \subsection{OpenCL}
 OpenCL was initiated by Apple Inc. and is managed by the Khronos
 Group~\cite{Khronos:url}. It allows the application developers to write
@@ -53,7 +54,37 @@ JNI calls to invoke OpenCL host code.
 
 OpenCL is designed to be portable across a wide range of devices. However,
 developers often use hardware specific parameters such as the size of OpenCL
-work-group, shared memory size to obtain better performance.
+work-group, shared memory size to obtain better performance on specific
+hardware. This harms the portability of OpenCL application kernel code.
+
 \subsection{RenderScript}
+RenderScript was released by Google as an official computing framework in
+2011~\cite{RederScript:url}. The motivation behind RenderScript is to provide
+performance and portability across SoC architectures to RenderScript
+applications.
+
+A RenderScript application consists of three parts: (1) Java application host
+code written by the developer that runs on Dalvik VM, (2) RenderScript code
+written in restricted C99 syntax containing one or more kernels, and (3)
+auto-generated Java code that helps application host code to communicate with
+RenderScript kernel code, allowing functions such as memory binding between the
+host program and the kernels.
+
+RenderScript compilation flow is shown in Figure~\ref{fig:RSCompilation}.
+First, \fix{llvm-rs-cc} utility is used to compile RenderScript kernels to
+LLVM~\ref{LLVM:url} bitcode (\fix{*.bc extension}) files. LLVM bitcode is LLVM
+intermediate representation having backend support for a wide range of hardware
+devices including general purpose processors, GPUs and DSPs. All OpenCL
+compilers too use a subset of LLVM IR as intermediate representation, thus
+making it a natural choice for RenderScript IR which has portability as one of
+its primary goal. During compilation of RenderScript kernels, \fix{llvm-rs-cc}
+also generates the corresponding reflected Java classes of the kernels.
+Thereafter, the application host code, the reflected Java classes and bitcode
+are bundled together into the Android application package (\fix{*.apk} file),
+which is installed on the Android device. During execution, the RenderScript
+runtime invokes \fix{libbcc}, RenderScript back-end compiler to translate
+bitcode into appropriate machine code.
+
+
 \todo[inline]{Programmability Challenge: Elaborate on that}
 \todo[inline]{LLVM IR code snippet}
