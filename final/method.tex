@@ -1,39 +1,34 @@
 \section{Methodology}
 
-There is one major change in our strategy to evaluate RenderScript from our last
-progress report. In our last report we mentioned that because of the ongoing competition between
-Google's RenderScript and Khronos Group's OpenCL, Google has decided not to ship
-GPU-CPU RenderScript drivers in their Nexus phones/tablets firmware. They never
-officially supported the drivers for use by developers, but the Android 4.2 was
-found to have unofficial OpenCL drivers. It was predicted that these drivers
-would be removed from future versions and as expected Google removed these drivers from
-Android 4.3 onwards. As a result we decided to focus on evaluating RenderScript
-implementation against Single threaded and multi-threaded Java implementations. 
-
-However, we have been able to manually install OpenCL drivers in Android 4.4.2
-running on our Nexus 7 device and we would now be able to evaluate
-RenderScript against OpenCL.
-This requires one to hack the device and can be done for the Nexus 5 device, but
-  we have not done so already.
-
 
 \subsection{Performance Analysis}
 
-We use the timer discussed in the previous section as our means to measure performance.
-For each implementation, we run the compute section multiple times taking the 
-  minimum time across runs.
-We carefully place hints to Java so that it performs the garbage collection before
-  it enters the compute part of code --- this results in the Java garbage collector not being invoked during the compute part of our code by chance.
-
-While we did not do so in our current measures, we plan on making sure
-   we exit all applications before running our benchmark suite.
-While we do not think that this to be a major factor, we will err on the side of caution.
 
 \subsection{Power Analysis}
 
-No progress has been made in trying to figure out the APIs needed to be called
-  to perform the power analysis.
-We may resort to some tools to run the power analysis, but given that the majority
-  of the runtime is devoted to I/O, we need to understand how to do power
-  analysis without accounting for the I/O time.
+
+Since Android does not offer a way to capture processor usage information
+  programatically, we use the Trepn tool by Qualqomm to capture the
+  data for us and save it into a {\tt csv} file.   
+Trepn, which is limited to Qualcomm based chipsets, reads internal processor
+  counters as well as power rail information, both of which are not otherwise
+  available programatically.
+We set Trepn to read the counters every $100ms$ and measure the load and power
+  usage seperatly to decrease the overhead of the profiler.
+To reduce overhead, Trepn measure the processor usage information every $100ms$, both
+  the frequency and the load are measured sequentially, we therefore need to 
+  correct that when parsing the {\tt csv} file.
+
+  
+First, we parse each processor reading along with the time stamp for reading
+  the file.
+Next, we interpolate the measured data (we use linear interpolant) and
+  evaluate the interpolant at the application state times (these are the
+  times Trepn recieved a signal from our application and correspond to
+  timed blocks of code).
+We then multiply the load by the frequency, and rescale all the CPU and GPU data (we perform the rescaling on the CPU and GPU seperatly).
+Trepn can have measurment errors, resulting in infinite numbers.
+To make sure that these do not skew the plots, we clip the range of possible processor reading to be between 1 and the the $0.99$th quantile of the data.
+While efforts have been taken to reduce the profiler's overhead, it still 
+  ocupies around a $10\%$ overhead.
 
