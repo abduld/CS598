@@ -8,31 +8,38 @@ RenderScript is a new framework being rapidly developed and deployed.
 Therefore, we expect that RenderScript will keep evolving to close most of the
 identified limitations.
 
+\paragraph{The Goods.}
 We start by describing the features that we like about the RenderScript
-programming model:
+programming model.
 
-\begin{itemize}
-\item RenderScript delivers its promises about the code portability. The runtime
-behavior of our RenderScript implementations is consistent across five different
-tested devices and seven different benchmarks. For example, we always got the
-same runtime errors, e.g., segmentation fault or out-of-memory error, regardless
-of the devices that the code is running on. Furthermore, we did not have to
-express any device specific parameters in our code. The code portability gives
-us a confidence that if a kernel works on our testing device, it will work
-seamlessly on other devices. Unlike OpenCL, we needed to tune some parameters,
-such as the thread block sizes, in order to avoid crashes in some devices.
+RenderScript delivers its promises about the \textit{code portability}.
+The runtime behavior of our RenderScript implementations is consistent across
+five different tested devices and seven different benchmarks. For example, we
+always got the same runtime errors, e.g., segmentation fault or out-of-memory
+error, regardless of the devices that the code is running on. Furthermore, we
+did not have to express any device specific parameters in our code. The code
+portability gives us a confidence that if a kernel works on our testing device,
+it will work seamlessly on other devices. Unlike OpenCL, we needed to tune some
+parameters, such as the thread block sizes, in order to avoid crashes in some
+devices.
 
-\item Debugging: much better with rsDebug. IDE supports showing compile errors.
+\textit{Debugging in RenderScript is convenient}. Since RenderScript is natively
+and officially supported in Android, it offers a set of built-in debugging
+facilities. For example, the $rsDebug()$ functions in RenderScript's runtime API
+provide a familiar debugging interface for displaying runtime information inside
+RenderSript kernels. Since most programmers accustom to the $printf()$ debugging
+style, this interface provides exactly what we need for debugging. Note that it
+is not convenient to use the $printf$ debugging style in other host/device
+programming models, such as OpenCL and CUDA. And also the IDE supports for
+compilation errors...
 
-\item Allocation is intuitive: Express data and computation simultaneously.
+\textit{Allocation is intuitive}: Express data and computation simultaneously.
 
-\item Flexibility and performability of C?
+\textit{Flexibility and performability of C}.
 
-\end{itemize}
+\textit{Active community}. stackoverflow response time is good and the answers were useful.
 
-* Active community: stackoverflow response time is good and the answers were useful.
-
-Cons:
+\paragraph{The Bads}
 
 * No intrinsic synchronization within kernels
 
