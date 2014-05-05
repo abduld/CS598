@@ -88,23 +88,5 @@ bitcode into appropriate machine code.
 
 \todo[inline]{Programmability Challenge: Elaborate on that}
 \todo[inline]{LLVM IR code snippet}
-\begin{lstlisting}[language=llvm]
-define ptx_kernel void @sum_kernel(float* %a, float* %b, float* %c) nounwind {
-entry:
-  %0 = load i32* getelementptr inbounds (%struct.uint3* @threadIdx, i64 0, i32 0), align 4
-  %1 = load i32* getelementptr inbounds (%struct.uint3* @blockIdx, i64 0, i32 0), align 4
-  %2 = load i32* getelementptr inbounds (%struct.uint3* @blockDim, i64 0, i32 0), align 4
-  %mul = mul i32 %2, %1
-  %add = add i32 %mul, %0
-  %idxprom = sext i32 %add to i64
-  %arrayidx = getelementptr inbounds float* %a, i64 %idxprom
-  %3 = load float* %arrayidx, align 4
-  %arrayidx2 = getelementptr inbounds float* %b, i64 %idxprom
-  %4 = load float* %arrayidx2, align 4
-  %add3 = fadd float %3, %4
-  %arrayidx5 = getelementptr inbounds float* %c, i64 %idxprom
-  store float %add3, float* %arrayidx5, align 4
-  ret void
-}
-\end{lstlisting}
-
+\lstinputlisting[language=llvm]{code/average.ll}
+\lstinputlisting[language=llvm]{code/simple-gpu.ll}
