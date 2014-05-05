@@ -12,7 +12,7 @@ identified limitations.
 We start by describing the features that we like about the RenderScript
 programming model.
 
-RenderScript delivers its promises about the \textit{code portability}.
+\textit{RenderScript delivers its promises about the code portability}.
 The runtime behavior of our RenderScript implementations is consistent across
 five different tested devices and seven different benchmarks. For example, we
 always got the same runtime errors, e.g., segmentation fault or out-of-memory
@@ -24,20 +24,23 @@ parameters, such as the thread block sizes, in order to avoid crashes in some
 devices.
 
 \textit{Debugging in RenderScript is convenient}. Since RenderScript is natively
-and officially supported in Android, it offers a set of built-in debugging
-facilities. For example, the $rsDebug()$ functions in RenderScript's runtime API
-provide a familiar debugging interface for displaying runtime information inside
-RenderSript kernels. Since most programmers accustom to the $printf()$ debugging
-style, this interface provides exactly what we need for debugging. Note that it
-is not convenient to use the $printf$ debugging style in other host/device
-programming models, such as OpenCL and CUDA. And also the IDE supports for
-compilation errors...
+supported in Android, it offers a set of convenient built-in debugging
+facilities, such as the \fix{rsDebug()} functions, detailed runtime exceptions,
+and IDE-navigable compilation errors. The \fix{rsDebug()} functions in
+RenderScript's runtime API provide a familiar debugging interface for displaying
+runtime information inside RenderSript kernels. Since most programmers accustom
+to the \fix{printf()} debugging style in C/C++, this interface provides exactly
+what we need for debugging. Note that it is not convenient to use the
+\fix{printf()} debugging style in other host/device programming models, such as
+OpenCL and CUDA, since it is available only in emulation mode.
 
-\textit{Allocation is intuitive}: Express data and computation simultaneously.
+\textit{The Allocation interface to express data and execution parallelism is
+intuitive}. As described in section~\ref{sec:imple_RS}...
 
 \textit{Flexibility and performability of C}.
 
-\textit{Active community}. stackoverflow response time is good and the answers were useful.
+\textit{Active community}. stackoverflow response time was good and the answers
+were useful.
 
 \paragraph{The Bads}
 
