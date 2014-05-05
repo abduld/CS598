@@ -34,22 +34,35 @@ what we need for debugging. Note that it is not convenient to use the
 \fix{printf()} debugging style in other host/device programming models, such as
 OpenCL and CUDA, since it is available only in emulation mode.
 
-\textit{The Allocation interface to express data and execution parallelism is
-intuitive}. As described in section~\ref{sec:imple_RS}...
+\textit{The \fix{Allocation} interface is intuitive to express data and
+execution parallelism}. As described in section~\ref{sec:imple_RS}, this
+\fix{Allocation} interface allows explicitly expressing parallelism
+granularities, i.e., via packing output and/or input into \fix{Element} objects,
+for RenderScript kernels.  We quickly accustomed to this interface
+after completing the first few simple benchmarks, and we did not encounter
+any problems using this interface.
 
-\textit{Flexibility and performability of C}.
+\textit{Writing RenderScript kernel in C99 brings great flexibility and
+performability}. We liked the feeling of having a complete control when using
+the C language for performance critical code. We understand that this point is
+completely biased due to our proficiency with C, C++, and CUDA. For many
+programmers, it is an abrupt transition from programming in Java to programming
+in C.
 
-\textit{Active community}. stackoverflow response time was good and the answers
-were useful.
+%\textit{Active community}. stackoverflow response time was good and the answers
+%were useful.
 
-\paragraph{The Bads}
+\paragraph{The Bads.} We also found that RenderScript is still unpleasant to work
+with in various aspects. We also note that many of these limitations due to the
+infancy of the framework.
 
-* No intrinsic synchronization within kernels
+\textit{No intrinsic synchronization within kernels.}
 
-* Only support two coordinates.
+\textit{Only support two coordinates.}
 
-* Overhead of data transfer. Even a kernel is executed in 
+\textit{Overhead of data transfer}. Even a kernel is executed in the same
+coherence domain.
 
-* Lack of documentation and standardization. Example: kernel invocation generation.
+\textit{Lack of documentation and standardization.} Example: kernel invocation generation.
 
 
