@@ -1,6 +1,8 @@
 \section{Related Work}
-The closest thing in terms of RenderScript's goals is OpenCL~\cite{OpenCL} (Open
-Computing Language) --- an open standard aiming at simplifying cross-platform
+
+In term of programming model, RenderScript is similar to OpenCL~\cite{OpenCL}
+and CUDA. While CUDA is designed specifically for NVIDIA GPU devices, OpenCL's
+goal is similar to RenderScript, which is aiming at simplifying cross-platform
 parallel programming for heterogeneous systems.  In fact, Google had an option
 to adopt OpenCL, since some android hardware already has OpenCL
 SDKs~\cite{OpenCL:Android}, but they opted to create RenderScript to.  Google
@@ -50,19 +52,30 @@ from expressing architectural specifics, such as the number of processing cores,
 local memory size. This study will evaluate whether hiding architectural details
 results in RenderScript incurring performance loss compared to OpenCL.
 
-In order to quickly reuse OpenCL legacy code in Android environments, Yang et
-al.  \cite{yang2012o2render} presents a source-to-source translator from OpenCL
-to RenderScript. The authors are presented with several challenges.  The most
-notable is the different in execution models of the two standards.  However, the
-authors did not release the translator publicly.  We hope that we can leverage
-some of the presented translation rules to speed up our manual porting of the
-Parboil benchmark.
+Several studies have focused on further simplifying the development of
+RenderScript code. In order to quickly reuse OpenCL legacy code in Android
+environments, Yang et al.  \cite{yang2012o2render} presents a source-to-source
+translator from OpenCL to RenderScript. The authors present several challenges
+of this process, the most notable one is the differences in the execution models
+of the two standards. More recently, Acosta et al.
+\cite{alejandro2014performance} proposes a parallel development framework,
+called Paralldroid, for improving the parallelism of programs running in the
+Android platform. The framework automatically generates parallel code in C and
+RenderScript based on programmers' annotation in Java code. The results show
+that the auto-generated RenderScript code often achieves higher performance than
+the auto-generated Native C code.
 
-In term of benchmarking RenderScript, we are not aware of any work that provides
-a systematic evaluation of RenderScript's performance and performance
-portability. The only available tool that we might be able to leverage is
-CompuBench mobile for RenderScript~\cite{compuBenchMobile}.  But since this
-benchmark is a commercial product and does not offer source, we would not be
-able to perform thorough analysis using this it.  So in this regard, we will be
-providing the first open source benchmark for RenderScript that can be evaluated
-against different language paradigms and hadware targets.
+In term of benchmarking RenderScript, study \cite{kemp2013using} compares three
+different programming models, namely RenderScript, Remote CUDA (RCUDA), and C++,
+of an image processing library in Android platform. The results on a Tegra 3
+quad core device evidently show that RenderScript outperforms both the RCUDA and
+C++ implementations. Furthermore, this performance gap increases as the size of
+the input increases.  However, we are not aware of any work that provides a
+systematic evaluation of RenderScript's performance and performance portability.
+The only available tool that we might be able to leverage is CompuBench mobile
+for RenderScript~\cite{compuBenchMobile}.  But since this benchmark is a
+commercial product and does not offer source, we would not be able to perform
+thorough analysis using this it.  So in this regard, we will be providing the
+first open source benchmark for RenderScript that can be evaluated against
+different language paradigms and hadware targets.
+
