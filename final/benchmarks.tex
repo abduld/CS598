@@ -20,27 +20,34 @@ Therefore, the OpenMP code for SGEMM is equivalent to the serial C code.
 
 \subsection{TPACF}
 
-TPACF 
+TPACF analyzes the angular distribution of astronomical objects.
+It performs histogramming, collecting the restults in 3 histograms which are then
+	correlated with the different datasets.
+We use $x$ number of datasets, each containing $y$ corrdinates.
 
 \subsection{MRIQ}
 
-
+MRIQ computes a non-uniform 3D inverse fourier transform to create a 3D image.
+The input image is of size $x$.
 
 \subsection{Stencil}
 
 Stencil computes a 7 point stencil of an input volume. 
 The volume has dimension $128 \times 128 \times 32$.
+Each kernel accesses the $6$ adjacent voxels, adding the results
+	to its current voxel.
+The result is then placed in the output buffer.
 
 \subsection{Histogram}
 
 Histogram computes the histogram of an input image.
 The input image used is of size $996 \times 1040$ and compute a 
 	histogram of size $256$.
-Each bin in the histogram saturate at $255$.
+Each bin in the histogram saturates at the value $255$.
 
 Unlike the other parallel implementations, which use atomcs, both the
 	threaded Java and OpenMP implementations use privitizations.
-Private histogram copies are allocated and operated on, each thread 
+Private histogram copies are allocated, each thread 
 	operates on its own private copy, and once the threads finish the
 	master thread aggregates the results.
 
