@@ -1,0 +1,68 @@
+\section{Related Work}
+The closest thing in terms of RenderScript's goals is OpenCL~\cite{OpenCL} (Open
+Computing Language) --- an open standard aiming at simplifying cross-platform
+parallel programming for heterogeneous systems.  In fact, Google had an option
+to adopt OpenCL, since some android hardware already has OpenCL
+SDKs~\cite{OpenCL:Android}, but they opted to create RenderScript to.  Google
+justified the choice by arguing that they not only required performance
+portability and development efficiency but also a more intuitive programming and
+distribution model.  This decision caused some frustration from the OpenCL
+community \cite{androidblockopenCL} and some hardware
+vendors~\cite{googlelockin} who made big investments on OpenCL.
+
+Since being introduced in 2008, OpenCL performance and performance portability
+has been extensively evaluated.  The most common of such evaluations is OpenCL's
+performance against CUDA on GPUs~\cite{fang2011comprehensive,
+weber2011comparing, van2011correlating, vassilev2010comparison,
+amorim2009comparing, karimi2010performance, komatsu2010evaluating}.  Since on
+GPUs OpenCL and CUDA have a similar platform, memory, and programming model, a
+one-to-one analysis is possible.  Most studies~\cite{weber2011comparing,
+van2011correlating, vassilev2010comparison, amorim2009comparing}  from wide
+array of domains show that CUDA usually achieve better performance (on NVIDIA
+GPUs) than OpenCL.  Another consensus among these studies is that OpenCL
+provides a sufficient interface for developers to express more architectural
+details to improve the performance of their applications.  For example,
+studies~\cite{komatsu2010evaluating} and \cite{fang2011comprehensive} show that
+most OpenCL kernels can obtain comparable performance with CUDA kernels when
+properly optimized.  In~\cite{shen2012performance}, the author compares OpenCL
+and OpenMP in the context of application performance on multi-core CPUs using
+the Rodinia benchmark suite~\cite{che2009rodinia}.  From the study, the OpenMP
+implementations generally outperforms the OpenCL ones.  Based on this result,
+the authors picked three OpenCL worse-performed applications, compared the
+performance against OpenMP, and performed manual performance tuning.  Their
+result show that tuned OpenCL applications outperformed the OpenMP in majority
+of the test cases.
+
+According to \cite{komatsu2010evaluating} and \cite{dolbeau2013one}, OpenCL
+achieves fairly stable performance across tested platforms. However, both
+studies also illustrate some cases, in which OpenCL does not handle
+architectural specifics well, such as memory layout and number of processing
+cores. In order to improve the portability of applications, recent OpenCL
+versions has an option to let the runtime decides the group size, i.e., the
+number of concurrent threads, or wrap size in CUDA's term. However, we are not
+aware of any study that evaluates the optimality of this feature.
+
+Compared with OpenCL, RenderScript's programming model is more restrictive, in
+the sense that it does not let developers to control the execution scheduling,
+i.e., developers do not know whether a particular region of code is going to be
+executed in a CPU or in a GPU at runtime. RenderScript also limits developers
+from expressing architectural specifics, such as the number of processing cores,
+local memory size. This study will evaluate whether hiding architectural details
+results in RenderScript incurring performance loss compared to OpenCL.
+
+In order to quickly reuse OpenCL legacy code in Android environments, Yang et
+al.  \cite{yang2012o2render} presents a source-to-source translator from OpenCL
+to RenderScript. The authors are presented with several challenges.  The most
+notable is the different in execution models of the two standards.  However, the
+authors did not release the translator publicly.  We hope that we can leverage
+some of the presented translation rules to speed up our manual porting of the
+Parboil benchmark.
+
+In term of benchmarking RenderScript, we are not aware of any work that provides
+a systematic evaluation of RenderScript's performance and performance
+portability. The only available tool that we might be able to leverage is
+CompuBench mobile for RenderScript~\cite{compuBenchMobile}.  But since this
+benchmark is a commercial product and does not offer source, we would not be
+able to perform thorough analysis using this it.  So in this regard, we will be
+providing the first open source benchmark for RenderScript that can be evaluated
+against different language paradigms and hadware targets.
