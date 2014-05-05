@@ -110,45 +110,52 @@ We set Trepn to read the counters every $100ms$ and measure the load and power
 % 
 
 
-\begin{figure*}[ht]
+\begin{figure}[ht]
+  \centering
 
-  \begin{subfigure}[b]{\textwidth}
+  \begin{subfigure}[b]{0.5\textwidth}
           \centering
-          \includegraphics[width=0.4\textwidth]{data/legend.pdf}
+          \includegraphics[width=0.8\textwidth]{data/legend.pdf}
   \end{subfigure}
 
-  \begin{subfigure}[b]{0.3\textwidth}
+  \begin{subfigure}[b]{0.25\textwidth}
+      \centering
       \includegraphics[width=\textwidth]{data/bbattery_vectoradd.pdf}
       \caption{VectorAdd}\label{fig:b_vectoradd}
-  \end{subfigure}
+  \end{subfigure}%
 
-  \begin{subfigure}[b]{0.3\textwidth}
+  \begin{subfigure}[b]{0.25\textwidth}
+      \centering
       \includegraphics[width=\textwidth]{data/bbattery_tpacf.pdf}
       \caption{TPACF} \label{fig:b_TPACF}
-  \end{subfigure}
+  \end{subfigure}%
 
-  \begin{subfigure}[b]{0.3\textwidth}
+  \begin{subfigure}[b]{0.25\textwidth}
+      \centering
       \includegraphics[width=\textwidth]{data/bbattery_histogram.pdf}
       \caption{Histo}\label{fig:b_histo}
-  \end{subfigure}
+  \end{subfigure}%
 
-  \begin{subfigure}[b]{0.3\textwidth}
+  \begin{subfigure}[b]{0.25\textwidth}
+      \centering
       \includegraphics[width=\textwidth]{data/bbattery_mriq.pdf}
       \caption{MRIQ} \label{fig:b_MRIQ}
   \end{subfigure}
 
-  \begin{subfigure}[b]{0.3\textwidth}
+  \begin{subfigure}[b]{0.25\textwidth}
+      \centering
       \includegraphics[width=\textwidth]{data/bbattery_sgemm.pdf}
       \caption{Sgemm}\label{fig:b_Sgemm}
   \end{subfigure}
 
-  \begin{subfigure}[b]{0.3\textwidth}
+  \begin{subfigure}[b]{0.25\textwidth}
+      \centering
       \includegraphics[width=\textwidth]{data/bbattery_stencil.pdf}
       \caption{Stencil} \label{fig:b_Stencil}
   \end{subfigure}
 
-  \caption{Battery Nexus 5}
-\end{figure*}
+  \caption{Battery Information}
+\end{figure}
 
 
 % \begin{figure*}[ht]
