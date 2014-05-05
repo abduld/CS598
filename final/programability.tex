@@ -8,15 +8,27 @@ RenderScript is a new framework being rapidly developed and deployed.
 Therefore, we expect that RenderScript will keep evolving to close most of the
 identified limitations.
 
-Pros:
+We start by describing the features that we like about the RenderScript
+programming model:
 
-* Allocation is intuitive: Express data and computation simultaneously.
+\begin{itemize}
+\item RenderScript delivers its promises about the code portability. The runtime
+behavior of our RenderScript implementations is consistent across five different
+tested devices and seven different benchmarks. For example, we always got the
+same runtime errors, e.g., segmentation fault or out-of-memory error, regardless
+of the devices that the code is running on. Furthermore, we did not have to
+express any device specific parameters in our code. The code portability gives
+us a confidence that if a kernel works on our testing device, it will work
+seamlessly on other devices. Unlike OpenCL, we needed to tune some parameters,
+such as the thread block sizes, in order to avoid crashes in some devices.
 
-* Flexibility and performability of C?
+\item Debugging: much better with rsDebug. IDE supports showing compile errors.
 
-* Portable; compare to OpenCL
+\item Allocation is intuitive: Express data and computation simultaneously.
 
-* Debugging: much better with rsDebug. IDE supports showing compile errors.
+\item Flexibility and performability of C?
+
+\end{itemize}
 
 * Active community: stackoverflow response time is good and the answers were useful.
 
