@@ -2,15 +2,20 @@
 This section presents our analysis of RenderScript's programmability --- how
 comfortable we, as programmers, feel when working with RenderScript. Since this
 analysis is primarily based on our experience working with RenderScript
+<<<<<<< HEAD
 throughout this semester, it is subjective. Furthermore, we are fully aware
 that some of the limitations presented in this section exist because
 RenderScript is a new framework, which is being rapidly developed and deployed.
+=======
+throughout this semester, it is highly subjective. Additionally, we are aware of
+that some of the limitations presented in this section are due to the fact that
+RenderScript is a new framework being rapidly developed and deployed.
+>>>>>>> c5dd086563cc308dc879e95b6e04efaebbe0a235
 Therefore, we expect that RenderScript will keep evolving to close most of the
 identified limitations.
 
 \paragraph{The Goods.}
-We start by describing the features that we like about the RenderScript
-programming model.
+We start by describing the features that we like about the RenderScript.
 
 \textit{RenderScript delivers on its promises about code portability}.
 The runtime behavior of our RenderScript implementations is consistent across
@@ -24,8 +29,8 @@ tuning some
 parameters, such as work-group sizes, in order to avoid crashes when ported to
 other devices.
 
-\textit{Debugging in RenderScript is convenient}. Since RenderScript is natively
-supported in Android, it offers a set of convenient built-in debugging
+\textit{Debugging RenderScript code is convenient}. Since RenderScript is
+natively supported in Android, it offers a set of convenient built-in debugging
 facilities, such as the \fix{rsDebug()} functions, detailed runtime exceptions,
 and IDE-navigable compilation errors. The \fix{rsDebug()} functions in
 RenderScript runtime API provide a familiar debugging interface for displaying
@@ -68,11 +73,18 @@ modify the RenderScript \todo{Do you mean RenderScript} implementation in order
 to overcome the lack of
 synchronization support.
 
+<<<<<<< HEAD
 \textit{Only support two coordinates.} The limited documentation that exists today for RenderScript
+=======
+\textit{Lack of support for multi-dimensional parallelism}. Only support two
+coordinates. The interface for the third dimension exists but was not
+implemented.
+>>>>>>> c5dd086563cc308dc879e95b6e04efaebbe0a235
 
 \textit{Overhead of data transfer}. Even a kernel is executed in the same
 coherence domain.
 
-\textit{Lack of documentation and standardization.} Example: kernel invocation generation.
+\textit{Lack of documentation and standardization.} Example: kernel invocation
+generation. Lack of example-driven tutorial.
 
 
