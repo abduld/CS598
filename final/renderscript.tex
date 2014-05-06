@@ -1,8 +1,9 @@
 
 \subsection{RenderScript}
 RenderScript is Android's official computing framework and was released in 
-2011~\cite{RenderScript}. The motivation behind is to provide
+2011~\cite{RenderScript}. The motivation behind it is similar to that of OpenCL: to provide
 performance and portability across SoC architectures for Android devices.
+It acomplishes portability across devices by not exposing any architectural details to the programmer.
 
 A RenderScript application consists of three parts: (1) Java application host
 code written by the developer that runs on Dalvik VM, (2) RenderScript code
@@ -23,12 +24,13 @@ RenderScript compilation flow is shown in Figure~\ref{fig:RSCompilation}.
 First, \fix{llvm-rs-cc} utility is used to compile RenderScript kernels to
 LLVM~\cite{LLVM:CGO04} bitcode files. The LLVM IR provide support for a wide range of hardware
 devices including CPUs, GPUs and DSPs. 
-As part of the RenderScript compilation step, corresponding reflected Java classes
-are generated via the  the \fix{llvm-rs-cc} tool.
-Then after, the application host code, the reflected Java classes and bitcode
+As part of the RenderScript compilation step, a Java class
+is generated for each RenderScript file via the the \fix{llvm-rs-cc} tool.
+The generated Java classes essentially avoids the user having to write JNI code.
+Then after, the application host code, the reflected Java classes, and RenderScript bitcode
 are bundled together into the Android application package (\fix{*.apk} file).
 During execution, the RenderScript
 runtime invokes \fix{libbcc}, the RenderScript back-end compiler, to translate
-bitcode into appropriate machine code.
+bitcode into machine assembly.
 
 
