@@ -8,16 +8,10 @@ Unlike programming desktops, where one mainly
 In fact, one of the main selling points for hetrogenous
   programming on mobile devices, is the increase in battery life.
 Increasingly, hardware vendors, such as Apple or Samsung, sell new
-  mobile hardware by advertising long battery life.
-
-
-In this section evaluate each benchmark and its implementations on the devices listed
-  in Table~\ref{table:hardware}.
-Each implementation is analyzed to determine processor utlization, performance
-  results, and power usage.
-We conclude the section by discussing the programability of RenderScript
-  and compare it against established programming models such as using
-  native C, OpenMP, or OpenCL for kernel code.
+  mobile hardware by advertising longer battery life.
+Finding a balance between energy consumption and performance is a 
+  balancing act that a programmer would like to deligate to the 
+  compiler or runtime.
 
 
 \begin{table}[h]\small
@@ -36,6 +30,18 @@ We conclude the section by discussing the programability of RenderScript
 \label{table:hardware}
 \end{table}
 
+In this section evaluate each benchmark on $5$ devices shown
+  in Table~\ref{table:hardware}.
+These devices capture the low, mid, and high end mobile and tablet
+  devices that are currently available on the market.
+Only the Nexus 5 and Nexus 7 devices can be modified to allow one to install an
+  unofficial OpenCL implementation.
+Each benchmarks contains multiple implementation which 
+  is analyzed to determine tradeoff between
+  processor utlization, performance, and energy usage.
+We conclude the section by discussing the programability of RenderScript
+  and compare it against established programming models such as:
+  native C, OpenMP, and OpenCL.
 
 \input{load}
 \input{performance}

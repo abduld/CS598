@@ -45,10 +45,11 @@ Both CPUs and GPUs make use of frequency scaling, but unlike CPUs (which typical
   have vary fine frequencies --- operating at around 10 different frequencies), GPUs
   have coarse grained frequencies (operating at only 4 different frequencies).  
 
-Processor utlization is measured by multiplying the $frequency$ and the $load$ information collected via Qualcomm's Trepn tool.
-The performance times are measured with the system connected to a
+Processor utlization is measured by multiplying the processor
+  load and frequency information collected via Trepn.
+The data is measured while the system is connected to a
   power source, which avoids the device going to sleep (it does add the
-  overhead of the device comunicating debug information with the development
+  extra overhead of the device comunicating debug information with the development
   machine).
 Since Trepn has a $100ms$ measure granularity, the kernel code is run $100$ times
   ($5$ times for MRIQ and TPACF), this allows us to visualize the trend in resource
@@ -57,8 +58,10 @@ The information gives us insight as to what parts of the code are active in each
 	section of the code, how that impacts performance and battery.
 
 
-Note that Java UI thread is running independent of the computation as well as Trepn which
-  have a high overhead ($10\%$ on average).
+As per standard Android applications, the UI runs in a seperate UI thread 
+  independent from the computation.
+Trepn, which has a high overhead ($10\%$ on average), also runs as a background
+  process.
 These background processes are echoed in
   the plots --- a single threaded Java code, for example, should not utilize more than one core, but our plots show that more than one core is active.
 
@@ -123,8 +126,9 @@ This is due to either the load being low for a high frequency or the frequency b
 \end{figure*}
 \FloatBarrier
 
-The TPACF compute codes is divided into two parts.
-The first is serial computation that, for the sake of code reuse, is done on the 
+The TPACF code is divided into two parts.
+The first is serial allocation and populating data
+  that, for the sake of code reuse, is done on the 
   Java side using a single thread.
 Once that complets, we then execute the code on different datasets in parallel.
 The utlization plots (figure~\ref{fig:loadMRIQTpacf}) show this behavior.  
@@ -138,7 +142,7 @@ For Stencil (figure~\ref{fig:loadHistogramStencil}) we see that RenderScript doe
 This is because the stencil kernel is memory access bound, performing around 10 flops 
   (ignoring index calculations).
 We again see that memory copy (\fix{SetupArgs} for RenderScript and
-  \fix{CopyTo} for OpenCL) result in the a substantial amound of resources being
+  \fix{CopyTo} for OpenCL) result in the a substantial amount of resources being
   wasted.
 
 \begin{figure*}[t]
