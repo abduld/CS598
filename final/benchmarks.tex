@@ -1,7 +1,7 @@
 \section{Benchmarks}
 \label{sec:benchmarks}
 
-We extend the Parboil benchmark suite and extend it to run on Android devices.
+We extend the Parboil benchmark suite to run on Android devices.
 Table~\ref{table:parboil} shows the porting status of each version of the
 benchmarks in the Parboil Benchmark Suite.
 
@@ -26,67 +26,67 @@ benchmarks in the Parboil Benchmark Suite.
     LBM               & \multicolumn{6}{c|}{N} \\ \hline
     \hline
 \end{tabu}
-\caption{Parboil Benchmark Porting Status. \textbf{NC} : Native C; \textbf{OMP}
-: Native C with OpenMP; \textbf{JT}: Threaded Java; \textbf{OCL} : OpenCL;
-\textbf{RS}: RenderScript; \textbf{C}: Completed; \textbf{N} : No
-Implementation; \textbf{B} : a bug causes the benchmark to crash.}
+\caption{Parboil Benchmark Porting Status. \textbf{NC}: Native C; \textbf{OMP}:
+Native C with OpenMP; \textbf{JT}: Threaded Java; \textbf{OCL}: OpenCL;
+\textbf{RS}: RenderScript; \textbf{C}: Completed; \textbf{N}: No Implementation;
+\textbf{B}: a bug causes the benchmark to crash.}
 \label{table:parboil}
 \end{table}
 
-In this section we give an overview of the benchmarks implemented along with 
+In this section, we give an overview of the benchmarks implemented along with 
 	the dataset sizes we used when profiling the results.
-While the Parboil benchmark suite represent scientific workloads we expect them to be 
+While the Parboil benchmark suite represents scientific workloads, we expect them to be 
 	representative of future Android applications --- given that we already 
 	see laptops using Android as their OS.
 
 \subsection{VectorAdd}
 
-VectorAdd, adds two floating point vectors with $8K$ elements.
+The VectorAdd adds two floating point vectors with $8K$ elements.
 Compared to other benchmarks, vector add has a very high memory to compute ratio.
 The benchmark is therefore not a fit for parallelization, but we use it to examine
   the overhead behavior.
 
 \subsection{SGEMM}
 
-SGEMM multiplies two matrices $A$ and $B$ producing an output $C$.
+The SGEMM multiplies two matrices $A$ and $B$ produces an output $C$.
 Matrix $A$ is of dimension $128 \times 96$ and $B$ is of dimension $96 \times 160$.
-Matrix $A$ is stored in row major format while $B$ is stored in column major format ---
+Matrix $A$ is stored in the row major format, while $B$ is stored in the column major format ---
 	we therefore do not need to transpose $B$ to make effective use of the cache.
 
-The OpenMP code use the \fix{\#pragma omp parallel for shared(A, B, C) collapse(2)}
-	pragma, which, based on the processor utilization,
+The OpenMP code uses the \fix{\#pragma omp parallel for shared(A, B, C) collapse(2)}
+	pragma, in which, based on the processor utilization,
 	the Android compiler was not able to parse as valid OpenMP code.
 Therefore, the OpenMP code for SGEMM is equivalent to the serial C code.
 
 \subsection{TPACF}
 
-TPACF analyzes the angular distribution of astronomical objects.
-The algorithm computes the distance between all pairs of coordinates in a dataset
+The TPACF analyzes the angular distribution of astronomical objects.
+The algorithm computes the distances between all pairs of coordinates in a dataset
 	and then performs histogramming.
-The results are collecting in 3 histograms which are then cross correlated to find
+The results are collected in three histograms which are then cross-correlated to find
 	the statistical spatial distribution of the astronomical bodies.
-For our analysis, use $100$ datasets each containing $487$ coordinates.
+For our analysis, we use $100$ datasets, each containing $487$ coordinates.
 
 \subsection{MRIQ}
 
-MRIQ computes a non-uniform 3D inverse Fourier transform representing a calibration matrix.
+The MRIQ computes a non-uniform 3D inverse-Fourier-transform, representing a calibration matrix.
 The calibration matrix is used to perform 3D image reconstruction from MRI data which is 
-	presented in non-Cartesian space.
-The input dataset of size $32 \times 32 \times 32$ containing trajectory information in $3$D
+	presented in a non-Cartesian space.
+The input dataset is of size $32 \times 32 \times 32$ containing trajectory information in $3$D
 	as direction parameter in $2$D.
 
 \subsection{Stencil}
 
-Stencil computes a 7 point stencil of an input volume. 
+The Stencil computes a 7 point stencil of an input volume. 
 The input volume has dimension $128 \times 128 \times 32$.
-Each performs a standard 7 point stencil: accessing the $6$ adjacent voxels,
+Each kernel performs a standard 7 point stencil: accessing the $6$ adjacent voxels,
 	scaling and then adding them the current voxel.
 The result is then placed in the output buffer.
 
 \subsection{Histogram}
 
-Histogram computes the histogram of an input image.
-The input image used is of size $996 \times 1040$ and compute a 
+The Histogram computes the histogram of an input image.
+The input image is of size $996 \times 1040$ and compute a 
 	histogram of size $256$.
 Each bin in the histogram saturates at the value $255$.
 

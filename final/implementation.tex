@@ -1,6 +1,27 @@
 \section{Implementation}
 \label{sec:implementation}
 
+
+\begin{table}
+\centering
+\begin{tabu} to \textwidth { | l | c |}
+    \hline 
+    Language      & Line Count \\ \hline
+    Java          & 7549       \\ \hline
+    RenderScript  & 1000       \\ \hline
+    JNI/C++       & 2048       \\ \hline
+    OpenCL        & 480        \\ \hline
+\end{tabu}
+\caption{Lines-of-code project breakdown per language.}
+\label{table:breakdown}
+\end{table}
+
+
+
+Table~\ref{table:breakdown} shows the numbers of lines-of-code (LOC) broken down
+into different types of programming languages in the project. This section describe 
+how we can achieve good code reuse while still having a sound and understandable program structure.
+
 \subsection{Framework Structure}
 
 \begin{figure}
@@ -22,15 +43,15 @@
 
 In order to facilitate the development of the benchmarks, we designed a
 framework,  which contains (i) a hierarchy of the benchmarks, e.g.,
-all different implementations of the same benchmark are group together, and
-(ii) utilities functions that support measuring and recording the results.
+all different implementations of the same benchmark are grouped together, and
+(ii) utility functions that support measuring and recording the results.
 Figure \ref{fig:package_structure} shows an overview of the framework by mean
-of the Java package structure. Figure \ref{fig:class_diagram} provides a closer
+of the Java package structure. Figure~\ref{fig:class_diagram} provides a closer
 view at the organization of the classes related to the VectorAdd benchmark.
 
 At a high level, we split the development of the graphical user interface (GUI),
 from the development of each of the benchmarks, under the \fix{GUI} package and
-the \fix{parboil} package in Figure \ref{fig:package_structure}, respectively.
+the \fix{parboil} package in Figure~\ref{fig:package_structure}, respectively.
 At this stage, the GUI is simply to allow users to start running the benchmarks,
 and to display the status of the benchmark execution, e.g., in which stage a
 benchmark is running, and whether a benchmark has executed successfully or
@@ -44,18 +65,17 @@ in classes, e.g., \fix{Timer} and \fix{Logger}, and implemented in the
 \fix{utils} package. Each benchmark, e,g., \fix{TPACF} or \fix{Histogram}, is
 implemented in a separate package under the \fix{benchmark} package. 
 
-Figure
-\ref{fig:class_diagram} shows the class diagram of the VectorAdd benchmark.
+Figure~\ref{fig:class_diagram} shows the class diagram of the VectorAdd benchmark.
 Other benchmarks have the same class structure. In order to implement a
-benchmark, we just need to inherit for the \fix{ParboiBenchmark} class, which
+benchmark, we just need to create a new class that inherits the \fix{ParboiBenchmark} class, which
 layouts a common skeleton. For each benchmark, we have to implement a class to
-read the input, for example \fix{VectorAddFileReader} class in this case. Each
+read the input, for example the \fix{VectorAddFileReader} class in this case. Each
 computational kernel, e.g., for Java, threaded Java, RenderScript, or OpenCL, is
 implemented in a separate class, e.g., \fix{VectorAddJava},
 \fix{VectorAddThreadedJava}, \fix{VectorAddRS}, or \fix{VectorAddOpenCL},
-respectively. The implementation classes inherit from the parent class of the benchmark ---
+respectively. These classes inherit from the parent class of the benchmark ---
 \fix{VectorAddBenchmark} in this case. This hierarchical design
-maximize the code reuse between benchmarks, and between computation kernel.  It
+maximizes the code reuse between benchmarks, and between computation kernels.  It
 also allows for a consistent interface to run the benchmarks.
 
 
@@ -63,7 +83,7 @@ also allows for a consistent interface to run the benchmarks.
 \subsubsection{Timer}
 The \fix{Timer} class is an important utility in our benchmark. It
 determines the accuracy and flexibility of our measurement. The \fix{Timer}
-class utilizes Android's \fix{SystemClock}, which provides real-time clock at
+class utilizes the Android's \fix{SystemClock}, which provides real-time clock at
 nanosecond resolution. Each \fix{Timer} object consists of a dynamic list of
 \fix{TimerElement} objects. Each \fix{TimerElement} object is a measure of a
 particular execution segment, e.g., allocation time, setup time, and compute
@@ -74,7 +94,7 @@ segment we wish to measure (here category is a user defined category such as
 category such as ``Allocating temporary data structures''). At the end of the
 execution segment, we need to invoke the \fix{Time.stop()} method. The
 time-stamp and elapsed time will be automatically computed and recorded.
-The \fix{Timer} class also can dump all the recorded \fix{TimerElement} to a
+The \fix{Timer} class can also dump all the recorded \fix{TimerElement}s to a
 SQLite database or serialize it to the JSON format for conveniently storing and
 parsing the results.
 
@@ -84,7 +104,7 @@ currently analysis, then the \fix{Timer} has a function to aggregate the results
 to output the average time across runs.  Currently, we do not exercise that code
 and we leave the statistical analysis to the parser and visualizer.
 
-\subsubsection{Output to Database}
+\subsubsection{Timing Database}
 
 Unlike Parboil, which outputs the times to {\tt stdout}, we output our data into
 a SQLite database.  This affords us a few things.  First, since data is
@@ -92,119 +112,88 @@ outputted in the specified columns, we do not have to re-parse the output data.
 Second, timing information can be shared easily by copying the database.
 Finally, we can store more than just timing information -- for example we also
 store which machine the time has been taken on as well as which runtime is being
-used.  Since writing to flash is extensive, all timing data is stored in memory
-and after the benchmark has run it is inserted into the database. 
+used.  Since writing to flash is expensive, all timing data is stored in memory,
+and then after the benchmark has finished, it is inserted into the database. 
 
 \subsubsection{Processor and Power Utilization}
 
+Unlike programming desktops, where one mainly 
+  improves software by increasing either features or performance,
+  mobile programmers develop for increase features, performance, and 
+  battery life.
+In fact, one of the main selling points for heterogeneous
+  programming on mobile devices, is the increase in battery life.
+Increasingly, hardware vendors, such as Apple or Samsung, sell new
+  mobile hardware by advertising longer battery life.
+Finding a balance between energy consumption and performance is a 
+  balancing act that a programmer would like to delegate to the 
+  compiler or runtime.
+
 Since Android does not offer a way to capture processor usage information
-programmatically, we use the Trepn~\cite{profilerqualcomm} tool by Qualcomm to capture the data and save it into a {\tt csv} file.  
-While the tool is limited to Qualcomm based
-chipsets, it is reads internal processor counters as well as power rail information,
+programmatically, we use the Trepn~\cite{profilerqualcomm} tool by Qualcomm to capture the data and save it into a {\tt csv} file.
+This tool is limited to Qualcomm based
+chipsets. Trepn reads internal processor counters as well as power rail information,
 both of which are not available programmatically and are more accurate than reading
 the information from the \fix{/proc} kernel file system.
 
 Trepn is an external application that is run outside of our benchmark framework.
 To pass messages to Trepn, we make use of Android's \fix{Intent} framework.
-The \fix{Intent} framework allows one to pass message between applications.
-Trpen records the time a message is received (which correspond to time blocks
+The \fix{Intent} framework allows one to pass messages between applications.
+Trepn records the time a message is received (which corresponds to time blocks
 in our code) and we developed scripts to correlate Trepn's data dump with both
 the load and power usage.
 
 We set Trepn to read
 the counters every $100ms$ and measure the load and power usage separately to
-decrease the overhead of the profiler.  To reduce overhead, Trepn measure the
+decrease the overhead of the profiler.  To reduce overhead, Trepn measures the
 processor usage information every $100ms$, both the frequency and the load are
-measured sequentially, we therefore need to correct that when parsing the {\tt
+measured sequentially, we therefore needed to correct that when parsing the {\tt
 csv} file.
 
-First, we parse each processor reading along with the time stamp for reading the
-file.  Next, we interpolate the measured data (we use linear interpolation) and
-evaluate the interpolant at the application state times (these are the times
-Trepn received a signal from our application and correspond to timed blocks of
+First, we parse each processor reading along with the time-stamps for reading the
+file.  Next, we interpolate the measured data (we use linear interpolation), and
+evaluate the interpolated value at the application state times (these are the times
+Trepn received signals from our application and correspond to timed blocks of
 code).  We then multiply the load by the frequency, and rescale all the CPU and
 GPU data (we perform the rescaling on the CPU and GPU separately).  Trepn can
 have measurement errors, resulting in infinite numbers.  To make sure that these
 do not skew the plots, we clip the range of possible processor reading to be
-between 1 and the the $0.99$th quantile of the data.  While efforts have
+between 1 and $0.99$th quantile of the data.  While efforts have
 been taken to reduce the profiler's overhead, the overhead is still around
 $10\%$.
 
+\subsection{Compute Kernels}
 
-\subsection{Implementing Computational Kernels}
-\label{sec:implementationRS}
+A RenderScript kernel is a map operation, taking a sequence of input and producing one output. For example, in
+the VectorAdd benchmark, the kernel takes two elements (one from each vector) adds the results and produces an output.
+With sequential accesses, one does not need to index into an array to access elements. In general, this results in code that's simpler to understand than OpenCL. 
 
-\begin{table}
-\centering
-\begin{tabu} to \textwidth { | l | c |}
-    \hline 
-    Language      & Line Count \\ \hline
-    Java          & 7549       \\ \hline
-    RenderScript  & 1000       \\ \hline
-    JNI/C++       & 2048       \\ \hline
-    OpenCL        & 480        \\ \hline
-\end{tabu}
-\caption{RSBench project line count breakdown.}
-\label{table:breakdown}
-\end{table}
+RenderScript does not unify memory, but provides APIs from within Java to allocate data and copy to and from the runtime. 
+We use \fix{copyFromUnchecked} to perform unsafe copies between Java and RenderScript, otherwise the runtime allocate temporary buffers and checks whether the conversion between the Java type and RenderScript type is valid.
 
-Table~\ref{table:breakdown} shows the numbers of line-of-code (LOC) broken down
-into different types of programming languages in the RSBench project. The next
-sub-sections describe the process of implementing different types of computational
-kernels for each benchmark.
-
-\subsubsection{RenderScript Kernels}
-%This section describes the general steps to write a computation kernel in
-%RenderScript for our benchmark.
-
-By design, each RenderScript kernel produces an \textit{element} of the output.
-It is up to developers to define the granularity of an element. For example, in
-the VectorAdd benchmark, an output element can be one, or two, or three array
-elements of the output vector. This granularity essentially determines the
-parallelism of the written RenderScript code. In our benchmarks, we select the
-finest granularity of the output element, e.g., one array element in this case,
-to implement our RenderScript kernel.
-
-In order to support this model, the RenderScript framework provides APIs to (i)
-define the type of \fix{Element} for both input and output of RenderScript
-kernels, and (ii) pack \fix{Element}s into \fix{Allocation}, which is the data
-structure that is used to pass data back and forth between regular Java code and
-RenderScript code.
-
-A significant effort of our work is to determine efficient ways to convert input
-data from original structure to the \fix{Allocation} structure with appropriate
-\fix{Element} type. This conversion is also reflected at runtime through the
-\textit{setup} time category of RenderScript execution.
-
-After data has been packed into \fix{Allocation} objects, we move to write
-RenderScript code in C99 format. The code needs to be placed in a specific file
-with the $.rs$ extension and a proper header, so that the Android Development
-Tools (ADT) can automatically generate a wrapper Java class for it. The
-auto-generated Java class provides interfaces to invoke the RenderScript code
-from Java code.
-
-The RenderScript targets the $4.4$ Android platform and 
+The RenderScript targets the $4.4$ Android platforms and 
 	is compiled with \fix{renderscript.support.mode=false} which
 	allows the compiler to use some optimizations which were not available in
 	previous Android versions.
 
-\subsubsection{Native Kernels}
-
-The Android operating system requires that C, OpenMP, and OpenCL kernels have to
-be invoked through Java Native Interface (JNI).  The C and OpenMP versions of
-the code have been taken from Parboil with minimal modifications.  Aside from
+Since Android applications must be hosted within Dalvik VM, we write JNI to 
+	interface our code with the native 
+	--- C, OpenMP, and OpenCL. To avoid having to write another timer, 
+	we split the native code into JNI functions corresponding to timed blocks and our
+	Java timer is used to time the native code.
+	Aside from
 wrapping the code via JNI so it is callable from within Java, little
-modification was done to the C and OpenMP code.
+modification was done to the Parboil version of the C and OpenMP code.
 
-The OpenCL kernels are lifted from the parboil benchmark suite with no
-modifications.  We use the \fix{base} implementation of OpenCL --- this a
-platform agnostic unoptimized implementation.  Unlike the Parboil benchmark
-suite, we write the OpenCL host code using the C++ OpenCL API, this simplifies
-some of the code and affords us more code reuse opportunities.
+
+The OpenCL kernels are lifted from Parboil as well, but we rewrite the 
+	OpenCL host code using the C++ OpenCL API, since it simplifies some of the
+	code and affords more code reuse opportunities.
+We use the \fix{base} implementation of OpenCL --- this a
+platform agnostic unoptimized implementation.
 
 To allow devices with no OpenCL support to make use of the C and OpenMP
 implementations, we generate 3 libraries (one for C, OpenMP, and OpenCL).  Each
 library is then loaded and called from with its class implementation.
-
 The \fix{-O3 -ftree-vectorize -mvectorize-with-neon-quad}
- compile option  is set when compiling native code, this allows opportunity to autovectorization code.
+ compile option  is set when compiling the libraries, this allows the compiler the opportunity to autovectorization code.
