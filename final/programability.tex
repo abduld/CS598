@@ -2,16 +2,10 @@
 This section presents our analysis of RenderScript's programmability --- how
 comfortable we, as programmers, feel when working with RenderScript. Since this
 analysis is primarily based on our experience working with RenderScript
-<<<<<<< HEAD
-throughout this semester, it is subjective. Furthermore, we are fully aware
-that some of the limitations presented in this section exist because
-RenderScript is a new framework, which is being rapidly developed and deployed.
-=======
-throughout this semester, it is highly subjective. Additionally, we are aware of
+throughout this semester, it is highly subjective. Additionally, we are aware
 that some of the limitations presented in this section are due to the fact that
-RenderScript is a new framework being rapidly developed and deployed.
->>>>>>> c5dd086563cc308dc879e95b6e04efaebbe0a235
-Therefore, we expect that RenderScript will keep evolving to close most of the
+RenderScript is a new framework, which is being rapidly developed and deployed.
+Therefore, we expect that RenderScript will keep evolving to close many of the
 identified limitations.
 
 \paragraph{The Goods.}
@@ -69,17 +63,13 @@ OpenCL-like \fix{barrier()} functions that can be called inside RenderScript
 kernels. Therefore, RenderScript kernels do not allow threads to share
 intermediate data. We found that this model is too restrictive in several
 scenarios. For example in the \fix{CUTCP} benchmark, we had to substantially
-modify the RenderScript \todo{Do you mean RenderScript} implementation in order
+modify the RenderScript \todo{Do you mean OpenCL implementation} implementation in order
 to overcome the lack of
 synchronization support.
 
-<<<<<<< HEAD
-\textit{Only support two coordinates.} The limited documentation that exists today for RenderScript
-=======
 \textit{Lack of support for multi-dimensional parallelism}. Only support two
 coordinates. The interface for the third dimension exists but was not
 implemented.
->>>>>>> c5dd086563cc308dc879e95b6e04efaebbe0a235
 
 \textit{Overhead of data transfer}. Even a kernel is executed in the same
 coherence domain.
