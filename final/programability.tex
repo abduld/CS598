@@ -53,7 +53,9 @@ in C.
 %\textit{Active community}. stackoverflow response time was good and the answers
 %were useful.
 
-\paragraph{The Bads.} We also found that RenderScript was still unpleasant to work with as it has some unnecessary idiosyncratic restrictions. However, many of these limitations exist due to the
+\paragraph{The Bads.} We also found that RenderScript was still unpleasant to
+work with as it has some unnecessary idiosyncratic restrictions. However, many
+of these limitations exist due to the
 infancy of the framework.
 
 \textit{No intrinsic synchronization within kernels.} Currently, RenderScript
@@ -67,14 +69,21 @@ modify the RenderScript \todo{Do you mean OpenCL implementation} implementation 
 to overcome the lack of
 synchronization support.
 
-\textit{Lack of support for multi-dimensional parallelism}. Only support two
-coordinates. The interface for the third dimension exists but was not
+\textit{Lack of support for multi-dimensional parallelism}. A RenderScript
+kernel allows an \fix{Allocation} to specify \fix{X}, \fix{Y}, and \fix{Z}
+dimensions, and the workload would be distributed across hardware units using
+these dimensions. However, currently it only supports two
+dimensions. The interface for the third dimension exists but was not
 implemented.
 
-\textit{Overhead of data transfer}. Even a kernel is executed in the same
-coherence domain.
+\textit{Overhead of data transfer}. Before RenderScript execution starts, all
+heap data to be used by the RenderScript kernel has to copied into one or more
+\fix{Allocation} type. Data has to be copied back from \fix{Allocation} after
+RenderScript execution. These data copies can be avoided when a kernel is
+executing in the same
+coherence domain. However, the current implementation of RenderScript does not
+perform these optimizations.
 
-\textit{Lack of documentation and standardization.} Example: kernel invocation
-generation. Lack of example-driven tutorial.
+\textit{Lack of documentation and standardization.} RenderScript was released recently in 2011 and we found the current documentation to be insufficient. For instance, atomic instructions such as \fix{rsAtomicInc(<Type>)} are claimed to exist in documentation and RenderScript header files for several data types, but the RenderScript runtime had support for only \fix{int32\_t} data type.
 
 
