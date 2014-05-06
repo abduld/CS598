@@ -24,7 +24,7 @@ In order to facilitate the development of the benchmarks, we designed a
 framework,  which contains (i) a hierarchy of the benchmarks, e.g.,
 all different implementations of the same benchmark are group together, and
 (ii) utilities functions that support measuring and recording the results.
-Figure \ref{fig:package_structure} depicts the overview of the framework by mean
+Figure \ref{fig:package_structure} shows an overview of the framework by mean
 of the Java package structure. Figure \ref{fig:class_diagram} provides a closer
 view at the organization of the classes related to the VectorAdd benchmark.
 
@@ -42,8 +42,10 @@ identified the common utility functions, such as timing- and logging-related
 functions, that are used across all the benchmarks. Those functions are grouped
 in classes, e.g., \fix{Timer} and \fix{Logger}, and implemented in the
 \fix{utils} package. Each benchmark, e,g., \fix{TPACF} or \fix{Histogram}, is
-implemented in a separate package under the \fix{benchmark} package.  Figure
-\ref{fig:class_diagram} depicts the class diagram of the VectorAdd benchmark.
+implemented in a separate package under the \fix{benchmark} package. 
+
+Figure
+\ref{fig:class_diagram} shows the class diagram of the VectorAdd benchmark.
 Other benchmarks have the same class structure. In order to implement a
 benchmark, we just need to inherit for the \fix{ParboiBenchmark} class, which
 layouts a common skeleton. For each benchmark, we have to implement a class to
@@ -204,5 +206,5 @@ To allow devices with no OpenCL support to make use of the C and OpenMP
 implementations, we generate 3 libraries (one for C, OpenMP, and OpenCL).  Each
 library is then loaded and called from with its class implementation.
 
-The compile option \fix{-O3 -ftree-vectorize -mvectorize-with-neon-quad}
- is set when compiling native code, this allows opportunity to autovectorization code.
+The \fix{-O3 -ftree-vectorize -mvectorize-with-neon-quad}
+ compile option  is set when compiling native code, this allows opportunity to autovectorization code.
