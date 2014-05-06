@@ -41,7 +41,7 @@ The \fix{parboil} Java package is the core of the project. In this package, we
 identified the common utility functions, such as timing- and logging-related
 functions, that are used across all the benchmarks. Those functions are grouped
 in classes, e.g., \fix{Timer} and \fix{Logger}, and implemented in the
-\fix{utils} package. Each benchmark, e,g., \fix{bfs} or \fix{cutcp}, is
+\fix{utils} package. Each benchmark, e,g., \fix{TPACF} or \fix{Histogram}, is
 implemented in a separate package under the \fix{benchmark} package.  Figure
 \ref{fig:class_diagram} depicts the class diagram of the VectorAdd benchmark.
 Other benchmarks have the same class structure. In order to implement a
@@ -93,40 +93,40 @@ store which machine the time has been taken on as well as which runtime is being
 used.  Since writing to flash is extensive, all timing data is stored in memory
 and after the benchmark has run it is inserted into the database. 
 
-\subsubsection{Load/Power Profiler}
+\subsubsection{Processor and Power Utilization}
 
 Since Android does not offer a way to capture processor usage information
-programatically, we use the Trepn~\cite{profilerqualcomm} tool by Qualqomm to capture the data and save it into a {\tt csv} file.  
+programmatically, we use the Trepn~\cite{profilerqualcomm} tool by Qualcomm to capture the data and save it into a {\tt csv} file.  
 While the tool is limited to Qualcomm based
 chipsets, it is reads internal processor counters as well as power rail information,
-both of which are not available programatically and are more accurate than reading
+both of which are not available programmatically and are more accurate than reading
 the information from the \fix{/proc} kernel file system.
 
 Trepn is an external application that is run outside of our benchmark framework.
 To pass messages to Trepn, we make use of Android's \fix{Intent} framework.
 The \fix{Intent} framework allows one to pass message between applications.
-Trpen records the time a message is recieved (which correspond to time blocks
+Trpen records the time a message is received (which correspond to time blocks
 in our code) and we developed scripts to correlate Trepn's data dump with both
 the load and power usage.
 
 We set Trepn to read
-the counters every $100ms$ and measure the load and power usage seperatly to
+the counters every $100ms$ and measure the load and power usage separately to
 decrease the overhead of the profiler.  To reduce overhead, Trepn measure the
 processor usage information every $100ms$, both the frequency and the load are
 measured sequentially, we therefore need to correct that when parsing the {\tt
 csv} file.
 
 First, we parse each processor reading along with the time stamp for reading the
-file.  Next, we interpolate the measured data (we use linear interpolant) and
+file.  Next, we interpolate the measured data (we use linear interpolation) and
 evaluate the interpolant at the application state times (these are the times
-Trepn recieved a signal from our application and correspond to timed blocks of
+Trepn received a signal from our application and correspond to timed blocks of
 code).  We then multiply the load by the frequency, and rescale all the CPU and
-GPU data (we perform the rescaling on the CPU and GPU seperatly).  Trepn can
-have measurment errors, resulting in infinite numbers.  To make sure that these
+GPU data (we perform the rescaling on the CPU and GPU separately).  Trepn can
+have measurement errors, resulting in infinite numbers.  To make sure that these
 do not skew the plots, we clip the range of possible processor reading to be
 between 1 and the the $0.99$th quantile of the data.  While efforts have
-been taken to reduce the profiler's overhead, it still ocupies around a
-$10\%$ overhead.
+been taken to reduce the profiler's overhead, the overhead is still around
+$10\%$.
 
 
 \subsection{Implementing Computational Kernels}
@@ -198,11 +198,11 @@ The OpenCL kernels are lifted from the parboil benchmark suite with no
 modifications.  We use the \fix{base} implementation of OpenCL --- this a
 platform agnostic unoptimized implementation.  Unlike the Parboil benchmark
 suite, we write the OpenCL host code using the C++ OpenCL API, this simplifies
-some of the code and affords us more code reuse oportunities.
+some of the code and affords us more code reuse opportunities.
 
 To allow devices with no OpenCL support to make use of the C and OpenMP
 implementations, we generate 3 libraries (one for C, OpenMP, and OpenCL).  Each
 library is then loaded and called from with its class implementation.
 
-Native kernels are compiled with the \fix{-O3 -ftree-vectorize -mvectorize-with-neon-quad}
- option allowing the compiler the autovectorization oportunity.
+The compile option \fix{-O3 -ftree-vectorize -mvectorize-with-neon-quad}
+ is set when compiling native code, this allows opportunity to autovectorization code.
