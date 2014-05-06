@@ -11,9 +11,9 @@ executed, sets up the environment, allocate memory on the device, copy data
 into the device memory and enqueue the kernel execution on the device.
 
 
-To allow execution on different devices, OpenCL programs represent the kernel
-	code as a C string.
-The OpenCL runtime contains a compiler which then compiles the C code at runtime.
+To allow execution on different devices, OpenCL kernels are stored in
+	the program as C strings.
+The OpenCL runtime contains a compiler which then compiles the OpenCL kernel code at runtime.
 This extra compilation step results in large overhead. Future OpenCL implementations
 will have the ability to perform some off line compilation to a virtual instruction
 set~\cite{SPIR}.
