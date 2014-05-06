@@ -2,6 +2,9 @@
 
 In this section we give an overview of the benchmarks implemented along with 
 	the dataset sizes we used when profiling the results.
+While these benchmarks represent scientific workloads we expect them to be 
+	representative of certain Android applications --- especially since we 
+	see that Android devices have already entered the laptop market.
 
 \subsection{VectorAdd}
 
@@ -22,13 +25,13 @@ Therefore, the OpenMP code for SGEMM is equivalent to the serial C code.
 
 TPACF analyzes the angular distribution of astronomical objects.
 It performs histogramming, collecting the restults in 3 histograms which are then
-	correlated with the different datasets.
-We use $x$ number of datasets, each containing $y$ corrdinates.
+	cross correlated.
+We use $100$ datasets, each containing $487$ corrdinates.
 
 \subsection{MRIQ}
 
 MRIQ computes a non-uniform 3D inverse fourier transform to create a 3D image.
-The input image is of size $x$.
+The input image is of size $32 \times 32 \times 32$.
 
 \subsection{Stencil}
 
