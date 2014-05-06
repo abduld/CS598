@@ -112,20 +112,20 @@ the load and power usage.
 
 We set Trepn to read
 the counters every $100ms$ and measure the load and power usage separately to
-decrease the overhead of the profiler.  To reduce overhead, Trepn measure the
+decrease the overhead of the profiler.  To reduce overhead, Trepn measures the
 processor usage information every $100ms$, both the frequency and the load are
-measured sequentially, we therefore need to correct that when parsing the {\tt
+measured sequentially, we therefore needed to correct that when parsing the {\tt
 csv} file.
 
-First, we parse each processor reading along with the time stamp for reading the
-file.  Next, we interpolate the measured data (we use linear interpolation) and
-evaluate the interpolant at the application state times (these are the times
-Trepn received a signal from our application and correspond to timed blocks of
+First, we parse each processor reading along with the time-stamps for reading the
+file.  Next, we interpolate the measured data (we use linear interpolation), and
+evaluate the interpolated value at the application state times (these are the times
+Trepn received signals from our application and correspond to timed blocks of
 code).  We then multiply the load by the frequency, and rescale all the CPU and
 GPU data (we perform the rescaling on the CPU and GPU separately).  Trepn can
 have measurement errors, resulting in infinite numbers.  To make sure that these
 do not skew the plots, we clip the range of possible processor reading to be
-between 1 and the the $0.99$th quantile of the data.  While efforts have
+between 1 and $0.99$th quantile of the data.  While efforts have
 been taken to reduce the profiler's overhead, the overhead is still around
 $10\%$.
 
@@ -176,13 +176,13 @@ data from original structure to the \fix{Allocation} structure with appropriate
 \textit{setup} time category of RenderScript execution.
 
 After data has been packed into \fix{Allocation} objects, we move to write
-RenderScript code in C99 format. The code needs to be placed in a specific file
+RenderScript code in the C99 format. The code needs to be placed in a specific file
 with the $.rs$ extension and a proper header, so that the Android Development
 Tools (ADT) can automatically generate a wrapper Java class for it. The
 auto-generated Java class provides interfaces to invoke the RenderScript code
 from Java code.
 
-The RenderScript targets the $4.4$ Android platform and 
+The RenderScript targets the $4.3$ and $4.4$ Android platforms and 
 	is compiled with \fix{renderscript.support.mode=false} which
 	allows the compiler to use some optimizations which were not available in
 	previous Android versions.
