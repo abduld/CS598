@@ -96,6 +96,18 @@ and then after the benchmark has finished, it is inserted into the database.
 
 \subsubsection{Processor and Power Utilization}
 
+Unlike programming desktops, where one mainly 
+  improves software by increasing either features or performance,
+  mobile programmers develop for increase features, performance, and 
+  battery life.
+In fact, one of the main selling points for heterogeneous
+  programming on mobile devices, is the increase in battery life.
+Increasingly, hardware vendors, such as Apple or Samsung, sell new
+  mobile hardware by advertising longer battery life.
+Finding a balance between energy consumption and performance is a 
+  balancing act that a programmer would like to delegate to the 
+  compiler or runtime.
+
 Since Android does not offer a way to capture processor usage information
 programmatically, we use the Trepn~\cite{profilerqualcomm} tool by Qualcomm to capture the data and save it into a {\tt csv} file.
 This tool is limited to Qualcomm based
@@ -189,21 +201,22 @@ The RenderScript targets the $4.3$ and $4.4$ Android platforms and
 
 \subsubsection{Native Kernels}
 
-The Android operating system requires that C, OpenMP, and OpenCL kernels have to
-be invoked through Java Native Interface (JNI).  The C and OpenMP versions of
-the code have been taken from Parboil with minimal modifications.  Aside from
+Android applications are hosted with Dalvik VM and therefore native code
+	--- C, OpenMP, and OpenCL --- has to be invoked through Java Native
+	Interface (JNI). 
+	Aside from
 wrapping the code via JNI so it is callable from within Java, little
-modification was done to the C and OpenMP code.
+modification was done to the Parboil version of the C and OpenMP code.
 
-The OpenCL kernels are lifted from the parboil benchmark suite with no
-modifications.  We use the \fix{base} implementation of OpenCL --- this a
-platform agnostic unoptimized implementation.  Unlike the Parboil benchmark
-suite, we write the OpenCL host code using the C++ OpenCL API, this simplifies
-some of the code and affords us more code reuse opportunities.
+
+The OpenCL kernels are lifted from Parboil as well, but we rewrite the 
+	OpenCL host code using the C++ OpenCL API, since it simplifies some of the
+	code and affords more code reuse opportunities.
+We use the \fix{base} implementation of OpenCL --- this a
+platform agnostic unoptimized implementation.
 
 To allow devices with no OpenCL support to make use of the C and OpenMP
 implementations, we generate 3 libraries (one for C, OpenMP, and OpenCL).  Each
 library is then loaded and called from with its class implementation.
-
 The \fix{-O3 -ftree-vectorize -mvectorize-with-neon-quad}
- compile option  is set when compiling native code, this allows opportunity to autovectorization code.
+ compile option  is set when compiling the libraries, this allows the compiler the opportunity to autovectorization code.
