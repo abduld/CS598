@@ -43,13 +43,13 @@
       \label{fig:Stencil}
   \end{subfigure}
 
-  \caption{Runtime across devices where kernel is exceuted once normalized to the Java execution time (lower is better). J : Java, JT : JavaThreaded, C : C with JNI, OMP: OpenMP, OCL : OpenCL, and RS : Renderscript.}
+  \caption{Runtime across devices where kernel is executed once normalized to the Java execution time (lower is better). J : Java, JT : JavaThreaded, C : C with JNI, OMP: OpenMP, OCL : OpenCL, and RS : Renderscript.}
 \end{figure*}
 \FloatBarrier
 
-The performance measurments are collected by measuring the time
+The performance measurements are collected by measuring the time
   spent within each section of the code (as discussed in~\ref{design})
-  while the device is pluged into the development machine.
+  while the device is plugged into the development machine.
 Each compute part of an implementation is run $5$ times with the minimum
   presented.
 We consider two cases --- one where the kernel code is run once and therefore
@@ -60,7 +60,7 @@ We consider two cases --- one where the kernel code is run once and therefore
 
 For each device, the plot show the time to execute sections of the code normalized
   to the Java execution time.
-These times correspond the the $x$-axis of the processor utlization times discussed
+These times correspond to the $x$-axis of the processor utilization times discussed
   in the previous section (e.g. figure~\ref{fig:loadVecAddSgemm}) --- Trepn is not
   running while collecting these timing results.
 
@@ -119,6 +119,6 @@ These times correspond the the $x$-axis of the processor utlization times discus
       \label{fig:Stencil}
   \end{subfigure}
 
-  \caption{Runtime across devices where kernel is exceuted multiple times normalized to the Java execution time (lower is better). J : Java, JT : JavaThreaded, C : C with JNI, OMP: OpenMP, OCL : OpenCL, and RS : Renderscript.}
+  \caption{Runtime across devices where kernel is executed multiple times normalized to the Java execution time (lower is better). J : Java, JT : JavaThreaded, C : C with JNI, OMP: OpenMP, OCL : OpenCL, and RS : Renderscript.}
 \end{figure*}
 \FloatBarrier
