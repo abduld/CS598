@@ -1,6 +1,14 @@
 \section{Related Work}
 \label{sec:related}
 
+Related work can be divided into $3$ categories.
+The first are works that examine performance portability.
+The second are works that examine the programming models and how to abstract some of the low level details them.
+And, finally, works that examine computation on mobile platforms.
+
+\subsection{Performance Portability}
+
+
 In term of programming model, RenderScript is similar to OpenCL~\cite{OpenCL}
 and CUDA. While CUDA is designed specifically for NVIDIA GPU devices, OpenCL's
 goal is similar to RenderScript, which is aiming at simplifying cross-platform
@@ -37,6 +45,7 @@ properly optimized.
 % result show that tuned OpenCL applications outperformed the OpenMP in majority
 % of the test cases.
 
+
 According to \cite{komatsu2010evaluating} and \cite{dolbeau2013one}, OpenCL
 achieves fairly stable performance across the tested platforms. However, both
 studies also illustrate some cases, in which OpenCL does not handle
@@ -53,6 +62,9 @@ aware of any study that evaluates the optimality of this feature.
 % from expressing architectural specifics, such as the number of processing cores,
 % local memory size. This study will evaluate whether hiding architectural details
 % results in RenderScript incurring performance loss compared to OpenCL.
+
+\subsection{Programming Model Abstractions}
+
 
 There are many recent proposals aiming at making parallel software development
 easier and better utilizing multicores and GPUs available in
@@ -75,6 +87,8 @@ programmers' annotation in Java code. The results show that the auto-generated
 RenderScript code often achieves higher performance than the auto-generated
 Native C code.
 
+\subsection{Computation on Mobile Devices}
+
 In term of benchmarking RenderScript, study \cite{kemp2013using} compares three
 different programming models, namely RenderScript, Remote CUDA (RCUDA), and C++,
 of an image processing library in Android platform. The results on a Tegra 3
@@ -87,4 +101,4 @@ for RenderScript~\cite{compuBenchMobile}.  But since this benchmark is a
 commercial product and does not offer source, we would not be able to perform
 thorough analysis using this it.  So in this regard, we will be providing the
 first open source benchmark for RenderScript that can be evaluated against
-different language paradigms and hadware targets.
+different language paradigms and hardware targets.
