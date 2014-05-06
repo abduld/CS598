@@ -1,38 +1,24 @@
 \section{Motivation and Background}
 \todo[inline]{Assuming Introduction has a sentence or two about the
 programmability problem.}
-The industry and the research community have been trying to solve this problem.
-The recent development of RenderScript~\cite{wiki:RenderScript, RenderScript}
-provides a framework
-for running computationally intensive tasks at a high performance by using a
-specialized runtime for 
-parallelizing work across all processors available on the device, such as
-multi-core CPUs, GPUs, or DSPs. RenderScript is therefore removing the
-burden of load balancing and memory management from the programmer to the run-time, unlike other
-solutions such as OpenCL, where the programmer has more control over the
-execution semantics of the application ({\em the programmer decides which part
-of application would run on which device and using which part of the memory heirarchy}).
-In this fashion RenderScript is
-making the computationally intensive part of the application, that needs to be
-accelerated on specialized hardware, performance portable across the various hardware compute
-units. Also, since the application is not dependent on the existence and
-availability of a specific accelerator, the application is portable across SoCs
-with varying combinations of compute units.
 
-While such portability is a noble goal, RenderScript achieves it at the cost of
-hiding hardware details from the programmer that are critical to good
-performance on these accelerator. For example, in GPUs, the placement of data at
-various levels of memory hierarchy is critical to good performance.
-It is this reason that most programming languages for GPUs, allow the programmer
-unlimited control over memory management. RenderScript too can use GPUs for acceleration, but
-completely hides the memory management from the programmer. In the RenderScript
-model, application developers only define the part of the application that needs
-to be accelerated, and the granularity at which data needs to be partitioned,
-while the rest of the responsibilities of memory management and work distribution
-among different compute units is handled by RenderScript compiler and run-time.
-This raises an important
-question of ``how effective is the RenderScript compiler and run-time?'', which
-we plan to answer by doing a comprehensive performance analysis of RenderScript.
+
+Heterogeneity of hardware resources has led to a diverse landscape
+of different programming models, run-time systems, profiling and debugging tools
+for application development. The differences are so deep that programmers are
+often experts on only one class of device, e.g., an expert GPU programmer will
+not have much DSP expertise and vice-versa. This is highly inefficient and
+unproductive: we cannot expect applications to use a separate language for each
+class of compute unit. If we want applications to use the full range of
+available hardware to maximize performance or energy efficiency or both, the
+programming environment has to provide common abstractions for available
+hardware compute units.
+
+OpenCL and RenderScript have been proposed to solve this problem. They are
+designed to accelerate data parallel computation intensive part of application
+code by allowing workload to be executed on multiple processing cores, GPUs,
+DSPs or a combination of these. Here we give a brief overview of OpenCL and
+RenderScript.
 
 \subsection{OpenCL}
 OpenCL was initiated by Apple Inc. and is managed by the Khronos
@@ -85,9 +71,40 @@ which is installed on the Android device. During execution, the RenderScript
 runtime invokes \fix{libbcc}, RenderScript back-end compiler to translate
 bitcode into appropriate machine code.
 
+\subsection{Why RenderScript evaluation is required?}
+RenderScript provides a framework
+for running computationally intensive tasks at a high performance by using a
+specialized runtime for 
+parallelizing work across all processors available on the device, such as
+multi-core CPUs, GPUs, or DSPs. RenderScript is therefore removing the
+burden of load balancing and memory management from the programmer to the run-time, unlike other
+solutions such as OpenCL, where the programmer has more control over the
+execution semantics of the application ({\em the programmer decides which part
+of application would run on which device and using which part of the memory heirarchy}).
+In this fashion RenderScript is
+making the computationally intensive part of the application, that needs to be
+accelerated on specialized hardware, performance portable across the various hardware compute
+units. Also, since the application is not dependent on the existence and
+availability of a specific accelerator, the application is portable across SoCs
+with varying combinations of compute units.
 
-\todo[inline]{Programmability Challenge: Elaborate on that}
-\todo[inline]{LLVM IR code snippet}
-\lstinputlisting[language=llvm, caption=Bitcode representation of RenderScript kernel]{code/average.ll}
-\lstinputlisting[language=llvm, caption=NVVM representation of CUDA kernel]{code/simple-gpu.ll}
-\lstinputlisting[language=llvm, caption=SPIR representation of OpenCL kernel]{code/average-opencl.ll}
+While such portability is a noble goal, RenderScript achieves it at the cost of
+hiding hardware details from the programmer that are critical to good
+performance on these accelerator. For example, in GPUs, the placement of data at
+various levels of memory hierarchy is critical to good performance.
+It is this reason that most programming languages for GPUs, allow the programmer
+unlimited control over memory management. RenderScript too can use GPUs for acceleration, but
+completely hides the memory management from the programmer. In the RenderScript
+model, application developers only define the part of the application that needs
+to be accelerated, and the granularity at which data needs to be partitioned,
+while the rest of the responsibilities of memory management and work distribution
+among different compute units is handled by RenderScript compiler and run-time.
+This raises an important
+question of ``how effective is the RenderScript compiler and run-time?'', which
+we plan to answer by doing a comprehensive performance analysis of RenderScript.
+
+%\lstinputlisting[language=llvm, caption=Bitcode representation of RenderScript kernel]{code/average.ll}
+%\lstinputlisting[language=llvm, caption=NVVM representation of CUDA kernel]{code/simple-gpu.ll}
+%\lstinputlisting[language=llvm, caption=SPIR representation of OpenCL kernel]{code/average-opencl.ll}
+
+
