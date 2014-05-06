@@ -2,11 +2,11 @@
 \subsection{OpenCL}
 
 OpenCL was initiated by Apple Inc. as a vendor neutral alternative
-to CUDA and is now managed by the Khronos Group~\cite{Khronos:url}.
+to CUDA and is now managed by the Khronos Group~\cite{OpenCL_kh}.
 An OpenCL application is composed of two parts: an OpenCL host program and a
 set of one or more kernels. The kernels, written in restricted C99 syntax,
 specify functions that are to be executed in data parallel fashion. The OpenCL
-host program identifies the device on which the OpenCL kernel would be
+host program identifies the devices on which the OpenCL kernel would be
 executed, sets up the environment, allocate memory on the device, copy data
 into the device memory and enqueue the kernel execution on the device.
 
@@ -14,12 +14,11 @@ into the device memory and enqueue the kernel execution on the device.
 To allow execution on on different devices, OpenCL programs represent the kernel
 	code as a C string.
 The OpenCL runtime contains a compiler which then compiles the C code at runtime.
-This extra compilation step results in large overhead and future OpenCL implementations
+This extra compilation step results in large overhead. Future OpenCL implementations
 will have the ability to perform some off line compilation to a virtual instruction
-set.
-\todo[inline]{Cite SPIR..}
+set~\cite{SPIR}.
 
-In the ideal case, it allows application developers to write
+In the ideal case, OpenCL allows application developers to write
 data parallel computation intensive parts of their application for an abstract
 hardware model, without using low level hardware specific function calls.
 In reality, developers need to target specific hardware to get tangential
