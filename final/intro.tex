@@ -15,13 +15,14 @@ life, to move towards heterogeneous designs.
 
 However, heterogeneity of hardware resources also has led to a diverse landscape
 of different programming models, run-time systems, profiling and debugging tools
-for application development. Since optimization for amiable in one device or
-programming model often do not apply with another programming model or device, 
-one gets specialization of code which require hand tuning by experts for each 
+for application development. Since low-level performance and energy
+optimizations for one device or
+programming model often do not work with another programming model or device, 
+one gets specialization of code which requires hand tuning by experts for each 
 programming model or device, e.g., an optimization for the GPU may degrade performance
 on a DSP and vice-versa. This is highly inefficient and
 unproductive: we cannot expect applications to use a separate language for each
-class of compute unit. If on is to expect applications to use the full range of
+class of compute unit. If one is to expect applications to use the full range of
 available hardware (to maximize performance or energy efficiency or both) then
 programming environment has to provide common abstractions to facilitate this.
 
@@ -44,7 +45,7 @@ application is portable across SoCs with varying combinations of compute units.
 
 While such portability is a noble goal, RenderScript achieves it at the cost of
 hiding hardware details from the programmer that are critical to good
-performance on these accelerator. For example, in GPUs, the placement of data at
+performance on these accelerators. For example, in GPUs, the placement of data at
 various levels of memory hierarchy is critical for peek performance.  It is this
 reason that most programming languages for GPUs allow the programmer fine grained
 control over memory management. RenderScript too can use GPUs for acceleration,
@@ -54,18 +55,23 @@ application that needs to be accelerated, and the granularity at which data
 needs to be partitioned. The rest of the responsibilities of memory
 hierarchy management, work distribution among different compute units, and device selection
 is handled by the RenderScript compiler and run-time. 
-This raises the question of ``how
-effective is the RenderScript compiler and runtime? and is it able to achieve these goals?''
+This raises the question: ``how
+effective is the RenderScript compiler and runtime, and is it able to achieve these goals?''
 
 In this report we answer this question 
-by performing a comprehensive performance analysis of RenderScript and compare it against 
+by performing a comprehensive performance analysis of RenderScript and compare
+it against 
 serial Java, threaded Java, native C, OpenMP, and OpenCL.
 The report is divided as follows: section~\ref{sec:background} introduces 
-RenderScript, section~\ref{sec:benchmarks} describes the benchmarks written for Android and the dataset sizes
+RenderScript, section~\ref{sec:benchmarks} describes the benchmarks written for
+Android and the dataset sizes
 used for the analysis,
-section~\ref{sec:implementation} gives some internals of how we structured our implementation of these benchmarks,
+section~\ref{sec:implementation} gives some internals of how we structured our
+implementation of these benchmarks,
 section~\ref{sec:analysis} shows results from our analysis which
-    examines the performance along with processor and energy utilization for the different implementations,
+examine the performance along with processor and energy utilization for the
+different implementations,
 section~\ref{sec:related} describes related work,
-section~\ref{sec:future} details the next logical steps that should be taken to enhance the benchmark suite and our insights of the results,
-finaly, section~\ref{sec:conclusion} gives our conclusions.
+section~\ref{sec:future} details the next logical steps that should be taken to
+enhance the benchmark suite and our insights of the results,
+finally, section~\ref{sec:conclusion} gives our conclusions.
