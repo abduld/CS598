@@ -101,15 +101,15 @@ array.
 \subsubsection{Lack of a Standardization}
 
 RenderScript is similar to CUDA in this respect --- the reference implementation
-  is the standard.
+  and documentation being the standard.
 Yet unlike CUDA, RenderScript's documentation tend to be incomplete and insufficient.
-Atomic instructions such as \fix{rsAtomicInc}, for example, are claimed to be support 
-(in both the documentation and the header files) several data types, but a 
-runtime exception is raised when using with types other than \fix{int32\_t}.
+Atomic instructions such as \fix{rsAtomicInc}, for example, are claimed to be supported
+(in both the documentation and the header files) for several data types, but a 
+runtime exception is raised when using the function with types other than \fix{int32\_t}.
 The lack of specification results in some errors being unintuitive --- one has to 
-  read the runtime to determine what the error refers to and what caused it.
-It also means that it is unlikely that RenderScript would be 
-  ported to desktop platforms.
+  read the runtime code to determine what some of the errors mean as well as possible causes.
+The lack of standard body also means that it is unlikely that RenderScript would be 
+  ported to desktop platforms and adopted on descrete GPUs.
 
 
 \subsubsection{Yet Another Parallel Framework}
