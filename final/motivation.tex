@@ -71,16 +71,8 @@ which is installed on the Android device. During execution, the RenderScript
 runtime invokes \fix{libbcc}, RenderScript back-end compiler to translate
 bitcode into appropriate machine code.
 
-
-\todo[inline]{Programmability Challenge: Elaborate on that}
-\todo[inline]{LLVM IR code snippet}
-\lstinputlisting[language=llvm, caption=Bitcode representation of RenderScript kernel]{code/average.ll}
-\lstinputlisting[language=llvm, caption=NVVM representation of CUDA kernel]{code/simple-gpu.ll}
-\lstinputlisting[language=llvm, caption=SPIR representation of OpenCL kernel]{code/average-opencl.ll}
-
-The industry and the research community have been trying to solve this problem.
-The recent development of RenderScript~\cite{wiki:RenderScript, RenderScript}
-provides a framework
+\subsection{Why RenderScript evaluation is required?}
+RenderScript provides a framework
 for running computationally intensive tasks at a high performance by using a
 specialized runtime for 
 parallelizing work across all processors available on the device, such as
@@ -110,5 +102,9 @@ among different compute units is handled by RenderScript compiler and run-time.
 This raises an important
 question of ``how effective is the RenderScript compiler and run-time?'', which
 we plan to answer by doing a comprehensive performance analysis of RenderScript.
+
+\lstinputlisting[language=llvm, caption=Bitcode representation of RenderScript kernel]{code/average.ll}
+\lstinputlisting[language=llvm, caption=NVVM representation of CUDA kernel]{code/simple-gpu.ll}
+\lstinputlisting[language=llvm, caption=SPIR representation of OpenCL kernel]{code/average-opencl.ll}
 
 
