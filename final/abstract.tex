@@ -1,22 +1,22 @@
 \begin{abstract}
 
 
-As the number of different hetrogenous devices increase, so does 
+As the number of different heterogeneous devices increase, so does 
 	the programming complexity.
 Languages, such as OpenCL, which expose low level architectural 
 	details either via the standard or extensions, result optimized
 	for a certain class of hardware and therefore not performance
 	portable.
 RenderScript achieves performance portability by both hiding architectural
-	details, performing offline optimization to an IR, and delaying 
+	details, performing off-line optimization to an IR, and delaying 
 	backend code generation until runtime.
 To aid the runtime, the IR is decorated with hints to
-	allow the runtime to make inteligent descisions to determine
+	allow the runtime to make intelligent decisions to determine
 	where code is to be executed.
 We show, by rewriting the Parboil benchmark suite to run on Android,
 	that RenderScript strikes a balance by
 	hiding enough of the architectural details while still achieving
-	both good peformance and energy utlization.
+	both good performance and energy utilization.
 
 Our code is publicly available at \url{https://github.com/cmpham/RSBench}.
 
