@@ -41,70 +41,40 @@ how we can achieve good code reuse while still having a sound and understandable
 \centering
 \end{figure}
 
-In order to facilitate the development of the benchmarks, we designed a
-framework,  which contains (i) a hierarchy of the benchmarks, e.g.,
-all different implementations of the same benchmark are grouped together, and
-(ii) utility functions that support measuring and recording the results.
-Figure \ref{fig:package_structure} shows an overview of the framework by mean
-of the Java package structure. Figure~\ref{fig:class_diagram} provides a closer
-view at the organization of the classes related to the VectorAdd benchmark.
+We design of our framework to serve two purposes.
+First, as shown in figure~\ref{fig:package_structure}, we separated the UI logic from the benchmark logic, furthermore each benchmark is compartmentalized into its own Java package --- this allows for benchmarks to be worked on independently.
+Second we make extensive use of subclassing to facilitate code reuse --- 
+	we would like to only write one file input handler for each benchmark,
+	for example.
+Figure~\ref{fig:class_diagram} provides a closer
+view at the class hierarchy for the VectorAdd benchmark.
 
-At a high level, we split the development of the graphical user interface (GUI),
-from the development of each of the benchmarks, under the \fix{GUI} package and
-the \fix{parboil} package in Figure~\ref{fig:package_structure}, respectively.
-At this stage, the GUI is simply to allow users to start running the benchmarks,
-and to display the status of the benchmark execution, e.g., in which stage a
-benchmark is running, and whether a benchmark has executed successfully or
-failed at the end. In the future, more features will be added, such as
-displaying the final scores of the device.
+The \fix{parboil} package is the core Java package of the project.
+Common utility functions such as timers and loggers are placed in the \fix{utils} package and reused across benchmarks.
 
-The \fix{parboil} Java package is the core of the project. In this package, we
-identified the common utility functions, such as timing- and logging-related
-functions, that are used across all the benchmarks. Those functions are grouped
-in classes, e.g., \fix{Timer} and \fix{Logger}, and implemented in the
-\fix{utils} package. Each benchmark, e,g., \fix{TPACF} or \fix{Histogram}, is
-implemented in a separate package under the \fix{benchmark} package. 
-
-Figure~\ref{fig:class_diagram} shows the class diagram of the VectorAdd benchmark.
-Other benchmarks have the same class structure. In order to implement a
-benchmark, we just need to create a new class that inherits the \fix{ParboiBenchmark} class, which
-layouts a common skeleton. For each benchmark, we have to implement a class to
-read the input, for example the \fix{VectorAddFileReader} class in this case. Each
-computational kernel, e.g., for Java, threaded Java, RenderScript, or OpenCL, is
-implemented in a separate class, e.g., \fix{VectorAddJava},
-\fix{VectorAddThreadedJava}, \fix{VectorAddRS}, or \fix{VectorAddOpenCL},
-respectively. These classes inherit from the parent class of the benchmark ---
-\fix{VectorAddBenchmark} in this case. This hierarchical design
-maximizes the code reuse between benchmarks, and between computation kernels.  It
-also allows for a consistent interface to run the benchmarks.
+Each benchmark's base class has an input and output reader, code to
+	initialize the data, and code to check if the output result matches
+	the expected output.
+The implementation of each benchmark requires one to define just the \fix{compute}
+	method.
+This design keeps code simple and avoid code duplication.
 
 
 \subsection{Utility Functions}
+
+A few utility functions were identified to be common across benchmarks.
+This section briefly discusses some of them.
+
 \subsubsection{Timer}
-The \fix{Timer} class is an important utility in our benchmark. It
-determines the accuracy and flexibility of our measurement. The \fix{Timer}
-class utilizes the Android's \fix{SystemClock}, which provides real-time clock at
-nanosecond resolution. Each \fix{Timer} object consists of a dynamic list of
-\fix{TimerElement} objects. Each \fix{TimerElement} object is a measure of a
-particular execution segment, e.g., allocation time, setup time, and compute
-time. In order to create a new \fix{TimerElement}, we just need to invoke the
-\fix{Timer.start(category, message)} method at the beginning of the execution
-segment we wish to measure (here category is a user defined category such as
+The \fix{Timer} class uses \fix{SystemClock} to get real-time clock information 
+	with nanosecond resolution.
+\fix{Timer} objects are collected into a dynamic list with each measuring
+	a particular execution segment, e.g., allocation time, setup time, and compute
+time. 
+\fix{Timer.start(category, message)} starts the timer and sets its label (here category is a user defined category such as
 ``Compute'' or ``Setup'', while message is a message that further refines the
 category such as ``Allocating temporary data structures''). At the end of the
-execution segment, we need to invoke the \fix{Time.stop()} method. The
-time-stamp and elapsed time will be automatically computed and recorded.
-The \fix{Timer} class can also dump all the recorded \fix{TimerElement}s to a
-SQLite database or serialize it to the JSON format for conveniently storing and
-parsing the results.
-
-If a benchmark is run multiple times, for example, we run the compute part 100
-times for each small benchmark, and five times for each big benchmark in our
-currently analysis, then the \fix{Timer} has a function to aggregate the results
-to output the average time across runs.  Currently, we do not exercise that code
-and we leave the statistical analysis to the parser and visualizer.
-
-\subsubsection{Timing Database}
+execution segment the \fix{Time.stop()} method is called. 
 
 Unlike Parboil, which outputs the times to {\tt stdout}, we output our data into
 a SQLite database.  This affords us a few things.  First, since data is
@@ -113,7 +83,7 @@ Second, timing information can be shared easily by copying the database.
 Finally, we can store more than just timing information -- for example we also
 store which machine the time has been taken on as well as which runtime is being
 used.  Since writing to flash is expensive, all timing data is stored in memory,
-and then after the benchmark has finished, it is inserted into the database. 
+and then after the benchmark has finished, it is written into the database. 
 
 \subsubsection{Processor and Power Utilization}
 
