@@ -1,27 +1,30 @@
 \subsection{RenderScript Programmability}
-This section presents our analysis of RenderScript's programmability --- how
-comfortable we, as programmers, feel when working with RenderScript. Since this
-analysis is primarily based on our experience working with RenderScript
-throughout this semester, it is highly subjective. Additionally, we are aware
-that some of the limitations presented in this section are due to the fact that
-RenderScript is a new framework, which is being rapidly developed and deployed.
-Therefore, we expect that RenderScript will keep evolving to close many of the
-identified limitations.
 
-\paragraph{The Goods.}
-We start by describing the features that we like about the RenderScript.
+This section presents our analysis of RenderScript's programmability.
+This analysis is based on our experience working with RenderScript, and is 
+  is highly subjective.
+Some of the limitations presented are due to RenderScript being a less mature
+  framework (compared to CUDA and OpenCL) and is actively being developed.
+Therefore, we expect that RenderScript will evolve to fix many of the
+identified limitations and fix the unecessary idiosyncratic restrictions we encountered.
 
-\textit{RenderScript delivers on its promises about code portability}.
+\subsubsection{Performance Portability}
+
+The main objective of RenderScript is to give acceptable compute performance
+ (comprable to OpenCL) on a variety of hardware.
 The runtime behavior of our RenderScript implementations is consistent across
-five different tested devices and seven different benchmarks. For example, we
+the devices we tested on.
+Reproducability of bugs is another important factor, we
 always got the same runtime errors, e.g., segmentation fault or out-of-memory
-error, regardless of the devices that the code is running on. Furthermore, we
-did not have to express any device specific parameters in our code. The code
-portability gives us a confidence that if a kernel works on our testing device,
-it will work seamlessly on other devices. OpenCL, on the other hand, required
-tuning some
-parameters, such as work-group sizes, in order to avoid crashes when ported to
-other devices.
+error, regardless of the devices that the code is running on.
+
+RenderScript does not expose any device specific features --- it is not even 
+ posible to choose which device RenderScript runs on.
+Regardless, RenderScript was able to achieve good performance and work unchanged 
+ across devices.
+OpenCL, on the other hand, required us to read some device specific parameters
+ and change run paramaters, such as work-group sizes, in order to avoid 
+ runtime errors.
 
 \subsubsection{Debug Support}
 
@@ -41,54 +44,48 @@ environment has no facilities for that currently.
 
 The \fix{Allocation} interface is intuitive to express data and
 execution parallelism}. As described in section~\ref{sec:imple_RS}, this
-\fix{Allocation} interface allows explicitly expressing parallelism
-granularities, i.e., via packing output and/or input into \fix{Element} objects,
-for RenderScript kernels.  We quickly got used to this interface
-after completing the first set of simple benchmarks, and we did not encounter
-any problems using this interface.
-
+\fix{Allocation} interface gives the programmer the ability to express parallelism
+granularities, i.e., via packing output and/or input into \fix{Element} objects.
+The interface is intuitive and is similar to the already familiar OpenCL memory interface.
 Within the kernel, utility functions (\fix{rsGetElementAt_*}) make indexing
  into a multi-dimensional arrays platform agnostic
  (e.g. the strides should not be assumed to be the same across architectures).
+The helper functions also allow one to not perform complex index arithmetic, mapping
+ a set of corrdinates to access a $1$D array.
 
 
 \subsubsection{Familiar Language}
 
-\textit{Writing RenderScript kernel in C99 brings great flexibility and
-performability\todo{Is this a word? What do you mean by performability}}. We
-liked the feeling of having complete control when using
-the C language for performance critical code. We understand that this point is
-completely biased due to our proficiency with C, C++, and CUDA. For many
-programmers, it is an abrupt transition from programming in Java to programming
-in C.
+RenderScript kernel is C99 based, and thefore does not require any learning of syntax.
+Classifying that as a features is slightly biased towards programmers already familiar with
+ C programming.
+For many programmers, a transition from programming in Java to programming in C might not be simple
+ --- especially if the two languages are within the same project.
+Similarly, for C programmers, having a language that is C like but employing different semantics
+  might be confusing.
 
-\paragraph{The Bads.} We also found that RenderScript was still unpleasant to
-work with as it has some unnecessary idiosyncratic restrictions. However, many
-of these limitations exist due to the
-infancy of the framework.
-
-\subsubsection{Lack of Intrinsics}
-
-\textit{No intrinsic synchronization within kernels.} Currently, RenderScript
-only allows global synchronization by calling the \fix{syncAll()} function in
-Java host code. This means that there is no CUDA-like \fix{\_\_syncthread()} or
-OpenCL-like \fix{barrier()} functions that can be called inside RenderScript
-kernels. Therefore, RenderScript kernels do not allow threads to share
-intermediate data. We found that this model is too restrictive in several
-scenarios. For example in the \fix{CUTCP} benchmark, we had to substantially
-modify the RenderScript \todo{Do you mean OpenCL implementation} implementation in order
-to overcome the lack of
-synchronization support.
 
 \subsubsection{Multi-Dimensional Parallelism}
 
 
-\textit{Lack of support for multi-dimensional parallelism}. A RenderScript
-kernel allows an \fix{Allocation} to specify \fix{X}, \fix{Y}, and \fix{Z}
+Unlike the familiar CUDA and OpenCL model where threads are partitioned into blocks which are
+  then partitioned into a grid, RenderScript has only one level partitioning.
+A RenderScript kernel allows an \fix{Allocation} to specify \fix{X}, \fix{Y}, and \fix{Z}
 dimensions, and the workload would be distributed across hardware units using
-these dimensions. However, currently it only supports two
-dimensions. The interface for the third dimension exists but was not
-implemented.
+these dimensions.
+We found that the current implementation lacks support for launching a $3$D kernels.
+
+\subsubsection{Lack of Synchronization Intrinsics}
+
+Because Renderscript does not allow one to group threads into blocks, there is only a global synchronization operation
+  --- \fix{syncAll()} ---  which is called from within the Java code.
+Coming from a GPU programming background, this means no support for \fix{\_\_syncthread()} or the OpenCL
+equivalent \fix{barrier()} function.
+The RenderScript kernels therefore cannot perform fine grained synchronizations and share data between a group of threads.
+For some benchmarks, this model is not convinent.
+In the \fix{CUTCP} benchmark, for example, we had to rethink how the algorithm operats to port 
+  the OpenCL implementation to Renderscript.
+
 
 \subsubsection{Non-Unified Memory}
 
@@ -118,7 +115,7 @@ It also means that it is unlikely that RenderScript would be
   ported to desktop platforms.
 
 
-\subsubsection{Another Parallel Framework}
+\subsubsection{Yet Another Parallel Framework}
 
 Aside from having full control over the language, it is not clear why
  Google did not adopt OpenCL or OpenCL's SPIR layer.
