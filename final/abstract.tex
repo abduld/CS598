@@ -1,12 +1,15 @@
 \begin{abstract}
 
-
-As the number of different heterogeneous devices increases, so does 
+Mobile devices have become ubiquitous with one of their main selling points
+	shifting from performance to energy efficiency.
+Given that specialized hardware decrease energy
+	utilizations for certain workloads, mobile devices have 
+	become heterogeneous to compete in the efficient energy market.
+But as the number of different heterogeneous devices increases, so does 
 	the programming complexity.
 Programming languages, such as OpenCL, which expose low level architectural 
-	details either via the standard or extensions, result optimized
-	for a certain class of hardware and therefore not performance
-	portable.
+	details --- either via the standard or implementation extensions --- 
+	results in optimized code for certain architectures and not others.
 RenderScript achieves performance portability by both hiding architectural
 	details, performing off-line optimizations to an IR, and delaying 
 	backend code generation until runtime.
@@ -14,6 +17,7 @@ To aid the runtime, the IR is decorated with hints to
 	allow the runtime to make intelligent decisions to determine
 	where code is to be executed.
 We show, by rewriting the Parboil benchmark suite to run on Android,
+	--- and comparing the performance and energy utilization of Java, threaded Java, C, OpenMP, OpenCL, and RenderScript --- 
 	that RenderScript strikes a balance by
 	hiding enough of the architectural details while still achieving
 	both good performance and energy utilization.
