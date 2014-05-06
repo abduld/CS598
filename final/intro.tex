@@ -66,10 +66,10 @@ Our code is publicly available at \url{https://github.com/cmpham/RSBench}.
 
 \begin{table}[h]\small
 \centering
-\begin{tabular}{ | l | c | c | c | c | c | c |}
+\begin{tabu}{ | l |[1.5pt] c | c | c | c | c | c |}
     \hline 
     Benchmark & \multicolumn{6}{c|}{Implementations} \\ \cline{2-7}
-                      & C & OMP & J & JT & OCL & RS \\ \hline
+                      & NC & OMP & J & JT & OCL & RS \\ \tabucline[1.5pt]{-}
     VectorAdd         & C & C   & C    & C      & C      & C \\ \hline
     SGEMM             & C & C   & C    & C      & C      & C \\ \hline
     Stencil           & C & C   & C    & C      & C      & C \\ \hline
@@ -83,9 +83,11 @@ Our code is publicly available at \url{https://github.com/cmpham/RSBench}.
     SPMV              & \multicolumn{6}{c|}{N} \\ \hline
     LBM               & \multicolumn{6}{c|}{N} \\ \hline
     \hline
-\end{tabular}
-\caption{Parboil Benchmark Porting Status. C : Native C; OMP : Native C with
-OpenMP; JT: Threaded Java; OCL : OpenCL;  RS: RenderScript; C: Completed; N : No Implementation; B : a bug causes the benchmark to crash.}
+\end{tabu}
+\caption{Parboil Benchmark Porting Status. \textbf{NC} : Native C; \textbf{OMP}
+: Native C with OpenMP; \textbf{JT}: Threaded Java; textbf{OCL} : OpenCL;
+\textbf{RS}: RenderScript; \textbf{C}: Completed; \textbf{N} : No
+Implementation; \textbf{B} : a bug causes the benchmark to crash.}
 \label{table:parboil}
 \end{table}
 
