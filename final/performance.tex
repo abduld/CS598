@@ -106,7 +106,7 @@ Not all benchmarks were run on the GalaxyNexus, since the device,
 In figure~\ref{fig:perfOne} the compute code is only executed once, it is clear that 
   the overhead of RenderScript on the Nexus 10 (and to some extent the SM-T900) device is consistently high.
 We suspect that the Nexus 5 and Nexus 7 are using a more recent version of the RenderScript library compared to the Nexus 10.
-As one would expect, when a kernel is executed only once, then overhead dominates the time. Thefore, for such executions, it is not a good policy to of-load the computation to either RenderScript or OpenCL ---
+As one would expect, when a kernel is executed only once, then overhead dominates the time. Thefore, for such executions, it is not a good policy to off-load the computation to either RenderScript or OpenCL ---
   i.e. the programmer still needs to understand which sections of the program are very hot and could benefit by not being hosted 
   in Java.
 

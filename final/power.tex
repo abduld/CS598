@@ -80,8 +80,12 @@ Since OpenCL has a similar time profile as RenderScript on the Nexus 5, we obser
   compared to RenderScript.
 For the Nexus 7, in some benchmarks RenderScript has better energy utilization while OpenCL is better in others.
 
-Therefore, which implementation to choose to reduce energy consumption is device- and compute-pattern-dependent.
-Compared to the other implementations, RenderScript has lower energy consumption for any of the benchmarks.
-It is also clear that the LCD screen makes a big impact on power usage, in MRIQ, for example, even though the threaded Java code
-  utilizes all the CPU cores, because it is able to complete quicker it uses less power overall compared to the serial Java code.
+Therefore, which implementation to choose to reduce energy consumption is
+device- and compute-pattern-dependent.
+Compared to the other implementations, RenderScript has lower energy
+consumption for many of the benchmarks.
+It is also clear that the LCD screen makes a big impact on power usage, in
+MRIQ, for example, even though the threaded Java code
+  utilizes all the CPU cores, because it is able to complete quicker it uses
+less energy overall compared to the serial Java code.
 
