@@ -6,24 +6,27 @@ systems. It provides the ability to integrate a variety of processing elements,
 such as large and small general purpose cores, GPUs, DSPs, and custom or
 semi-custom hardware into a single system. Applications that can efficiently use
 the full range of available hardware reap significant energy
-savings over conventional processors by executing portions of the code on the
-device which optimized for it. This promise of performance along with power efficiency
+savings over conventional processors by executing portions of the computation on
+devices that perform the computational pattern efficiently.
+This promise of performance along with power efficiency
 has led mobile devices such as smartphones
 and tablets, which deal with a variety of applications with limited battery
 life, to move towards heterogeneous designs.
 
 However, heterogeneity of hardware resources also has led to a diverse landscape
 of different programming models, run-time systems, profiling and debugging tools
-for application development. The differences are so deep that programmers are
-often experts on only one class of device, e.g., an expert GPU programmer will
-not have much DSP expertise and vice-versa. This is highly inefficient and
+for application development. Since optimization for amiable in one device or
+programming model often do not apply with another programming model or device, 
+one gets specialization of code which require hand tuning by experts for each 
+programming model or device, e.g., an optimization for the GPU may degrade performance
+on a DSP and vice-versa. This is highly inefficient and
 unproductive: we cannot expect applications to use a separate language for each
-class of compute unit. If we want applications to use the full range of
-available hardware to maximize performance or energy efficiency or both, the
-programming environment has to provide common abstractions for available
-hardware compute units.
+class of compute unit. If on is to expect applications to use the full range of
+available hardware (to maximize performance or energy efficiency or both) then
+programming environment has to provide common abstractions to facilitate this.
 
-The industry and the research community have been trying to solve this problem.
+The industry and the research community have been actively working on abstractions
+    to mitigate this problem.
 The recent development of RenderScript~\cite{wiki:RenderScript, RenderScript}
 provides a framework for running computationally intensive tasks at a high
 performance by using a specialized runtime for parallelizing work across all
@@ -31,8 +34,8 @@ processors available on the device, such as multi-core CPUs, GPUs, or DSPs.
 RenderScript is therefore removing the burden of load balancing and memory
 management from the programmer to the run-time, unlike other solutions such as
 OpenCL, where the programmer has more control over the execution semantics of
-the application ({\em the programmer decides which part of application would run
-on which device and using which part of the memory hierarchy}).  In this fashion
+the application (the programmer needs to determine where code is run and
+ which part of the memory hierarchy data would reside).  In this fashion,
 RenderScript is making the computationally intensive part of the application,
 that needs to be accelerated on specialized hardware, performance portable
 across the various hardware compute units. Also, since the application is not
@@ -42,16 +45,28 @@ application is portable across SoCs with varying combinations of compute units.
 While such portability is a noble goal, RenderScript achieves it at the cost of
 hiding hardware details from the programmer that are critical to good
 performance on these accelerator. For example, in GPUs, the placement of data at
-various levels of memory hierarchy is critical to good performance.  It is this
-reason that most programming languages for GPUs, allow the programmer unlimited
+various levels of memory hierarchy is critical for peek performance.  It is this
+reason that most programming languages for GPUs allow the programmer fine grained
 control over memory management. RenderScript too can use GPUs for acceleration,
-but completely hides the memory management from the programmer. In the
+but hides the memory hierarchy from the programmer. In the
 RenderScript model, application developers only define the part of the
 application that needs to be accelerated, and the granularity at which data
-needs to be partitioned, while the rest of the responsibilities of memory
-management and work distribution among different compute units is handled by
-RenderScript compiler and run-time.  This raises an important question of ``how
-effective is the RenderScript compiler and run-time?'', which we plan to answer
-by doing a comprehensive performance analysis of RenderScript.
+needs to be partitioned. The rest of the responsibilities of memory
+hierarchy management, work distribution among different compute units, and device selection
+is handled by the RenderScript compiler and run-time. 
+This raises the question of ``how
+effective is the RenderScript compiler and run-time?'' and is it able to achieve these goals.
 
-
+In this report we answer this 
+by performing a comprehensive performance analysis of RenderScript and compare it against 
+serial Java, threaded Java, native C, OpenMP, and OpenCL.
+The report is divided as follows: section~\ref{sec:background} introduces 
+RenderScript, section~\ref{sec:benchmarks} describes the benchmarks written for Android and the dataset sizes
+used for the analysis,
+section~\ref{sec:implementation} gives some internals of how we structured our implementation of these benchmarks,
+section~\ref{sec:analysis} shows results from our analysis which
+    examines the performance along with processor and energy utilization for the different implementations,
+section~\ref{sec:related} describes related work,
+section~\ref{sec:conclusion} summarizes the analysis,
+finally, section~\ref{sec:future} details the next logical steps that should be taken to enhance the
+    benchmark suite and our insights of the results.
