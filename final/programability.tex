@@ -42,7 +42,7 @@ Eclipse environment has no facilities for that currently.
 \subsubsection{Memory Operations}
 
 The \fix{Allocation} interface is intuitive to express data and
-execution parallelism. As described in section~\ref{sec:implementationRS}, this
+execution parallelism. The
 \fix{Allocation} interface gives programmers the ability to express parallelism
 granularities, i.e., via packing output and/or input into \fix{Element} objects.
 The interface is intuitive and is similar to the already familiar OpenCL memory interface.
@@ -88,16 +88,14 @@ OpenCL implementation to RenderScript.
 
 \subsubsection{Non-Unified Memory}
 
-Before RenderScript execution starts, all heap data to be used by the kernel has
-to be copied into \fix{Allocation} buffers.  The buffer has to be copied back to
-make it available to Java.  Safe casting between Java and C requires some
+A RenderScript kernel requiers explicit allocation and copy for all data that it accesses. The buffers then have to be copied back to
+make them available to Java.  Safe casting between Java and C requires some
 checking --- since Java does not conform to the same IEEE standard that
-RenderScript conforms to.  But in the case of unsafe copies, these can be
-avoided when the kernel is executing in the same coherence domain.  The current
+RenderScript conforms to.  Use use unsafe casting which results in little overhead when the processors are in the same coherence domain.  The current
 implementation of RenderScript does not perform these optimizations.
 Furthermore, the runtime, via function overloading, should be able to hide
 explicit buffer creation and copies, by detecting the type passed into the
-function and converting to a \fix{Allocation} buffer if what is passed is a Java
+function and converting it into an \fix{Allocation} buffer if it is passed in a Java
 array.
 
 \subsubsection{Lack of a Standardization}
