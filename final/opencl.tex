@@ -6,7 +6,9 @@ to CUDA and is now managed by the Khronos Group~\cite{OpenCL_kh}.
 An OpenCL application is composed of two parts: an OpenCL host program and a
 set of one or more kernels. The kernels, written in restricted C99 syntax,
 specify functions that are to be executed in data parallel fashion. The OpenCL 
-host code is a C API that allow the programer to specify the device used for kernel execution, setting up the OpenCL environment, allocating memory, copying data, and executing the kernel.
+host code is a C API that allows the programer to specify the device used for
+kernel execution, setting up the OpenCL environment, allocating memory, copying
+data, and executing the kernel.
 
 To allow execution on different devices, OpenCL kernels are stored in
 	the program as C strings.
