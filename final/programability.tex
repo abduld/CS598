@@ -23,24 +23,36 @@ tuning some
 parameters, such as work-group sizes, in order to avoid crashes when ported to
 other devices.
 
-\textit{Debugging RenderScript code is convenient}. Since RenderScript is
-natively supported in Android, it offers a set of convenient built-in debugging
-facilities, such as the \fix{rsDebug()} functions, detailed runtime exceptions,
-and IDE-navigable compilation errors. The \fix{rsDebug()} functions in
-RenderScript runtime API provide a familiar debugging interface for displaying
-runtime information inside RenderScript kernels. Since most programmers are accustomed
-to \fix{printf()} debugging style in C/C++, this interface provides exactly
-what we need for debugging. Note that it is not convenient to use the
-\fix{printf()} debugging style in other host/device programming models, such as
-OpenCL and CUDA, since it is available only in emulation mode.
+\subsubsection{Debug Support}
 
-\textit{The \fix{Allocation} interface is intuitive to express data and
+Since RenderScript is natively supported in Android,
+it offers a set of convenient built-in debugging
+facilities, such as the \fix{rsDebug()} functions, detailed runtime exceptions,
+and IDE-navigable compilation errors.
+The \fix{rsDebug()} function forces RenderScript to execute on the CPU and interacts 
+with the eclipse platform to offer a convinent way to present printed values from within the kernel
+(OpenCL and CUDA offer similar facilities, but they are less convinent to use).
+For programmers accustomed to \fix{printf()} debugging style in C/C++, this interface provides
+a familiar debugging model. For developers expecting a breakpoint debugging workflow, the eclipse
+environment has no facilities for that currently.
+
+
+\subsubsection{Memory Operations}
+
+The \fix{Allocation} interface is intuitive to express data and
 execution parallelism}. As described in section~\ref{sec:imple_RS}, this
 \fix{Allocation} interface allows explicitly expressing parallelism
 granularities, i.e., via packing output and/or input into \fix{Element} objects,
 for RenderScript kernels.  We quickly got used to this interface
 after completing the first set of simple benchmarks, and we did not encounter
 any problems using this interface.
+
+Within the kernel, utility functions (\fix{rsGetElementAt_*}) make indexing
+ into a multi-dimensional arrays platform agnostic
+ (e.g. the strides should not be assumed to be the same across architectures).
+
+
+\subsubsection{Familiar Language}
 
 \textit{Writing RenderScript kernel in C99 brings great flexibility and
 performability\todo{Is this a word? What do you mean by performability}}. We
@@ -50,13 +62,12 @@ completely biased due to our proficiency with C, C++, and CUDA. For many
 programmers, it is an abrupt transition from programming in Java to programming
 in C.
 
-%\textit{Active community}. stackoverflow response time was good and the answers
-%were useful.
-
 \paragraph{The Bads.} We also found that RenderScript was still unpleasant to
 work with as it has some unnecessary idiosyncratic restrictions. However, many
 of these limitations exist due to the
 infancy of the framework.
+
+\subsubsection{Lack of Intrinsics}
 
 \textit{No intrinsic synchronization within kernels.} Currently, RenderScript
 only allows global synchronization by calling the \fix{syncAll()} function in
@@ -69,6 +80,9 @@ modify the RenderScript \todo{Do you mean OpenCL implementation} implementation 
 to overcome the lack of
 synchronization support.
 
+\subsubsection{Multi-Dimensional Parallelism}
+
+
 \textit{Lack of support for multi-dimensional parallelism}. A RenderScript
 kernel allows an \fix{Allocation} to specify \fix{X}, \fix{Y}, and \fix{Z}
 dimensions, and the workload would be distributed across hardware units using
@@ -76,14 +90,45 @@ these dimensions. However, currently it only supports two
 dimensions. The interface for the third dimension exists but was not
 implemented.
 
-\textit{Overhead of data transfer}. Before RenderScript execution starts, all
-heap data to be used by the RenderScript kernel has to copied into one or more
-\fix{Allocation} type. Data has to be copied back from \fix{Allocation} after
-RenderScript execution. These data copies can be avoided when a kernel is
-executing in the same
-coherence domain. However, the current implementation of RenderScript does not
-perform these optimizations.
+\subsubsection{Non-Unified Memory}
 
-\textit{Lack of documentation and standardization.} RenderScript was released recently in 2011 and we found the current documentation to be insufficient. For instance, atomic instructions such as \fix{rsAtomicInc(<Type>)} are claimed to exist in documentation and RenderScript header files for several data types, but the RenderScript runtime had support for only \fix{int32\_t} data type.
+Before RenderScript execution starts, all
+heap data to be used by the kernel has to copied into \fix{Allocation} buffers.
+The buffer has to be copied back to make it available to Java.
+Safe casting between Java and C requires some checking --- since Java does not 
+  conform to the same IEEE standard that RenderScript conforms to.
+But in the case of unsafe copies, these can be avoided when the kernel is
+  executing in the same coherence domain.
+The current implementation of RenderScript does not perform these optimizations.
+Furthermore, the runtime, via function overloading, should be able to hide 
+  explicit buffer creation and copies, by detecting the type passed into the function
+  and converting to a \fix{Allocation} buffer if what is passed is a Java array.
 
+\subsubsection{Lack of a Standardization}
+
+RenderScript is similar to CUDA in this respect --- the reference implementation
+  is the standard.
+Yet unlike CUDA, RenderScript's documentation tend to be incomplete and insufficient.
+Atomic instructions such as \fix{rsAtomicInc(<Type>)}, for example, are claimed to be supported
+in documentation and appear in the header files for several data types, but upon usage 
+the runtime raises an exception if any type other than \fix{int32\_t} is used.
+The lack of specification results in some errors being unintuitive --- one has to 
+  read the runtime to determine what the error refers to and what caused it.
+It also means that it is unlikely that RenderScript would be 
+  ported to desktop platforms.
+
+
+\subsubsection{Another Parallel Framework}
+
+Aside from having full control over the language, it is not clear why
+ Google did not adopt OpenCL or OpenCL's SPIR layer.
+As can be seen, the RenderScript language borrows many elements from the CUDA/OpenCL 
+ programming model, with some tooling support.
+Many of the ``features'' of RenderScript can be implementing via a library that 
+ interacts with OpenCL and there is no need for a new language.
+One reason could be that the compiler and runtime can prevent compute code that run on the GPU from
+ possibly crashing the driver (by using too much resources or using unsafe memory accesses),
+ since crashing the GPU driver on mobile devices is equivalent to crashing the device.
+Yet, again, this feature can be implemented by enhancing the OpenCL compiler and runtime to detect
+ and raise an exception if illegal memory accesses occur.
 
