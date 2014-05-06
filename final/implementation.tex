@@ -1,6 +1,27 @@
 \section{Implementation}
 \label{sec:implementation}
 
+
+\begin{table}
+\centering
+\begin{tabu} to \textwidth { | l | c |}
+    \hline 
+    Language      & Line Count \\ \hline
+    Java          & 7549       \\ \hline
+    RenderScript  & 1000       \\ \hline
+    JNI/C++       & 2048       \\ \hline
+    OpenCL        & 480        \\ \hline
+\end{tabu}
+\caption{Lines-of-code project breakdown per language.}
+\label{table:breakdown}
+\end{table}
+
+
+
+Table~\ref{table:breakdown} shows the numbers of lines-of-code (LOC) broken down
+into different types of programming languages in the project. This section describe 
+how we can achieve good code reuse while still having a sound and understandable program structure.
+
 \subsection{Framework Structure}
 
 \begin{figure}
@@ -83,7 +104,7 @@ currently analysis, then the \fix{Timer} has a function to aggregate the results
 to output the average time across runs.  Currently, we do not exercise that code
 and we leave the statistical analysis to the parser and visualizer.
 
-\subsubsection{Output to Database}
+\subsubsection{Timing Database}
 
 Unlike Parboil, which outputs the times to {\tt stdout}, we output our data into
 a SQLite database.  This affords us a few things.  First, since data is
@@ -141,69 +162,25 @@ between 1 and $0.99$th quantile of the data.  While efforts have
 been taken to reduce the profiler's overhead, the overhead is still around
 $10\%$.
 
+\subsection{Compute Kernels}
 
-\subsection{Implementing Computational Kernels}
-\label{sec:implementationRS}
+A RenderScript kernel is a map operation, taking a sequence of input and producing one output. For example, in
+the VectorAdd benchmark, the kernel takes two elements (one from each vector) adds the results and produces an output.
+With sequential accesses, one does not need to index into an array to access elements. In general, this results in code that's simpler to understand than OpenCL. 
 
-\begin{table}
-\centering
-\begin{tabu} to \textwidth { | l | c |}
-    \hline 
-    Language      & Line Count \\ \hline
-    Java          & 7549       \\ \hline
-    RenderScript  & 1000       \\ \hline
-    JNI/C++       & 2048       \\ \hline
-    OpenCL        & 480        \\ \hline
-\end{tabu}
-\caption{RSBench project line count breakdown.}
-\label{table:breakdown}
-\end{table}
+RenderScript does not unify memory, but provides APIs from within Java to allocate data and copy to and from the runtime. 
+We use \fix{copyFromUnchecked} to perform unsafe copies between Java and RenderScript, otherwise the runtime allocate temporary buffers and checks whether the conversion between the Java type and RenderScript type is valid.
 
-Table~\ref{table:breakdown} shows the numbers of line-of-code (LOC) broken down
-into different types of programming languages in the RSBench project. The next
-sub-sections describe the process of implementing different types of computational
-kernels for each benchmark.
-
-\subsubsection{RenderScript Kernels}
-%This section describes the general steps to write a computation kernel in
-%RenderScript for our benchmark.
-
-By design, each RenderScript kernel produces an \textit{element} of the output.
-It is up to developers to define the granularity of an element. For example, in
-the VectorAdd benchmark, an output element can be one, or two, or three array
-elements of the output vector. This granularity essentially determines the
-parallelism of the written RenderScript code. In our benchmarks, we select the
-finest granularity of the output element, e.g., one array element in this case,
-to implement our RenderScript kernel.
-
-In order to support this model, the RenderScript framework provides APIs to (i)
-define the type of \fix{Element} for both input and output of RenderScript
-kernels, and (ii) pack \fix{Element}s into \fix{Allocation}, which is the data
-structure that is used to pass data back and forth between regular Java code and
-RenderScript code.
-
-A significant effort of our work is to determine efficient ways to convert input
-data from original structure to the \fix{Allocation} structure with appropriate
-\fix{Element} type. This conversion is also reflected at runtime through the
-\textit{setup} time category of RenderScript execution.
-
-After data has been packed into \fix{Allocation} objects, we move to write
-RenderScript code in the C99 format. The code needs to be placed in a specific file
-with the $.rs$ extension and a proper header, so that the Android Development
-Tools (ADT) can automatically generate a wrapper Java class for it. The
-auto-generated Java class provides interfaces to invoke the RenderScript code
-from Java code.
-
-The RenderScript targets the $4.3$ and $4.4$ Android platforms and 
+The RenderScript targets the $4.4$ Android platforms and 
 	is compiled with \fix{renderscript.support.mode=false} which
 	allows the compiler to use some optimizations which were not available in
 	previous Android versions.
 
-\subsubsection{Native Kernels}
-
-Android applications are hosted with Dalvik VM and therefore native code
-	--- C, OpenMP, and OpenCL --- has to be invoked through Java Native
-	Interface (JNI). 
+Since Android applications must be hosted within Dalvik VM, we write JNI to 
+	interface our code with the native 
+	--- C, OpenMP, and OpenCL. To avoid having to write another timer, 
+	we split the native code into JNI functions corresponding to timed blocks and our
+	Java timer is used to time the native code.
 	Aside from
 wrapping the code via JNI so it is callable from within Java, little
 modification was done to the Parboil version of the C and OpenMP code.
