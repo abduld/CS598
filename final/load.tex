@@ -8,7 +8,7 @@
           \centering
           \includegraphics[width=0.4\textwidth]{data/load_legend.pdf}
   \end{subfigure}
-  
+
   \begin{subfigure}[b]{0.88\textwidth}
        \centering
        \includegraphics[width=\textwidth]{data/load_vectoradd_nexus5.pdf}
@@ -32,32 +32,32 @@
    \end{subfigure}
 
 
-  \caption{Processor utilization of VectorAdd and SGEMM for both Nexus 5 and Nexus 7. The $x$ axis is time, and the $y$ axis is normalized to the peek utlization for CPUs or GPUs across implementations.}
+  \caption{Processor utilization of VectorAdd and SGEMM for both Nexus 5 and Nexus 7. The $x$ axis is time, and the $y$ axis is normalized to the peek utilization for CPUs or GPUs across implementations.}
   \label{fig:loadVecAddSgemm}
 \end{figure*}
 
 Mobile devices use dynamic voltage frequency scaling (DVFS)
-  to match performance to power utlization.
+  to match performance to power utilization.
 The frequency is increased for the processors when the load goes over a certain
-  threashold.
+  threshold.
 Both CPUs and GPUs make use of frequency scaling, but unlike CPUs (which typically
   have vary fine frequencies --- operating at around 10 different frequencies), GPUs
   have coarse grained frequencies (operating at only 4 different frequencies).  
 
-Processor utlization is measured by multiplying the processor
+Processor utilization is measured by multiplying the processor
   load and frequency information collected via Trepn.
 The data is measured while the system is connected to a
   power source, which avoids the device going to sleep (it does add the
-  extra overhead of the device comunicating debug information with the development
+  extra overhead of the device communicating debug information with the development
   machine).
 Since Trepn has a $100ms$ measure granularity, the kernel code is run $100$ times
   ($5$ times for MRIQ and TPACF), this allows us to visualize the trend in resource
-  utlization.
+  utilization.
 The information gives us insight as to what parts of the code are active in each
 	section of the code, how that impacts performance and battery.
 
 
-As per standard Android applications, the UI runs in a seperate UI thread 
+As per standard Android applications, the UI runs in a separate UI thread 
   independent from the computation.
 Trepn, which has a high overhead ($10\%$ on average), also runs as a background
   process.
@@ -65,26 +65,26 @@ These background processes are echoed in
   the plots --- a single threaded Java code, for example, should not utilize more than one core, but our plots show that more than one core is active.
 
 
-VectorAdd has a very high memory to compute ratio, therefore the processor utlization
+VectorAdd has a very high memory to compute ratio, therefore the processor utilization
   plot~(figure \ref{fig:loadVecAddSgemm}) shows that not all CPUs 
-  are fully utlized during the compute phase.
+  are fully utilized during the compute phase.
 For the Nexus 5 device, while the graphs show a GPU is being used during the OpenMP,
-  Renderscript, and Java, this is an error in the measurement --- we believe this is 
+  RenderScript, and Java, this is an error in the measurement --- we believe this is 
   due to the UI thread utilizing the GPU or some other interferences.
 As expected, the GPU is not being utilized on the Nexus 7 except for OpenCL.
 
 As discussed in the benchmark section, the Android GCC compiler was not able 
   to interpret the OpenMP pragma code and therefore SGEMM runs in a single thread
   on both the Nexus 5 and Nexus 7 (figure~\ref{fig:loadVecAddSgemm}).
-While OpenCL does utlize the GPU, because of the size of the matrix, there GPU has
+While OpenCL does utilize the GPU, because of the size of the matrix, there GPU has
   lower occupancy and therefore does not achieve peek performance.
-Both the RenderScript and ThreadedJava code make full utlization of all the cores.
+Both the RenderScript and ThreadedJava code make full utilization of all the cores.
 
-MRIQ is embarisingly parallel and we can see full utlization for both the CPUs and GPUs in figure~\ref{fig:loadMRIQTpacf}.
+MRIQ is embarrassingly parallel and we can see full utilization for both the CPUs and GPUs in figure~\ref{fig:loadMRIQTpacf}.
 Abrupt dips in the plots show positions where a kernel launch occurs.
-It is also interesting to note that on the Nexus 5 the CPU is not fully utilized for both ThreadedJava and Renderscript.
+It is also interesting to note that on the Nexus 5 the CPU is not fully utilized for both ThreadedJava and RenderScript.
 This is due to either the load being low for a high frequency or the frequency being 
-  choosen to be low.
+  chosen to be low.
 
 \begin{figure*}
   \centering
@@ -120,7 +120,7 @@ This is due to either the load being low for a high frequency or the frequency b
       \label{fig:TPACF7}
   \end{subfigure}
 
-  \caption{Processor utilization of MRIQ and TPACF for both Nexus 5 and Nexus 7. The $x$ axis is time, and the $y$ axis is normalized to the peek utlization for CPUs or GPUs across implementations.}
+  \caption{Processor utilization of MRIQ and TPACF for both Nexus 5 and Nexus 7. The $x$ axis is time, and the $y$ axis is normalized to the peek utilization for CPUs or GPUs across implementations.}
   \label{fig:loadMRIQTpacf}
 \end{figure*}
 
@@ -128,12 +128,12 @@ The TPACF code is divided into two parts.
 The first is serial allocation and populating data
   that, for the sake of code reuse, is done on the 
   Java side using a single thread.
-Once that complets, we then execute the code on different datasets in parallel.
-The utlization plots (figure~\ref{fig:loadMRIQTpacf}) show this behavior.  
+Once that complete, we then execute the code on different datasets in parallel.
+The utilization plots (figure~\ref{fig:loadMRIQTpacf}) show this behavior.  
 
 For Histogram (figure~\ref{fig:loadHistogramStencil}) we see that memory starts
-  to play a major role in processor utlization.
-The GPU is being utlized in the memory copy as it is in the computation, for example.
+  to play a major role in processor utilization.
+The GPU is being utilized in the memory copy as it is in the computation, for example.
 
 For Stencil (figure~\ref{fig:loadHistogramStencil}) we see that RenderScript does
   not fully utilize all CPU cores.
@@ -164,12 +164,12 @@ We again see that memory copy (\fix{SetupArgs} for RenderScript and
       \label{fig:Stencil5}
   \end{subfigure}
 
-  \caption{Processor utilization of Histogram and Stencil for both Nexus 5. The $x$ axis is time, and the $y$ axis is normalized to the peek utlization for CPUs or GPUs across implementations.}
+  \caption{Processor utilization of Histogram and Stencil for both Nexus 5. The $x$ axis is time, and the $y$ axis is normalized to the peek utilization for CPUs or GPUs across implementations.}
   \label{fig:loadHistogramStencil}
 \end{figure*}
 
 Throughout the benchmarks we see that RenderScript
-	does not utalize the GPU.
+	does not utilize the GPU.
 This is due to RenderScript requiring full
 	IEEE 754-2008 compliance, which the GPU is not able to provide.
 Inserting the \fix{\#pragma rs\_fp\_imprecise} pragma into the
@@ -177,5 +177,5 @@ Inserting the \fix{\#pragma rs\_fp\_imprecise} pragma into the
 	should allow for GPU acceleration.
 Similar options are available in OpenCL and C, but since
 	this option is not available in Java we chose to disable it. 
-Further investigations would require us to analyze the results with relatex precision.
+Further investigations would require us to analyze the results with relaxed precision.
 

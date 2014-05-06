@@ -6,24 +6,24 @@ This analysis is based on our experience working with RenderScript, and is
 Some of the limitations presented are due to RenderScript being a less mature
   framework (compared to CUDA and OpenCL) and is actively being developed.
 Therefore, we expect that RenderScript will evolve to fix many of the
-identified limitations and fix the unecessary idiosyncratic restrictions we encountered.
+identified limitations and fix the unnecessary idiosyncratic restrictions we encountered.
 
 \subsubsection{Performance Portability}
 
 The main objective of RenderScript is to give acceptable compute performance
- (comprable to OpenCL) on a variety of hardware.
+ (comparable to OpenCL) on a variety of hardware.
 The runtime behavior of our RenderScript implementations is consistent across
 the devices we tested on.
-Reproducability of bugs is another important factor, we
+Reproducibility of bugs is another important factor, we
 always got the same runtime errors, e.g., segmentation fault or out-of-memory
 error, regardless of the devices that the code is running on.
 
 RenderScript does not expose any device specific features --- it is not even 
- posible to choose which device RenderScript runs on.
+ possible to choose which device RenderScript runs on.
 Regardless, RenderScript was able to achieve good performance and work unchanged 
  across devices.
 OpenCL, on the other hand, required us to read some device specific parameters
- and change run paramaters, such as work-group sizes, in order to avoid 
+ and change some of the run parameters, such as work-group sizes, in order to avoid 
  runtime errors.
 
 \subsubsection{Debug Support}
@@ -33,8 +33,8 @@ it offers a set of convenient built-in debugging
 facilities, such as the \fix{rsDebug} functions, detailed runtime exceptions,
 and IDE-navigable compilation errors.
 The \fix{rsDebug} function forces RenderScript to execute on the CPU and interacts 
-with the eclipse platform to offer a convinent way to present printed values from within the kernel
-(OpenCL and CUDA offer similar facilities, but they are less convinent to use).
+with the eclipse platform to offer a continent way to present printed values from within the kernel
+(OpenCL and CUDA offer similar facilities, but they are less convenient to use).
 For programmers accustomed to \fix{printf} debugging style in C/C++, this interface provides
 a familiar debugging model. For developers expecting a breakpoint debugging workflow, the eclipse
 environment has no facilities for that currently.
@@ -51,12 +51,12 @@ Within the kernel, utility functions (\fix{rsGetElementAt\_*}) make indexing
  into a multi-dimensional arrays platform agnostic
  (e.g. the strides should not be assumed to be the same across architectures).
 The helper functions also allow one to not perform complex index arithmetic, mapping
- a set of corrdinates to access a $1$D array.
+ a set of coordinates to access a $1$D array.
 
 
 \subsubsection{Familiar Language}
 
-RenderScript kernel is C99 based, and thefore does not require any learning of syntax.
+RenderScript kernel is C99 based, and therefore does not require any learning of syntax.
 Classifying that as a features is slightly biased towards programmers already familiar with
  C programming.
 For many programmers, a transition from programming in Java to programming in C might not be simple
@@ -77,14 +77,14 @@ We found that the current implementation lacks support for launching a $3$D kern
 
 \subsubsection{Lack of Synchronization Intrinsics}
 
-Because Renderscript does not allow one to group threads into blocks, there is only a global synchronization operation
+Because RenderScript does not allow one to group threads into blocks, there is only a global synchronization operation
  (using \fix{syncAll})  which is called from within the Java code.
 Coming from a GPU programming background, this means no support for \fix{\_\_syncthread} as in CUDA or the OpenCL
 equivalent \fix{barrier} function.
 The RenderScript kernels therefore cannot perform fine grained synchronizations and share data between a group of threads.
-For some benchmarks, this model is not convinent.
-In the \fix{CUTCP} benchmark, for example, we had to rethink how the algorithm operats to port 
-  the OpenCL implementation to Renderscript.
+For some benchmarks, this model is not convenient.
+In the \fix{CUTCP} benchmark, for example, we had to rethink how the algorithm operates to port 
+  the OpenCL implementation to RenderScript.
 
 
 \subsubsection{Non-Unified Memory}
