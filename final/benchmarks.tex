@@ -1,44 +1,85 @@
 \section{Benchmarks}
 
+We extend the Parboil benchmark suite and extend it to run on Android devices.
+Table~\ref{table:parboil} shows the porting status of each version of the
+benchmarks in the Parboil Benchmark Suite.
+
+
+\begin{table}
+\centering
+\begin{tabu}{ | l | c | c | c | c | c | c |}
+    \hline 
+    Benchmark & \multicolumn{6}{c|}{Implementations} \\ \cline{2-7}
+                      & NC & OMP & J    & JT     & OCL    & RS\\ \hline
+    VectorAdd         & C  & C   & C    & C      & C      & C \\ \hline
+    SGEMM             & C  & C   & C    & C      & C      & C \\ \hline
+    Stencil           & C  & C   & C    & C      & C      & C \\ \hline
+    CUTCP             & N  & N   & C    & C      & C      & C \\ \hline
+    MRI-Q             & N  & N   & C    & C      & C      & C \\ \hline
+    TPACF             & B  & B   & C    & C      & C      & C \\ \hline
+    Histogram         & C  & B   & C    & C      & C      & C \\ \hline
+    BFS               & \multicolumn{6}{c|}{N} \\ \hline
+    MRI-G             & \multicolumn{6}{c|}{N} \\ \hline
+    SAM               & \multicolumn{6}{c|}{N} \\ \hline
+    SPMV              & \multicolumn{6}{c|}{N} \\ \hline
+    LBM               & \multicolumn{6}{c|}{N} \\ \hline
+    \hline
+\end{tabu}
+\caption{Parboil Benchmark Porting Status. \textbf{NC} : Native C; \textbf{OMP}
+: Native C with OpenMP; \textbf{JT}: Threaded Java; \textbf{OCL} : OpenCL;
+\textbf{RS}: RenderScript; \textbf{C}: Completed; \textbf{N} : No
+Implementation; \textbf{B} : a bug causes the benchmark to crash.}
+\label{table:parboil}
+\end{table}
+
 In this section we give an overview of the benchmarks implemented along with 
 	the dataset sizes we used when profiling the results.
-While these benchmarks represent scientific workloads we expect them to be 
-	representative of certain Android applications --- especially since we 
-	see that Android devices have already entered the laptop market.
+While the Parboil benchmark suite represent scientific workloads we expect them to be 
+	representative of future Android applications --- given that we already 
+	see latops using Android as their OS.
 
 \subsection{VectorAdd}
 
-VectorAdd, unlike other benchmarks, has a very high memory to compute ratio.
-We use two $8K$ input vectors and simple element by element addition.
+VectorAdd, adds two floating point vectors with $8K$ elements.
+Compared to other benchmarks, vector add has a very high memory to compute ratio.
+The benchmark is therefore not a fit for parallization, but we use it to examine
+  the overhead behavior.
 
 \subsection{SGEMM}
 
-
-SGEMM multiplies two matricies $A$ and $B$ together.
+SGEMM multiplies two matricies $A$ and $B$ producing an output $C$.
 Matrix $A$ is of dimension $128 \times 96$ and $B$ is of dimension $96 \times 160$.
-Matrix $A$ is stored in row major format while $B$ is stored in column major format --- we therfore do not need to transpose $B$ to make effective use of the cache.
+Matrix $A$ is stored in row major format while $B$ is stored in column major format ---
+	we therfore do not need to transpose $B$ to make effective use of the cache.
 
-The OpenMP code use the \fix{\#pragma omp parallel for shared(A, B, C) collapse(2)} pragma, which, based on the processor utilization, the Android GCC compiler is not able to understand as valid OpenMP code.
+The OpenMP code use the \fix{\#pragma omp parallel for shared(A, B, C) collapse(2)}
+	pragma, which, based on the processor utilization,
+	the Android compiler was not able to parse as valid OpenMP code.
 Therefore, the OpenMP code for SGEMM is equivalent to the serial C code.
 
 \subsection{TPACF}
 
 TPACF analyzes the angular distribution of astronomical objects.
-It performs histogramming, collecting the restults in 3 histograms which are then
-	cross correlated.
-We use $100$ datasets, each containing $487$ corrdinates.
+The algorithm computes the distance between all pairs of corrdinates in a dataset
+	and then performs histogramming.
+The results are collecting in 3 histograms which are then cross correlated to find
+	the statistical spatial distribution of the astronomical bodies.
+For our analysis, use $100$ datasets each containing $487$ corrdinates.
 
 \subsection{MRIQ}
 
-MRIQ computes a non-uniform 3D inverse fourier transform to create a 3D image.
-The input image is of size $32 \times 32 \times 32$.
+MRIQ computes a non-uniform 3D inverse fourier transform representing a calibration matrix.
+The calibration matrix is used to perform 3D image reconstruction from MRI data which is 
+	presented in non-Cartesian space.
+The input dataset of size $32 \times 32 \times 32$ containing trajectory information in $3$D
+	as direction paramaters in $2$D.
 
 \subsection{Stencil}
 
 Stencil computes a 7 point stencil of an input volume. 
-The volume has dimension $128 \times 128 \times 32$.
-Each kernel accesses the $6$ adjacent voxels, adding the results
-	to its current voxel.
+The input volume has dimension $128 \times 128 \times 32$.
+Each performs a standard 7 point stencil: accessing the $6$ adjacent voxels,
+	scaling and then adding them the current voxel.
 The result is then placed in the output buffer.
 
 \subsection{Histogram}

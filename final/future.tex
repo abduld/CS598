@@ -1,5 +1,12 @@
 \section{Future Work}
 
-
-
-\todo[inline]{Discuss Future Work.}
+Redoing the analysis with relaxed floating points enabled for RenderScript kernels
+	and determining what impact that has on both the performance and energy utlization
+	would be the first step in understanding the results better.
+Fixing bugs that prevented us from running some benchmarks, and completing the
+	other benchmark implementations would allow us to have a benchmark
+	suite that's well studied on desktop and would allow us to have more insights
+	into which computational patterns have a clear mapping to RenderScript.
+Finally, all the devices used are ARM based.
+Measuring the performance on Intel or NVIDIA based CPUs or GPUs would give us
+	more insight about when to use CPUs or GPUs for computation.

@@ -30,12 +30,12 @@ OpenCL, on the other hand, required us to read some device specific parameters
 
 Since RenderScript is natively supported in Android,
 it offers a set of convenient built-in debugging
-facilities, such as the \fix{rsDebug()} functions, detailed runtime exceptions,
+facilities, such as the \fix{rsDebug} functions, detailed runtime exceptions,
 and IDE-navigable compilation errors.
-The \fix{rsDebug()} function forces RenderScript to execute on the CPU and interacts 
+The \fix{rsDebug} function forces RenderScript to execute on the CPU and interacts 
 with the eclipse platform to offer a convinent way to present printed values from within the kernel
 (OpenCL and CUDA offer similar facilities, but they are less convinent to use).
-For programmers accustomed to \fix{printf()} debugging style in C/C++, this interface provides
+For programmers accustomed to \fix{printf} debugging style in C/C++, this interface provides
 a familiar debugging model. For developers expecting a breakpoint debugging workflow, the eclipse
 environment has no facilities for that currently.
 
@@ -43,11 +43,11 @@ environment has no facilities for that currently.
 \subsubsection{Memory Operations}
 
 The \fix{Allocation} interface is intuitive to express data and
-execution parallelism}. As described in section~\ref{sec:imple_RS}, this
+execution parallelism. As described in section~\ref{sec:implementationRS}, this
 \fix{Allocation} interface gives the programmer the ability to express parallelism
 granularities, i.e., via packing output and/or input into \fix{Element} objects.
 The interface is intuitive and is similar to the already familiar OpenCL memory interface.
-Within the kernel, utility functions (\fix{rsGetElementAt_*}) make indexing
+Within the kernel, utility functions (\fix{rsGetElementAt\_*}) make indexing
  into a multi-dimensional arrays platform agnostic
  (e.g. the strides should not be assumed to be the same across architectures).
 The helper functions also allow one to not perform complex index arithmetic, mapping
@@ -78,9 +78,9 @@ We found that the current implementation lacks support for launching a $3$D kern
 \subsubsection{Lack of Synchronization Intrinsics}
 
 Because Renderscript does not allow one to group threads into blocks, there is only a global synchronization operation
-  --- \fix{syncAll()} ---  which is called from within the Java code.
-Coming from a GPU programming background, this means no support for \fix{\_\_syncthread()} or the OpenCL
-equivalent \fix{barrier()} function.
+ (using \fix{syncAll})  which is called from within the Java code.
+Coming from a GPU programming background, this means no support for \fix{\_\_syncthread} as in CUDA or the OpenCL
+equivalent \fix{barrier} function.
 The RenderScript kernels therefore cannot perform fine grained synchronizations and share data between a group of threads.
 For some benchmarks, this model is not convinent.
 In the \fix{CUTCP} benchmark, for example, we had to rethink how the algorithm operats to port 
@@ -106,9 +106,9 @@ Furthermore, the runtime, via function overloading, should be able to hide
 RenderScript is similar to CUDA in this respect --- the reference implementation
   is the standard.
 Yet unlike CUDA, RenderScript's documentation tend to be incomplete and insufficient.
-Atomic instructions such as \fix{rsAtomicInc(<Type>)}, for example, are claimed to be supported
-in documentation and appear in the header files for several data types, but upon usage 
-the runtime raises an exception if any type other than \fix{int32\_t} is used.
+Atomic instructions such as \fix{rsAtomicInc}, for example, are claimed to be support 
+(in both the documentation and the header files) several data types, but a 
+runtime exception is raises when use with types other than \fix{int32\_t}.
 The lack of specification results in some errors being unintuitive --- one has to 
   read the runtime to determine what the error refers to and what caused it.
 It also means that it is unlikely that RenderScript would be 

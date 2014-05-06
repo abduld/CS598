@@ -1,0 +1,24 @@
+
+\subsection{OpenCL}
+OpenCL was initiated by Apple Inc. and is managed by the Khronos
+Group~\cite{Khronos:url}. It allows the application developers to write
+data parallel computation intensive parts of their application for an abstract
+hardware model, without using low level hardware specific function calls.
+
+An OpenCL application is composed of two parts: an OpenCL host program and a
+set of one or more kernels. The kernels, written in restricted C99 syntax,
+specify functions that are to be executed in data parallel fashion. The OpenCL
+host program identifies the device on which the OpenCL kernel would be
+executed, sets up the environment, allocate memory on the device, copy data
+into the device memory and enqueue the kernel execution on the device.
+
+In the Android world, where all application execute on Dalvik virtual machine,
+an application using OpenCL has a third component as well. This is the Java
+host code which would initialize the application, read in the inputs and use
+JNI calls to invoke OpenCL host code.
+
+OpenCL is designed to be portable across a wide range of devices. However,
+developers often use hardware specific parameters such as the size of OpenCL
+work-group, shared memory size to obtain better performance on specific
+hardware. This harms the portability of OpenCL application kernel code.
+

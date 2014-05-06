@@ -1,6 +1,7 @@
 \section{Implementation}
+\label{sec:implementation}
 
-\subsection{The RSBench Framework Structure}
+\subsection{Framework Structure}
 
 \begin{figure}[t!]
 \centering
@@ -50,8 +51,8 @@ read the input, for example \fix{VectorAddFileReader} class in this case. Each
 computational kernel, e.g., for Java, threaded Java, RenderScript, or OpenCL, is
 implemented in a separate class, e.g., \fix{VectorAddJava},
 \fix{VectorAddThreadedJava}, \fix{VectorAddRS}, or \fix{VectorAddOpenCL},
-respectively. These classes inherit from the parent class of the benchmark,
-which is the \fix{VectorAddBenchmark} in this case. This hierarchical design
+respectively. The implementation classes inherit from the parent class of the benchmark ---
+\fix{VectorAddBenchmark} in this case. This hierarchical design
 maximize the code reuse between benchmarks, and between computation kernel.  It
 also allows for a consistent interface to run the benchmarks.
 
@@ -129,13 +130,13 @@ $10\%$ overhead.
 
 
 \subsection{Implementing Computational Kernels}
-\label{sec:imple_RS}
+\label{sec:implementationRS}
 
-\begin{table}[tp]\small
+\begin{table}
 \centering
-\begin{tabu}{ | l |[1.5pt] c |}
+\begin{tabu} to \textwidth { | l | c |}
     \hline 
-    Language      & Line Count \\ \tabucline[1.5pt]{-}
+    Language      & Line Count \\ \hline
     Java          & 7549       \\ \hline
     RenderScript  & 1000       \\ \hline
     JNI/C++       & 2048       \\ \hline
@@ -180,6 +181,11 @@ Tools (ADT) can automatically generate a wrapper Java class for it. The
 auto-generated Java class provides interfaces to invoke the RenderScript code
 from Java code.
 
+The RenderScript targets the $4.4$ Android platform and 
+	is compiled with \fix{renderscript.support.mode=false} which
+	allows the compiler to use some optimizations which were not available in
+	previous Android versions.
+
 \subsubsection{Native Kernels}
 
 The Android operating system requires that C, OpenMP, and OpenCL kernels have to
@@ -198,3 +204,5 @@ To allow devices with no OpenCL support to make use of the C and OpenMP
 implementations, we generate 3 libraries (one for C, OpenMP, and OpenCL).  Each
 library is then loaded and called from with its class implementation.
 
+Native kernels are compiled with the \fix{-O3 -ftree-vectorize -mvectorize-with-neon-quad}
+ allowing the compiler the autovectorization oportunity.

@@ -1,31 +1,31 @@
 \subsection{Processor Utilization}
 
 
-\begin{figure*}[htp]
+\begin{figure*}
   \centering
 
   \begin{subfigure}[b]{\textwidth}
           \centering
           \includegraphics[width=0.4\textwidth]{data/load_legend.pdf}
   \end{subfigure}
-
-  \begin{subfigure}[b]{0.85\textwidth}
+  
+  \begin{subfigure}[b]{0.88\textwidth}
        \centering
        \includegraphics[width=\textwidth]{data/load_vectoradd_nexus5.pdf}
        \caption{VectorAdd on Nexus 5}\label{fig:Vecadd5}
    \end{subfigure}
-  \begin{subfigure}[b]{0.85\textwidth}
+  \begin{subfigure}[b]{0.88\textwidth}
        \centering
        \includegraphics[width=\textwidth]{data/load_vectoradd_nexus7.pdf}
        \caption{VectorAdd on Nexus 7}\label{fig:Vecadd7}
    \end{subfigure}
 
-  \begin{subfigure}[b]{0.85\textwidth}
+  \begin{subfigure}[b]{0.88\textwidth}
        \centering
        \includegraphics[width=\textwidth]{data/load_sgemm_nexus5.pdf}
        \caption{Sgemm on Nexus 5}\label{fig:Sgemm5}
    \end{subfigure}
-  \begin{subfigure}[b]{0.85\textwidth}
+  \begin{subfigure}[b]{0.88\textwidth}
        \centering
        \includegraphics[width=\textwidth]{data/load_sgemm_nexus7.pdf}
        \caption{Sgemm on Nexus 7}\label{fig:Sgemm7}
@@ -35,7 +35,6 @@
   \caption{Processor utilization of VectorAdd and SGEMM for both Nexus 5 and Nexus 7. The $x$ axis is time, and the $y$ axis is normalized to the peek utlization for CPUs or GPUs across implementations.}
   \label{fig:loadVecAddSgemm}
 \end{figure*}
-\FloatBarrier
 
 Mobile devices use dynamic voltage frequency scaling (DVFS)
   to match performance to power utlization.
@@ -87,7 +86,7 @@ It is also interesting to note that on the Nexus 5 the CPU is not fully utilized
 This is due to either the load being low for a high frequency or the frequency being 
   choosen to be low.
 
-\begin{figure*}[t]
+\begin{figure*}
   \centering
 
   \begin{subfigure}[b]{\textwidth}
@@ -95,26 +94,26 @@ This is due to either the load being low for a high frequency or the frequency b
           \includegraphics[width=0.4\textwidth]{data/load_legend.pdf}
   \end{subfigure}
 
-  \begin{subfigure}[b]{0.95\textwidth}
+  \begin{subfigure}[b]{\textwidth}
       \centering
       \includegraphics[width=\textwidth]{data/load_mriq_nexus5.pdf}
       \caption{MRIQ on Nexus 5}
       \label{fig:MRIQ5}
   \end{subfigure}
-  \begin{subfigure}[b]{0.95\textwidth}
+  \begin{subfigure}[b]{\textwidth}
       \centering
       \includegraphics[width=\textwidth]{data/load_mriq_nexus7.pdf}
       \caption{MRIQ on Nexus 7}
       \label{fig:MRIQ7}
   \end{subfigure}
 
-  \begin{subfigure}[b]{0.95\textwidth}
+  \begin{subfigure}[b]{\textwidth}
       \centering
       \includegraphics[width=\textwidth]{data/load_tpacf_nexus5.pdf}
       \caption{TPACF on Nexus 5}
       \label{fig:TPACF5}
   \end{subfigure}
-  \begin{subfigure}[b]{0.95\textwidth}
+  \begin{subfigure}[b]{\textwidth}
       \centering
       \includegraphics[width=\textwidth]{data/load_tpacf_nexus7.pdf}
       \caption{TPACF on Nexus 7}
@@ -124,7 +123,6 @@ This is due to either the load being low for a high frequency or the frequency b
   \caption{Processor utilization of MRIQ and TPACF for both Nexus 5 and Nexus 7. The $x$ axis is time, and the $y$ axis is normalized to the peek utlization for CPUs or GPUs across implementations.}
   \label{fig:loadMRIQTpacf}
 \end{figure*}
-\FloatBarrier
 
 The TPACF code is divided into two parts.
 The first is serial allocation and populating data
@@ -145,7 +143,7 @@ We again see that memory copy (\fix{SetupArgs} for RenderScript and
   \fix{CopyTo} for OpenCL) result in the a substantial amount of resources being
   wasted.
 
-\begin{figure*}[t]
+\begin{figure*}
   \centering
 
   \begin{subfigure}[b]{\textwidth}
@@ -153,13 +151,13 @@ We again see that memory copy (\fix{SetupArgs} for RenderScript and
           \includegraphics[width=0.4\textwidth]{data/load_legend.pdf}
   \end{subfigure}
 
-  \begin{subfigure}[b]{0.9\textwidth}
+  \begin{subfigure}[b]{\textwidth}
       \centering
       \includegraphics[width=\textwidth]{data/load_histogram_nexus5.pdf}
       \caption{Histogram on Nexus 5}
       \label{fig:Histogram5}
   \end{subfigure}
-  \begin{subfigure}[b]{0.9\textwidth}
+  \begin{subfigure}[b]{\textwidth}
       \centering
       \includegraphics[width=\textwidth]{data/load_stencil_nexus5.pdf}
       \caption{Stencil on Nexus 5}
@@ -169,7 +167,6 @@ We again see that memory copy (\fix{SetupArgs} for RenderScript and
   \caption{Processor utilization of Histogram and Stencil for both Nexus 5. The $x$ axis is time, and the $y$ axis is normalized to the peek utlization for CPUs or GPUs across implementations.}
   \label{fig:loadHistogramStencil}
 \end{figure*}
-\FloatBarrier
 
 Throughout the benchmarks we see that RenderScript
 	does not utalize the GPU.

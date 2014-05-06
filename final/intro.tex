@@ -54,35 +54,4 @@ RenderScript compiler and run-time.  This raises an important question of ``how
 effective is the RenderScript compiler and run-time?'', which we plan to answer
 by doing a comprehensive performance analysis of RenderScript.
 
-Our code is publicly available at \url{https://github.com/cmpham/RSBench}.
-Table~\ref{table:parboil} shows the porting status of each version of the
-benchmarks in the Parboil Benchmark Suite.
-
-
-\begin{table}[h]\small
-\centering
-\begin{tabu}{ | l |[1.5pt] c | c | c | c | c | c |}
-    \hline 
-    Benchmark & \multicolumn{6}{c|}{Implementations} \\ \cline{2-7}
-                      & NC & OMP & J & JT & OCL & RS \\ \tabucline[1.5pt]{-}
-    VectorAdd         & C & C   & C    & C      & C      & C \\ \hline
-    SGEMM             & C & C   & C    & C      & C      & C \\ \hline
-    Stencil           & C & C   & C    & C      & C      & C \\ \hline
-    CUTCP             & N & N   & C    & C      & C      & C \\ \hline
-    MRI-Q             & N & N   & C    & C      & C      & C \\ \hline
-    TPACF             & B & B   & C    & C      & C      & C \\ \hline
-    Histogram         & C & B   & C    & C      & C      & C \\ \hline
-    BFS               & \multicolumn{6}{c|}{N} \\ \hline
-    MRI-G             & \multicolumn{6}{c|}{N} \\ \hline
-    SAM               & \multicolumn{6}{c|}{N} \\ \hline
-    SPMV              & \multicolumn{6}{c|}{N} \\ \hline
-    LBM               & \multicolumn{6}{c|}{N} \\ \hline
-    \hline
-\end{tabu}
-\caption{Parboil Benchmark Porting Status. \textbf{NC} : Native C; \textbf{OMP}
-: Native C with OpenMP; \textbf{JT}: Threaded Java; \textbf{OCL} : OpenCL;
-\textbf{RS}: RenderScript; \textbf{C}: Completed; \textbf{N} : No
-Implementation; \textbf{B} : a bug causes the benchmark to crash.}
-\label{table:parboil}
-\end{table}
 
