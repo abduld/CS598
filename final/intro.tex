@@ -55,9 +55,9 @@ needs to be partitioned. The rest of the responsibilities of memory
 hierarchy management, work distribution among different compute units, and device selection
 is handled by the RenderScript compiler and run-time. 
 This raises the question of ``how
-effective is the RenderScript compiler and run-time?'' and is it able to achieve these goals.
+effective is the RenderScript compiler and runtime? and is it able to achieve these goals?''
 
-In this report we answer this 
+In this report we answer this question 
 by performing a comprehensive performance analysis of RenderScript and compare it against 
 serial Java, threaded Java, native C, OpenMP, and OpenCL.
 The report is divided as follows: section~\ref{sec:background} introduces 
@@ -67,6 +67,5 @@ section~\ref{sec:implementation} gives some internals of how we structured our i
 section~\ref{sec:analysis} shows results from our analysis which
     examines the performance along with processor and energy utilization for the different implementations,
 section~\ref{sec:related} describes related work,
-section~\ref{sec:conclusion} summarizes the analysis,
-finally, section~\ref{sec:future} details the next logical steps that should be taken to enhance the
-    benchmark suite and our insights of the results.
+section~\ref{sec:future} details the next logical steps that should be taken to enhance the benchmark suite and our insights of the results,
+finaly, section~\ref{sec:conclusion} gives our conclusions.

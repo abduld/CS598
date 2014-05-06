@@ -2,58 +2,32 @@
 \label{sec:related}
 
 Related work can be divided into $3$ categories.
-The first are works that examine performance portability.
+The first are works that explore performance portability.
 The second are works that examine the programming models and how to abstract some of the low level details them.
 And, finally, works that examine computation on mobile platforms.
 
 \subsection{Performance Portability}
 
-
 In term of programming model, RenderScript is similar to OpenCL~\cite{OpenCL}
-and CUDA. While CUDA is designed specifically for NVIDIA GPU devices, OpenCL's
-goal is similar to RenderScript, which is aiming at simplifying cross-platform
-parallel programming for heterogeneous systems.  In fact, Google had an option
-to adopt OpenCL, since some Android hardware already has OpenCL
-SDKs~\cite{OpenCL:Android}, but they opted to create RenderScript.  Google
-justified the choice by arguing that they required not only performance
-portability and development efficiency, but also a more intuitive programming
-and distribution model.  This decision caused some frustration from the OpenCL
-community \cite{androidblockopenCL} and some hardware
-vendors~\cite{googlelockin} who had made big investments on OpenCL.
-
-Since being introduced in 2008, OpenCL performance and performance portability
-has been extensively evaluated.  The most common of such evaluations is OpenCL's
-performance against CUDA on GPUs~\cite{fang2011comprehensive,
+and CUDA~\cite{CUDA}. While CUDA is restriced to NVIDIA GPU devices, OpenCL is vendor neutral. OpenCL performance and performance portability
+has been extensively evaluated.  Most evaluations compare OpenCL against CUDA on GPUs~\cite{fang2011comprehensive,
 weber2011comparing, van2011correlating, vassilev2010comparison,
-amorim2009comparing, karimi2010performance, komatsu2010evaluating}.  On
-GPUs, OpenCL and CUDA have a similar platform, memory, and programming model,
-thus an one-to-one analysis is possible.  Most studies~\cite{weber2011comparing,
-van2011correlating, vassilev2010comparison, amorim2009comparing}, from a wide
-array of domains, show that CUDA usually achieves better performance (on NVIDIA
-GPUs) than OpenCL.  Another consensus among these studies is that OpenCL
+amorim2009comparing, karimi2010performance, komatsu2010evaluating}.  Since OpenCL and CUDA have a similar platform, memory, and programming model on descrete GPUs, a 
+one-to-one analysis is faire.  Using benchmarks, such as Parboil, ~\cite{weber2011comparing,
+van2011correlating, vassilev2010comparison, amorim2009comparing} show that on NVIDIA GPUs, CUDA achieves better performance than OpenCL. 
+The studies also show that OpenCL
 provides a sufficient interface for developers to express more architectural
-details to improve the performance of their applications.  For example,
-studies~\cite{komatsu2010evaluating} and \cite{fang2011comprehensive} show that
+details to improve the performance of their applications. 
+
+In ~\cite{komatsu2010evaluating,fang2011comprehensive,dolbeau2013one} the authors show that
 most OpenCL kernels can obtain comparable performance with CUDA kernels when
 properly optimized.
-% In~\cite{shen2012performance}, the authors compare OpenCL
-% and OpenMP in the context of application performance on multi-core CPUs using
-% the Rodinia benchmark suite~\cite{che2009rodinia}.  From the study, the OpenMP
-% implementations generally outperforms the OpenCL ones.  Based on this result,
-% the authors picked three OpenCL worse-performed applications, compared the
-% performance against OpenMP, and performed manual performance tuning.  Their
-% result show that tuned OpenCL applications outperformed the OpenMP in majority
-% of the test cases.
-
-
-According to \cite{komatsu2010evaluating} and \cite{dolbeau2013one}, OpenCL
-achieves fairly stable performance across the tested platforms. However, both
-studies also illustrate some cases, in which OpenCL does not handle
+Furthermore, the authors show that OpenCL
+achieves stable performance across the tested platforms. The studies illustrate, however, that cases exist where OpenCL does not handle
 architectural specifics well, such as memory layout and number of processing
 cores. In order to improve the portability of applications, recent OpenCL
-versions has an option to let the runtime decides the group size, i.e., the
-number of concurrent threads, or wrap size in CUDA's term. However, we are not
-aware of any study that evaluates the optimality of this feature.
+iterations have added the option to deligate the workgroup size to the runtime.
+We are not aware of any study that evaluates the optimality of this feature.
 
 % Compared with OpenCL, RenderScript's programming model is more restrictive, in
 % the sense that it does not let developers to control the execution scheduling,
@@ -66,39 +40,36 @@ aware of any study that evaluates the optimality of this feature.
 \subsection{Programming Model Abstractions}
 
 
-There are many recent proposals aiming at making parallel software development
-easier and better utilizing multicores and GPUs available in
-mobile devices. Chen et al.~\cite{6704508} introduces a new programming model,
-called Android-Aparapi, which is based on the Aparapi model~\cite{Aparapi_web}
-to allow Android applications to run parallel Java code on GPU via OpenCL.
-Qualcomm has been developing an Android programming library and API, called
-MARE (Multicore Asynchronous Runtime Environment)~\cite{MARE_qc}, to facilitate writing parallel
-C code via Android Native Development Kit (NDK).
-Other studies focused on further simplifying the development of RenderScript
-code. In order to quickly reuse OpenCL legacy code in Android environments, Yang
-et al.~\cite{yang2012o2render} presents a source-to-source translator from
-OpenCL to RenderScript. The authors present several challenges of this process,
-the most notable one is the differences in the execution models of the two
-standards. More recently, Acosta et al.~\cite{alejandro2014performance}
-proposes a parallel development framework, called Paralldroid, for improving the
-parallelism of programs running in the Android platform. The framework
-automatically generates parallel code in C and RenderScript based on
-programmers' annotation in Java code. The results show that the auto-generated
+There are many recent proposals aiming at abstracting parallel software development to either make it easier to develop, less error prone, or to have better utilization hetrogenous cores on mobile devices. Aparapi~\cite{Aparapi_web} allows one to ofload computation to OpenCL by inserting Java source code annotations around the compute kernels. In ~\cite{6704508} the authors extend the Aparapi model, introducing Android-Aparapi, and targets Android devices.
+
+Intel~\cite{barik2014efficient} has extended the Thread Building Blocks (TBB)~\cite{reinders2007intel} model to run on hetrogenous devices. In this model, one encodes
+	parallism as a DAG of tasks.
+The tasks are then schedule to run in parallel on available hardware (maintaining the dependencies that the programmer encoded).
+Qualcomm MARE (Multicore Asynchronous Runtime Environment)~\cite{MARE_qc} is similar to Intel's TBB extension.
+
+Other work examined whether a source-to-source translator is practical to 
+	port OpenCL code to RenderScript.
+In ~\cite{yang2012o2render}, the authors presents such a tool along with challenges of this process:
+the most notable is differences in the execution models of the two.
+More recently, in ~\cite{hipacc} the authors develop a domain specific language that allows
+one to develop image processing kernels, but target C, CUDA, OpenCL, or RenderScript. In ~\cite{alejandro2014performance}, the authors
+propose the Paralldroid language which allows one to target C and RenderScript using 
+programmer's annotation of Java source code. The results show that the auto-generated
 RenderScript code often achieves higher performance than the auto-generated
-Native C code.
+C code. 
 
 \subsection{Computation on Mobile Devices}
 
-In term of benchmarking RenderScript, study \cite{kemp2013using} compares three
-different programming models, namely RenderScript, Remote CUDA (RCUDA), and C++,
-of an image processing library in Android platform. The results on a Tegra 3
-quad core device evidently show that RenderScript outperforms both the RCUDA and
-C++ implementations. Furthermore, this performance gap increases as the size of
-the input increases.  However, we are not aware of any work that provides a
+Studies examining the computation behavior on mobile devices are scarese.
+In \cite{kemp2013using} the authors compare RenderScript, Remote CUDA (RCUDA), and C for image processing applications. The results show that on a Tegra 3
+RenderScript outperforms both the RCUDA and
+C. Furthermore, this performance gap increases as the size of
+the input increases.
+
+However, we are not aware of any work that provides a
 systematic evaluation of RenderScript's performance and performance portability.
-The only available tool that we might be able to leverage is CompuBench mobile
-for RenderScript~\cite{compuBenchMobile}.  But since this benchmark is a
-commercial product and does not offer source, we would not be able to perform
-thorough analysis using this it.  So in this regard, we will be providing the
-first open source benchmark for RenderScript that can be evaluated against
-different language paradigms and hardware targets.
+The only available tool that does some comparison is the CompuBench mobile
+for RenderScript~\cite{compuBenchMobile} commercial benchmark application. 
+This application is targeted at comparing RenderScript performance acrsoss devices, rather than understanding the results, and the benchmarks used (around 4 applications) are all image processing based.
+
+

@@ -117,15 +117,17 @@ It also means that it is unlikely that RenderScript would be
 
 \subsubsection{Yet Another Parallel Framework}
 
-Aside from having full control over the language, it is not clear why
+Aside from having full control over the language~\cite{googlelockin}, it is not clear why
  Google did not adopt OpenCL or OpenCL's SPIR layer.
 As can be seen, the RenderScript language borrows many elements from the CUDA/OpenCL 
  programming model, with some tooling support.
 Many of the ``features'' of RenderScript can be implementing via a library that 
  interacts with OpenCL and there is no need for a new language.
-One reason could be that the compiler and runtime can prevent compute code that run on the GPU from
+Futhermore, many hadware vendors already support OpenCL~\cite{OpenCL:Android}.
+
+One reason for a new language could be that the compiler and runtime can prevent compute code that run on the GPU from
  possibly crashing the driver (by using too much resources or using unsafe memory accesses),
  since crashing the GPU driver on mobile devices is equivalent to crashing the device.
 Yet, again, this feature can be implemented by enhancing the OpenCL compiler and runtime to detect
  and raise an exception if illegal memory accesses occur.
-
+It is therefore unclear why a new programming language was necessary.
