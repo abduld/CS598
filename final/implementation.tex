@@ -19,7 +19,7 @@
 
 
 Table~\ref{table:breakdown} shows the numbers of lines-of-code (LOC) broken down
-into different types of programming languages in the project. This section describe 
+into different types of programming languages in the project. This section describes
 how we can achieve good code reuse while still having a sound and understandable program structure.
 
 \subsection{Framework Structure}
@@ -43,7 +43,7 @@ how we can achieve good code reuse while still having a sound and understandable
 
 We design our framework to serve two purposes.
 First, as shown in Figure~\ref{fig:package_structure}, we separated the UI logic from the benchmark logic, furthermore each benchmark is compartmentalized into its own Java package --- this allows for benchmarks to be worked on independently.
-Second we make extensive use of subclassing to facilitate code reuse --- 
+Second we made extensive use of subclassing to facilitate code reuse --- 
 	we would like to only write one file input handler for each benchmark,
 	for example.
 Figure~\ref{fig:class_diagram} provides a closer
@@ -52,12 +52,12 @@ view at the class hierarchy for the VectorAdd benchmark.
 The \fix{parboil} package is the core Java package of the project.
 Common utility functions such as timers and loggers are placed in the \fix{utils} package and reused across benchmarks.
 
-Each benchmark's base class has an input and output reader, code to
+Each benchmark's base class has an input and output reader code to
 	initialize the data, and code to check if the output result matches
 	the expected output.
 The implementation of each benchmark requires one to define just the \fix{compute}
 	method.
-This design keeps code simple and avoid code duplication.
+This design keeps code simple and avoids code duplication.
 
 
 \subsection{Utility Functions}
