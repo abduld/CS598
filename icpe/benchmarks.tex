@@ -8,27 +8,27 @@ benchmarks in the Parboil Benchmark Suite.
 
 \begin{table}
 \centering
-\begin{tabu}{ | l | c | c | c | c | c | c |}
+\begin{tabu}{ | l | c | c | c | c | c | c | c | c |}
     \hline 
-    Benchmark & \multicolumn{6}{c|}{Implementations} \\ \cline{2-7}
-                      		   & NC & OMP & J    & JT     & OCL    & RS\\ \hline
-    \textbf{VectorAdd}         & C  & C   & C    & C      & C      & C \\ \hline
-    \textbf{SGEMM}             & C  & C   & C    & C      & C      & C \\ \hline
-    \textbf{Stencil}           & C  & C   & C    & C      & C      & C \\ \hline
-    \textbf{CUTCP}             & N  & N   & C    & C      & C      & C \\ \hline
-    \textbf{MRIQ}             & N  & N   & C    & C      & C      & C \\ \hline
-    \textbf{TPACF}             & B  & B   & C    & C      & C      & C \\ \hline
-    \textbf{Histogram}         & C  & B   & C    & C      & C      & C \\ \hline
-    \textbf{BFS}               & \multicolumn{6}{c|}{N} \\ \hline
-    \textbf{MRIG}             & \multicolumn{6}{c|}{N} \\ \hline
-    \textbf{SAM}               & \multicolumn{6}{c|}{N} \\ \hline
-    \textbf{SPMV}              & \multicolumn{6}{c|}{N} \\ \hline
-    \textbf{LBM}               & \multicolumn{6}{c|}{N} \\ \hline
+    Name & \multicolumn{8}{c|}{Implementations} \\ \cline{2-9}
+                      		   & NC & MP  & J    & JT     & CL     & RS & MR & TB\\ \hline
+    \textbf{VecAdd}            & C  & C   & C    & C      & C      & C  & C    & C\\ \hline
+    \textbf{MM}                & C  & C   & C    & C      & C      & C  & C    & C\\ \hline
+    \textbf{Stencil}           & C  & C   & C    & C      & C      & C  & C    & C\\ \hline
+    \textbf{CUTCP}             & N  & N   & C    & C      & C      & C  & N    & N\\ \hline
+    \textbf{MRIQ}              & N  & N   & C    & C      & C      & C  & N    & N\\ \hline
+    \textbf{TPACF}             & B  & B   & C    & C      & C      & C  & N    & N\\ \hline
+    \textbf{Histo}             & C  & B   & C    & C      & C      & C  & N    & N\\ \hline
+    \textbf{BFS}               & \multicolumn{8}{c|}{N} \\ \hline
+    \textbf{MRIG}              & \multicolumn{8}{c|}{N} \\ \hline
+    \textbf{SAM}               & \multicolumn{8}{c|}{N} \\ \hline
+    \textbf{SPMV}              & \multicolumn{8}{c|}{N} \\ \hline
+    \textbf{LBM}               & \multicolumn{8}{c|}{N} \\ \hline
     \hline
 \end{tabu}
-\caption{Parboil Benchmark Porting Status. \textbf{NC}: Native C; \textbf{OMP}:
-Native C with OpenMP; \textbf{JT}: Threaded Java; \textbf{OCL}: OpenCL;
-\textbf{RS}: RenderScript; \textbf{C}: Completed; \textbf{N}: No Implementation;
+\caption{Parboil Benchmark Porting Status. \textbf{NC}: Native C; \textbf{MP}:
+Native C with OpenMP; \textbf{JT}: Threaded Java; \textbf{CL}: OpenCL;
+\textbf{RS}: RenderScript; \textbf{MR}: MARE; \textbf{TB}: Thread Building Blocks; \textbf{C}: Completed; \textbf{N}: No Implementation;
 \textbf{B}: a bug causes the benchmark to crash.}
 \label{table:parboil}
 \end{table}
