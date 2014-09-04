@@ -1,0 +1,40 @@
+\section{Analysis}
+\label{sec:analysis}
+
+
+\begin{table}
+\centering
+\begin{tabular}{ | l | p{2.1cm} | p{1.7cm} | c |}
+    \hline 
+    Name & CPU & GPU & Memory \\ \hline
+    \textbf{GalaxyNexus} & ARMv7, 2 cores, 1200 Mhz, SIMD NEON & PowerVR-SGX 540 & 694MB \\ \hline
+    \textbf{Nexus 5} & Qualcomm Snapdragon S4 Pro 1.5GHz & Adreno 320 400MHz & 2GB \\ \hline
+    \textbf{Nexus 7} & Qualcomm Snapdragon 800 2.26GHz & Adreno 330 450MHz & 2GB \\ \hline
+    \textbf{Nexus 10} & DualCore 1.7GHz Cortex-A15 & Mali T604 & 2GB \\ \hline
+    \textbf{SM-T900} & QuadCore 1.9GHz Cortex-A15 & Mali T628 & 3GB \\ \hline
+    \hline
+\end{tabular}
+\caption{The device hardware specifications used for the analysis.}
+\label{table:hardware}
+\end{table}
+
+This section evaluates each benchmark on five devices shown
+  in Table~\ref{table:hardware}, all running Android $4.4.2$ (KitKat).
+These devices capture the low, mid, and high end mobile and tablet
+  devices that are currently available in the market.
+Only the Nexus 5 and Nexus 7 devices can be modified to install an
+  unofficial OpenCL implementation and only those two devices are fully supported
+  by Trepn.
+Each benchmark contains multiple implementations, which 
+  are analyzed to determine trade-offs between
+  processor utilization, performance, and energy usage.
+We conclude the section by discussing the programability of RenderScript
+  and compare it against established programming models such as:
+  native C, OpenMP, and OpenCL.
+
+\input{load}
+\input{performance}
+\input{power}
+\input{io}
+
+\input{programability}

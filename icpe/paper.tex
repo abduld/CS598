@@ -1,0 +1,191 @@
+%-----------------------------------------------------------------------------
+%
+%               Template for sigplanconf LaTeX Class
+%
+% Name:         sigplanconf-template.tex
+%
+% Purpose:      A template for sigplanconf.cls, which is a LaTeX 2e class
+%               file for SIGPLAN conference proceedings.
+%
+% Guide:        Refer to "Author's Guide to the ACM SIGPLAN Class,"
+%               sigplanconf-guide.pdf
+%
+% Author:       Paul C. Anagnostopoulos
+%               Windfall Software
+%               978 371-2316
+%               paul@windfall.com
+%
+% Created:      15 February 2005
+%
+%-----------------------------------------------------------------------------
+
+
+\documentclass[nocopyrightspace, 10pt]{sigplanconf}
+
+% The following \documentclass options may be useful:
+%
+% 10pt          To set in 10-point type instead of 9-point.
+% 11pt          To set in 11-point type instead of 9-point.
+% authoryear    To obtain author/year citation style instead of numeric.
+
+\usepackage{natbib}
+\usepackage{url}
+\usepackage[squaren,thinqspace,binary]{SIunits}
+
+\usepackage{hyperref}
+\newcommand\fnurl[2]{%
+  \href{#2}{#1}\footnote{\url{#2}}%
+}
+
+\let\fourth\relax               % Undefine a macro
+\let\second\relax               % Undefine a macro
+\let\degree\relax               % Undefine a macro
+\let\cdot\relax                 % Undefine a macro
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%\usepackage{mathabx}
+\usepackage{mathtools}
+\usepackage{multirow}
+\usepackage{bussproofs}
+\usepackage{verbatim}
+\usepackage{fancyvrb}
+
+\usepackage{graphicx}
+\usepackage{subcaption,placeins}
+\usepackage{setspace}
+%\usepackage[tight,footnotesize]{subfigure}
+% \usepackage{subfigure}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage{tabu}
+
+% Display notes/comments with todonotes:
+\usepackage[disable]{todonotes} % notes/comments not showed
+% \usepackage[draft]{todonotes} % notes/comments showed
+
+\newcommand{\fix}[1]{\texttt{\small #1}}
+\lstset{
+    inputencoding=utf8,
+%    backgroundcolor=\color{white},
+    tabsize=4,
+    rulecolor=,
+    upquote=true,
+%    aboveskip={1.5\baselineskip},
+    columns=fixed,
+    showstringspaces=false,
+    extendedchars=true,
+    breaklines=true,
+    prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+    frame=single,
+    showtabs=false,
+    showspaces=false,
+    showstringspaces=false,
+    basicstyle=\scriptsize\ttfamily,
+    identifierstyle=\ttfamily,
+    keywordstyle=\ttfamily\color[rgb]{0,0,1},
+    commentstyle=\ttfamily\color[rgb]{0.133,0.545,0.133},
+    stringstyle=\ttfamily\color[rgb]{0.627,0.126,0.941},
+}
+
+
+
+%\makeatletter
+\lstdefinelanguage{llvm}{
+  morecomment = [l]{;},
+  morestring=[b]", 
+  sensitive = true,
+  classoffset=0,
+  morekeywords={
+    define, declare, global, constant,
+    internal, external, private,
+    linkonce, linkonce_odr, weak, weak_odr, appending,
+    common, extern_weak,
+    thread_local, dllimport, dllexport,
+    hidden, protected, default,
+    except, deplibs,
+    volatile, fastcc, coldcc, cc, ccc,
+    x86_stdcallcc, x86_fastcallcc,
+    ptx_kernel, ptx_device,
+    signext, zeroext, inreg, sret, nounwind, noreturn,
+    nocapture, byval, nest, readnone, readonly, noalias, uwtable,
+    inlinehint, noinline, alwaysinline, optsize, ssp, sspreq,
+    noredzone, noimplicitfloat, naked, alignstack,
+    module, asm, align, tail, to,
+    addrspace, section, alias, sideeffect, c, gc,
+    target, datalayout, triple,
+    blockaddress, metadata
+  },
+  classoffset=1, keywordstyle=\color{purple},
+  morekeywords={
+    add, fadd, sub, fsub, mul, fmul,
+    sdiv, udiv, fdiv, srem, urem, frem,
+    and, or, xor,
+    icmp, fcmp,
+    eq, ne, ugt, uge, ult, ule, sgt, sge, slt, sle,
+    oeq, ogt, oge, olt, ole, one, ord, ueq, ugt, uge,
+    ult, ule, une, uno,
+    nuw, nsw, exact, inbounds,
+    phi, call, select, shl, lshr, ashr, va_arg,
+    trunc, zext, sext,
+    fptrunc, fpext, fptoui, fptosi, uitofp, sitofp,
+    ptrtoint, inttoptr, bitcast,
+    ret, br, indirectbr, switch, invoke, unwind, unreachable,
+    malloc, alloca, free, load, store, getelementptr,
+    extractelement, insertelement, shufflevector,
+    extractvalue, insertvalue,
+  },
+  alsoletter=\%,
+  keywordsprefix=\%,
+}
+
+%------------------------------------------------------------------------------
+%\doublespacing
+\begin{document}
+
+%\titlebanner{banner above paper title}        % These are ignored unless
+%\preprintfooter{preprint}   % 'preprint' option specified.
+
+\title{Performance Analysis of Parallel Languages on Android}
+\subtitle{CS 598SVA - Heterogeneous Computing}
+
+\authorinfo{Abdul Dakkak \and Cuong Manh Pham \and Prakalp Srivastava}
+           {}
+           % {University of Illinois at Urbana-Champaign}
+           {\{dakkak, pham9, psrivas2\}@illinois.edu}
+
+\conferenceinfo{CONF 'yy}{Month d--d, 20yy, City, ST, Country} 
+\copyrightyear{20yy} 
+\copyrightdata{978-1-nnnn-nnnn-n/yy/mm} 
+\doi{nnnnnnn.nnnnnnn}
+
+\maketitle
+\todo[inline]{To do notes is enabled. Disable it to hide all notes}
+%\category{CR-number}{subcategory}{third-level}
+
+%\terms
+%term1, term2
+
+%\keywords
+%keyword1, keyword2
+\input{abstract}
+\input{intro}
+\input{background}
+\input{benchmarks}
+\input{implementation}
+\input{analysis}
+\input{related}
+\input{future}
+\input{conclusion}
+
+% We recommend abbrvnat bibliography style.
+
+\bibliographystyle{abbrvnat}
+\bibliography{paper}
+
+
+\listoftodos
+%\input{appendix}
+\end{document}

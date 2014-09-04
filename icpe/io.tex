@@ -1,0 +1,12 @@
+\subsection{Input/Output}
+
+Throughout the analysis, we have ignored IO times which is in fact the biggest
+performance bottleneck in these benchmarks.
+The main bottle neck is read speeds, since unlike desktops which have a hard
+drive read speed of 80-100MB/s, mobile devices typically use use flash which
+have a 7-25MB/s read speed.
+In reality, however, computational data for mobile devices is not stored on
+disk and is usually either streamed from the cloud or captured from onboard
+sensors and therefore is available in RAM.
+Therefore, to keep with the typical usage, and to not skew the plots, we
+explicitly removed the IO performance times from our graphs.

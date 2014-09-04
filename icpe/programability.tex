@@ -1,0 +1,130 @@
+\subsection{RenderScript Programmability}
+
+This section presents our analysis of RenderScript's programmability.
+This analysis is based on our experience working with RenderScript, and is 
+  is highly subjective.
+Some of the limitations presented are due to RenderScript being a less mature
+  framework (compared to CUDA and OpenCL) and is actively being developed.
+Therefore, we expect that RenderScript will evolve to fix many of the
+identified limitations and fix the unnecessary idiosyncratic restrictions we encountered.
+
+\subsubsection{Performance Portability}
+
+The main objective of RenderScript is to give acceptable compute performance
+ (comparable to OpenCL) on a variety of hardware.
+The runtime behavior of our RenderScript implementations is consistent across
+the devices we tested on.
+Reproducibility of bugs is another important factor, we
+always got the same runtime errors, e.g., segmentation fault or out-of-memory
+error, regardless of the devices that the code is running on.
+
+RenderScript does not expose any device specific features --- it is not even 
+ possible to choose which device RenderScript runs on.
+Regardless, RenderScript was able to achieve good performance and work unchanged 
+ across devices.
+OpenCL, on the other hand, required us to read some device specific parameters
+ and change some of the run parameters, such as work-group sizes, in order to avoid 
+ runtime errors.
+
+\subsubsection{Debug Support}
+
+Since RenderScript is natively supported in Android, it offers a set of
+convenient built-in debugging facilities, such as the \fix{rsDebug} functions,
+detailed runtime exceptions, and IDE-navigable compilation errors.  The
+\fix{rsDebug} function forces RenderScript to execute on the CPU and interacts
+with the Android's logging facilities, e.g., logcat, to offer a convenient way
+to present printed values from within the kernel (OpenCL and CUDA offer similar
+facilities, but they are less convenient to use).  For programmers accustomed to
+\fix{printf} debugging style in C/C++, this interface provides a familiar
+debugging model. For developers expecting a breakpoint debugging workflow, the
+Eclipse environment has no facilities for that currently.
+
+\subsubsection{Memory Operations}
+
+The \fix{Allocation} interface is intuitive to express data and
+execution parallelism. The
+\fix{Allocation} interface gives programmers the ability to express parallelism
+granularities, i.e., via packing output and/or input into \fix{Element} objects.
+The interface is intuitive and is similar to the already familiar OpenCL memory interface.
+Within the kernel, utility functions (\fix{rsGetElementAt\_*}) make indexing
+into a multi-dimensional arrays platform agnostic (e.g. the strides should not
+be assumed to be the same across architectures).  The helper functions also
+allow one to not perform complex index arithmetic, mapping a set of coordinates
+to access a $1$D array.
+
+
+\subsubsection{Familiar Language}
+
+RenderScript kernel is C99-based, and therefore does not require any learning of
+syntax.  Classifying that as a feature is slightly biased towards programmers
+already familiar with C programming.  For many programmers, a transition from
+programming in Java to programming in C might not be simple --- especially if
+the two languages are within the same project.  Similarly, for C programmers,
+having a language that is C like but employing different semantics might be
+confusing.
+
+
+\subsubsection{Multi-Dimensional Parallelism}
+
+Unlike the familiar CUDA and OpenCL models where threads are partitioned into
+blocks which are then partitioned into a grid, RenderScript has only one level
+partitioning.  A RenderScript kernel allows an \fix{Allocation} to specify
+\fix{X}, \fix{Y}, and \fix{Z} dimensions, and the workload would be distributed
+across hardware units using these dimensions.  We found that the current
+implementation lacks support for launching $3$D kernels.
+
+\subsubsection{Lack of Synchronization Intrinsics}
+
+Because RenderScript does not allow one to group threads into blocks, there is
+only a global synchronization operation, i.e.,using \fix{syncAll},  which is
+called from within the Java code.  Coming from a GPU programming background,
+this means no support for \fix{\_\_syncthread} as in CUDA or the OpenCL
+equivalent \fix{barrier} function.  The RenderScript kernels therefore cannot
+perform fine grained synchronizations and share data between a group of threads.
+For some benchmarks, this model is not convenient.  In the \fix{CUTCP}
+benchmark, for example, we had to rethink how the algorithm operates to port the
+OpenCL implementation to RenderScript.
+
+
+\subsubsection{Non-Unified Memory}
+
+A RenderScript kernel requiers explicit allocation and copy for all data that it accesses. The buffers then have to be copied back to
+make them available to Java.  Safe casting between Java and C requires some
+checking --- since Java does not conform to the same IEEE standard that
+RenderScript conforms to.  Use use unsafe casting which results in little overhead when the processors are in the same coherence domain.  The current
+implementation of RenderScript does not perform these optimizations.
+Furthermore, the runtime, via function overloading, should be able to hide
+explicit buffer creation and copies, by detecting the type passed into the
+function and converting it into an \fix{Allocation} buffer if it is passed in a Java
+array.
+
+\subsubsection{Lack of a Standardization}
+
+RenderScript is similar to CUDA in this respect --- the reference implementation
+  and documentation being the standard.
+Yet unlike CUDA, RenderScript's documentation tend to be incomplete and insufficient.
+Atomic instructions such as \fix{rsAtomicInc}, for example, are claimed to be supported
+(in both the documentation and the header files) for several data types, but a 
+runtime exception is raised when using the function with types other than \fix{int32\_t}.
+The lack of specification results in some errors being unintuitive --- one has to 
+  read the runtime code to determine what some of the errors mean as well as possible causes.
+The lack of standard body also means that it is unlikely that RenderScript would be 
+  ported to desktop platforms and adopted on descrete GPUs.
+
+
+\subsubsection{Yet Another Parallel Framework}
+
+Aside from having full control over the language~\cite{googlelockin}, it is not clear why
+ Google did not adopt OpenCL or OpenCL's SPIR layer.
+As can be seen, the RenderScript language borrows many elements from the CUDA/OpenCL 
+ programming model, with some tooling support.
+Many of the ``features'' of RenderScript can be implemented via a library that 
+ interacts with OpenCL and there is no need for a new language.
+Furthermore, many hardware vendors already support OpenCL~\cite{OpenCL:Android}.
+
+One reason for a new language could be that the compiler and runtime can prevent compute code that run on the GPU from
+ possibly crashing the driver, e.g., by using too much resources or using unsafe memory accesses,
+ since crashing the GPU driver on mobile devices is equivalent to crashing the device.
+Yet, again, this feature can be implemented by enhancing the OpenCL compiler and runtime to detect
+ and raise an exception if illegal memory accesses occur.
+It is therefore unclear why a new programming language was necessary.

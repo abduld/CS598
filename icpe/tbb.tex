@@ -1,0 +1,11 @@
+
+\subsection{Thread Building Blocks}
+
+
+Thread Building Blocks (TBB) is a C++ library developed by Intel that abstract parallel programming
+    by reducing them to tasks.
+A programmer links tasks if they depend on each other, otherwise the tasks can be run in parallel.
+Like MARE, TBB, offers a \fix{parallel\_for} function that executes a function in parallel for the specified range.
+While the official distribution of TBB only parallizes on CPUs, researchers\todo{cite} have extended TBB to work
+    in hetrogenous programming environments.
+In our benchmark, we compile the official TBB distribution on Android.

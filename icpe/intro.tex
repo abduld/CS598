@@ -1,0 +1,77 @@
+\section{Introduction}
+
+Heterogeneous computing promises to address the rising power dissipation problem
+of today's traditional homogeneous multi-core
+systems. It provides the ability to integrate a variety of processing elements,
+such as large and small general purpose cores, GPUs, DSPs, and custom or
+semi-custom hardware into a single system. Applications that can efficiently use
+the full range of available hardware reap significant energy
+savings over conventional processors by executing portions of the computation on
+devices that perform the computational patterns efficiently.
+This promise of performance along with power efficiency
+has led mobile devices such as smartphones
+and tablets, which deal with a variety of applications with limited battery
+life, to move towards heterogeneous designs.
+
+However, heterogeneity of hardware resources has also led to a diverse landscape
+of different programming models, run-time systems, profiling and debugging tools
+for application development. Since low-level performance and energy
+optimizations for one device, or
+programming model, often do not translate to other programming models or devices, 
+one gets specialization of code which requires hand-tuning by experts for each 
+programming model or device, e.g., an optimization for the GPU may degrade performance
+on a DSP and vice-versa. This is highly inefficient and
+unproductive: we cannot expect applications to use a separate language for each
+class of compute unit. If one is to expect applications to make full use of
+available hardware (to maximize performance or energy efficiency or both) then
+the programming environment has to provide common abstractions to facilitate this.
+
+The industry and the research community have been actively working on abstractions
+    to mitigate this problem.
+The recent development of RenderScript~\cite{wiki:RenderScript, RenderScript}
+provides a framework for running computationally intensive tasks at a high
+performance by using a specialized runtime for parallelizing work across all
+processors available on the device, such as multi-core CPUs, GPUs, or DSPs.
+RenderScript is therefore removing the burden of load balancing and memory
+management from programmers to the run-time, unlike other solutions such as
+OpenCL, where programmers have more control over the execution semantics of
+the application (a programmer needs to determine where code is run and
+ which part of the memory hierarchy data would reside).  In this fashion,
+RenderScript is making the computationally intensive part of the application,
+that needs to be accelerated on specialized hardware, performance portable
+across the various hardware compute units. Also, since the application is not
+dependent on the existence and availability of a specific accelerator, the
+application is portable across SoCs with varying combinations of compute units.
+
+RenderScript achieves it at the cost of
+hiding hardware details from programmers that are critical to good
+performance on these accelerators. For example, in GPUs, the placement of data at
+various levels of memory hierarchy is critical for peek performance.  It is this
+reason that most programming languages for GPUs allow programmers fine-grained
+control over memory management. RenderScript too can use GPUs for acceleration,
+but hides the memory hierarchy from programmers. In the
+RenderScript model, application developers only define the part of the
+application that needs to be accelerated, and the granularity at which data
+needs to be partitioned. The rest of the responsibilities of memory
+hierarchy management, work distribution among different compute units, and device selection
+is handled by the RenderScript compiler and run-time. 
+This raises the question: ``how
+effective is the RenderScript compiler and run-time, and is it able to achieve these goals?''
+
+In this report we answer this question 
+by performing a comprehensive performance analysis of RenderScript and compare
+it against other existing alternatives, namely
+serial Java, threaded Java, native C, OpenMP, MARE, TBB, and OpenCL.
+The report is divided as follows: section~\ref{sec:background} introduces 
+RenderScript, section~\ref{sec:benchmarks} describes the benchmarks written for
+Android and the dataset sizes
+used for the analysis,
+section~\ref{sec:implementation} gives some internals of how we structured our
+implementations of these benchmarks,
+section~\ref{sec:analysis} shows results from our analysis which
+examines the performance along with processor and energy utilizations for the
+different implementations,
+section~\ref{sec:related} describes related work,
+section~\ref{sec:future} details future work that should be taken to
+enhance the benchmark suite,
+finally, section~\ref{sec:conclusion} gives our conclusions.
